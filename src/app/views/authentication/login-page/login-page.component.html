@@ -1,0 +1,27 @@
+<section class="authentication__login__page">
+  <div class="authentication__login__page__container container">
+    <div class="authentication__login__page__information">
+      <img class="authentication__login__page__illustration"
+           [alt]="'ecosystem-data-jabar' | translate"
+           src="assets/images/illustration.svg" />
+    </div>
+    <div class="authentication__login__page__form">
+      <h4 class="authentication__login__page__title">{{ 'page.login.title' | translate }}</h4>
+      <div class="authentication__login__page__subtitle">{{ 'page.login.subtitle' | translate }}</div>
+
+      <ngb-alert type="red-800"
+                 *ngIf="error"
+                 (closed)="error=''">
+        {{ error }}
+      </ngb-alert>
+
+      <form [formGroup]="loginForm"
+            (ngSubmit)="onSubmit()"
+            (keydown.enter)="$event.stopPropagation()">
+        <kb-form-authentication-login [formGroup]="loginForm"
+                                      [submitted]="submitted"
+                                      [isLoading]="isLoading"></kb-form-authentication-login>
+      </form>
+    </div>
+  </div>
+</section>

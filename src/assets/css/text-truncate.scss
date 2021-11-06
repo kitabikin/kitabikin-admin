@@ -1,0 +1,11 @@
+$clamp: 10;
+
+@for $i from 1 through $clamp {
+  .text-truncate-#{$i}-row {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: $i;
+    -webkit-box-orient: vertical;
+  }
+}

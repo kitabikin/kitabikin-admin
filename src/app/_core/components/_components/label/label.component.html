@@ -1,0 +1,17 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <label class="form-label fw-bold">
+    <ng-content></ng-content>
+    <span *ngIf="vm.required"
+          class="text-error">*</span>
+  </label>
+  <ng-content select="[kbLabelSecondary]"></ng-content>
+  <ng-content select="[kbInput]"></ng-content>
+  <div *ngIf="vm.helperText"
+       class="form-text text-muted">
+    {{ vm.helperText }}
+  </div>
+  <div *ngIf="vm.invalid"
+       class="form-text text-error">
+    {{ vm.invalidText }}
+  </div>
+</ng-container>

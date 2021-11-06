@@ -1,1 +1,319 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~@fontsource/roboto/400.css';
+@import '~@fontsource/roboto/700.css';
+@import '~@fontsource/roboto/900.css';
+@import '~@fontsource/lato/400.css';
+@import '~@fontsource/lato/700.css';
+@import '~@fontsource/lato/900.css';
+@import '~@fontsource/lora/400.css';
+@import '~@fontsource/lora/700.css';
+
+// CORE
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/buttons';
+@import '~ngx-toastr/toastr';
+
+// BODY
+$body-bg: #ffffff;
+$body-color: #424242;
+
+// FONT
+.font-roboto {
+  font-family: 'Roboto' !important;
+}
+
+.font-lato {
+  font-family: 'Lato' !important;
+}
+
+.font-lora {
+  font-family: 'Lora' !important;
+}
+
+$font-family-base: 'Roboto';
+$font-size-base: 1rem;
+
+// COLOR
+@import 'assets/css/color.scss';
+
+$component-active-bg: $green-800;
+
+// HEADING
+$headings-font-family: 'Lora';
+$headings-font-weight: 'bold';
+$headings-color: $gray-900;
+
+$h6-font-size: $font-size-base * 1.333;
+$h5-font-size: $h6-font-size * 1.333;
+$h4-font-size: $h5-font-size * 1.333;
+$h3-font-size: $h4-font-size * 1.333;
+$h2-font-size: $h3-font-size * 1.333;
+$h1-font-size: $h2-font-size * 1.333;
+
+// BUTTON + TEXT FIELD
+$input-btn-focus-width: 1px;
+$input-btn-focus-color-opacity: 0.25;
+$input-btn-focus-color: $yellow-500;
+$input-btn-focus-blur: 0;
+$input-btn-focus-box-shadow: inset 0 0 $input-btn-focus-blur $input-btn-focus-width $input-btn-focus-color;
+
+// BUTTON
+$btn-padding-y: 9px;
+$btn-padding-x: 16px;
+$btn-font-family: 'Lato';
+$btn-font-size: 14px;
+$btn-line-height: 18px;
+
+$btn-padding-y-sm: 7px;
+$btn-padding-x-sm: 14px;
+$btn-font-size-sm: 12px;
+
+$btn-padding-y-lg: 11px;
+$btn-padding-x-lg: 18px;
+$btn-font-size-lg: 16px;
+
+$btn-focus-width: $input-btn-focus-width;
+$btn-focus-box-shadow: $input-btn-focus-box-shadow;
+
+.btn-check:focus + .btn,
+.btn:focus {
+  box-shadow: $input-btn-focus-box-shadow !important;
+}
+
+$btn-border-radius: 8px;
+$btn-border-radius-sm: 8px;
+$btn-border-radius-lg: 8px;
+
+// TEXT FIELD
+$input-padding-y: 10px;
+$input-padding-x: 8px;
+$input-font-family: 'Lato';
+$input-font-size: 14px;
+$input-font-weight: normal;
+$input-line-height: 16px;
+
+$input-padding-y-sm: 8px;
+$input-padding-x-sm: 6px;
+$input-font-size-sm: 12px;
+
+$input-padding-y-lg: 12px;
+$input-padding-x-lg: 10px;
+$input-font-size-lg: 16px;
+
+$input-bg: $gray-50;
+$input-disabled-bg: $gray-200;
+$input-disabled-border-color: null;
+
+$input-color: $gray-800;
+$input-border-color: $gray-400;
+$input-border-width: $input-btn-border-width;
+$input-box-shadow: $box-shadow-inset;
+
+$input-border-radius: 8px;
+$input-border-radius-sm: 8px;
+$input-border-radius-lg: 8px;
+
+$input-focus-border-color: $component-active-bg;
+$input-focus-width: $input-btn-focus-width;
+$input-focus-box-shadow: $input-btn-focus-box-shadow;
+
+$input-placeholder-color: $gray-600;
+$input-plaintext-color: $gray-50;
+
+.form-control-spinner {
+  position: relative;
+
+  .spinner-border {
+    position: absolute;
+    right: 10px;
+    top: calc(50% - 8px);
+  }
+}
+
+// TEXT FIELD GROUP
+$input-group-addon-border-color: $gray-400;
+@import 'assets/css/input-group.scss';
+
+// FORM LABEL
+$form-label-margin-bottom: 0.5rem;
+$form-label-font-size: 15px;
+$form-label-color: $gray-800;
+
+.form-label {
+  font-family: 'Lato' !important;
+  line-height: 13px !important;
+}
+
+// CHECKBOX & RADIO
+$form-check-margin-bottom: 8px;
+
+$form-check-input-border: 2px solid $gray-600;
+
+$form-check-input-checked-bg-color: $green-800;
+$form-check-input-checked-border-color: $green-800;
+$form-check-input-focus-border: $input-focus-border-color;
+$form-check-input-focus-box-shadow: $input-btn-focus-box-shadow;
+
+$form-check-input-indeterminate-bg-color: $green-800;
+$form-check-input-indeterminate-border-color: $green-800;
+
+.form-check {
+  .form-check-label {
+    font-family: 'Lato';
+    font-size: 14px;
+  }
+}
+
+// DROPDOWN MENU
+$dropdown-border-radius: 8px;
+
+.dropup,
+.dropdown {
+  &.dropup {
+    .dropdown-menu {
+      margin-bottom: 8px;
+    }
+  }
+
+  .dropdown-toggle {
+    &:after {
+      display: none !important;
+    }
+  }
+
+  .dropdown-menu {
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+}
+
+// BREADCRUMBS
+$breadcrumb-divider-color: $gray-300;
+$breadcrumb-active-color: $gray-800;
+$breadcrumb-divider: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='#E0E0E0'/%3E%3C/svg%3E");
+
+.breadcrumb {
+  font-weight: 700;
+
+  a {
+    color: var(--bs-blue-600);
+  }
+}
+
+// SECTION MESSAGE (ALERT)
+$alert-border-radius: 8px;
+$alert-bg-scale: -85%;
+$alert-border-scale: 0%;
+$alert-color-scale: 20%;
+
+// TABS
+@import 'assets/css/tabs.scss';
+
+// TOOLTIP
+$tooltip-max-width: 275px;
+$tooltip-color: $white;
+$tooltip-bg: $gray-900;
+$tooltip-border-radius: 8px;
+$tooltip-opacity: 1;
+$tooltip-padding-y: 8px;
+$tooltip-padding-x: 12px;
+
+.tooltip {
+  .tooltip-inner {
+    text-align: start;
+  }
+}
+
+// TABLE
+@import 'assets/css/table.scss';
+
+.btn-mini {
+  padding: 5px 10px !important;
+  line-height: 14px !important;
+  font-size: 10px !important;
+}
+
+// LIST GROUP
+$list-group-active-bg: $green;
+
+// CARD
+$card-border-radius: 8px;
+
+// NAVBAR
+$navbar-padding-y: 0;
+$navbar-brand-font-size: 0;
+$navbar-brand-height: 1.125rem;
+$navbar-brand-padding-y: 1.125rem;
+$navbar-brand-margin-end: 0;
+
+.navbar {
+  .navbar-brand {
+    img {
+      height: 1.125rem;
+    }
+  }
+}
+
+// MODAL
+$modal-content-border-radius: 8px;
+
+.modal {
+  .modal-header {
+    padding: 8px 1rem;
+    border-bottom: 0;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+
+  .modal-footer {
+    background-color: $gray-50;
+    border-top: 0;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+}
+
+// IMAGES
+.img-thumbnail {
+  &.list {
+    min-width: 48px;
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+  }
+
+  &.form {
+    min-width: 120px;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+  }
+}
+
+// BADGE
+.badge {
+  &.badge-status {
+    font-family: 'Lato';
+    font-weight: 400;
+    font-size: 14px;
+    padding: 1px 8px;
+    line-height: 23px;
+  }
+}
+
+// CORE
+@import '~bootstrap/scss/bootstrap';
+
+// ADDITIONAL
+@import 'assets/css/custom.scss';
+@import 'assets/css/sizing.scss';
+@import 'assets/css/text-truncate.scss';
+@import 'assets/css/select.scss';
+@import 'assets/css/date-picker.scss';
+
+// ADMIN
+@import 'assets/css/admin.scss';
+
+// PACKAGES
+@import '~@ng-select/ng-select/themes/default.theme.css';

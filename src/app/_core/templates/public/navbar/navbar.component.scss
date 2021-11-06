@@ -1,0 +1,13 @@
+.public-navbar {
+  .navbar {
+    .navbar-brand {
+      margin-right: 1rem;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .navbar-expand-lg .toggler-navbar {
+      display: none;
+    }
+  }
+}

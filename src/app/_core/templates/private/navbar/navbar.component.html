@@ -1,0 +1,53 @@
+<header class="private-navbar">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container-fluid px-3">
+      <div class="d-flex flex-1 d-lg-none">
+        <button class="navbar-toggler"
+                type="button"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+                (click)="toggleMobileExpanded()">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+      <div class="navbar-collapse collapse flex-lg-1 order-2 order-lg-1">
+        <!-- <ul class="navbar-nav nav-left flex-row">
+          <li class="nav-item">
+            <a class="nav-link"
+               [routerLinkActive]="['active']"
+               [routerLink]="['/admin' | localize]"
+               (click)="isMenuCollapsed = true">
+              {{ 'home' | translate }}
+            </a>
+          </li>
+        </ul> -->
+      </div>
+      <div class="d-flex justify-content-end align-items-center flex-1 flex-lg-0 order-1 order-lg-2">
+        <ul class="navbar-nav nav-right flex-row">
+          <li ngbDropdown
+              class="nav-item nav-avatar dropdown">
+            <a ngbDropdownToggle
+               class="nav-link d-flex align-items-center"
+               [routerLink]="[]">
+              <app-comp-avatar-item primaryText="{{ adminUser.name }}"
+                                    [avatar]="{ appearance: 'circle', size: 36, src: 'assets/images/avatar/admin.svg' }">
+              </app-comp-avatar-item>
+              <i class="fas fa-caret-down ms-2"></i>
+            </a>
+            <ul ngbDropdownMenu
+                class="dropdown-menu end-0">
+              <li ngbDropdownItem>
+                <a class="d-block text-gray-800 text-decoration-none px-0"
+                   [routerLink]="[]"
+                   (click)="doLogout()">
+                  {{ 'logout' | translate }}
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

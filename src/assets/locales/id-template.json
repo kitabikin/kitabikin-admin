@@ -1,0 +1,149 @@
+{
+  "ROUTES.404": "404",
+  "ROUTES.home": "home",
+  "ROUTES.foundations": "foundations",
+  "ROUTES.color": "color",
+  "ROUTES.typography": "typography",
+  "ROUTES.components": "components",
+  "ROUTES.avatar": "avatar",
+  "ROUTES.avatar-item": "avatar-item",
+  "ROUTES.breadcrumbs": "breadcrumbs",
+  "ROUTES.button": "button",
+  "ROUTES.checkbox": "checkbox",
+  "ROUTES.dropdown-menu": "dropdown-menu",
+  "ROUTES.modal": "modal",
+  "ROUTES.pagination": "pagination",
+  "ROUTES.radio": "radio",
+  "ROUTES.section-message": "section-message",
+  "ROUTES.select": "select",
+  "ROUTES.table": "table",
+  "ROUTES.tabs": "tabs",
+  "ROUTES.textfield": "textfield",
+  "ROUTES.tooltip": "tooltip",
+  "ROUTES.examples": "examples",
+  "ROUTES.navbar": "navbar",
+  "ROUTES.ngrx": "ngrx",
+  "ROUTES.admin": "admin",
+  "home": "Home",
+  "foundations": "Foundations",
+  "color": "Color",
+  "typography": "Typography",
+  "components": "Components",
+  "avatar": "Avatar",
+  "avatar-item": "Avatar Item",
+  "breadcrumbs": "Breadcrumbs",
+  "button": "Button",
+  "checkbox": "Checkbox",
+  "dropdown-menu": "Dropdown Menu",
+  "modal": "Modal",
+  "pagination": "Pagination",
+  "radio": "Radio",
+  "section-message": "Section Message",
+  "select": "Select",
+  "table": "Table",
+  "tabs": "Tabs",
+  "textfield": "Text field",
+  "tooltip": "Tooltip",
+  "examples": "Examples",
+  "navbar": "Navbar",
+  "ngrx": "NgRx",
+  "admin": "Admin",
+  "seo": {
+    "home-page": {
+      "title": "Home",
+      "description": "Description Home"
+    },
+    "foundations-page": {
+      "title": "Foundations",
+      "description": "Foundations are the visual elements needed to create engaging end-to-end user experiences. This includes guidance on iconography, typography, layout and structure."
+    },
+    "color-page": {
+      "title": "Color",
+      "description": "Color distinguishes our brand and helps us create consistent experiences across products."
+    },
+    "typography-page": {
+      "title": "Typography",
+      "description": "Typography is our system of fonts. Each font conveys the appropriate sentiment to assist our users through each stage of their journey."
+    },
+    "components-page": {
+      "title": "Components",
+      "description": "Components are the reusable building blocks of our design system. Each component meets a specific interaction or UI need, and has been specifically created to work together to create patterns and intuitive user experiences."
+    },
+    "avatar-page": {
+      "title": "Avatar",
+      "description": "An avatar is a visual representation of a user or entity."
+    },
+    "avatar-item-page": {
+      "title": "Avatar Item",
+      "description": "An avatar item is a wrapper that goes around an avatar when it's displayed alongside text, such as a name or status."
+    },
+    "breadcrumbs-page": {
+      "title": "Breadcrumbs",
+      "description": "Breadcrumbs are a navigation system used to show a user's location in a site or app."
+    },
+    "button-page": {
+      "title": "Button",
+      "description": "A button triggers an event or action. They let users know what will happen next."
+    },
+    "checkbox-page": {
+      "title": "Checkbox",
+      "description": "A checkbox is an input control that allows a user to select one or more options from a number of choices."
+    },
+    "dropdown-menu-page": {
+      "title": "Dropdown Menu",
+      "description": "A dropdown menu displays a list of actions or options to a user."
+    },
+    "modal-page": {
+      "title": "Modal",
+      "description": "A modal dialog displays content that requires user interaction, in a layer above the page."
+    },
+    "pagination-page": {
+      "title": "Pagination",
+      "description": "Pagination allows you to divide large amounts of content into smaller chunks across multiple pages."
+    },
+    "radio-page": {
+      "title": "Radio",
+      "description": "A radio input allows people to select only one option from a number of choices. Radio is generally displayed in a radio group."
+    },
+    "section-message-page": {
+      "title": "Section Message",
+      "description": "A section message is used to alert users to a particular section of the screen."
+    },
+    "select-page": {
+      "title": "Select",
+      "description": "Select allows users to make a single selection or multiple selections from a list of options."
+    },
+    "table-page": {
+      "title": "Table",
+      "description": "Table."
+    },
+    "tabs-page": {
+      "title": "Tabs",
+      "description": "Tabs are used to organize content by grouping similar information on the same page."
+    },
+    "textfield-page": {
+      "title": "Text field",
+      "description": "A text field is an input that allows a user to write or edit text."
+    },
+    "tooltip-page": {
+      "title": "Tooltip",
+      "description": "A tooltip is a floating, non-actionable label used to explain a user interface element or feature."
+    },
+    "examples-page": {
+      "title": "Examples",
+      "description": "Examples."
+    },
+    "navbar-page": {
+      "title": "Navbar",
+      "description": "Navbar."
+    },
+    "ngrx-page": {
+      "title": "NgRx",
+      "description": "NgRx."
+    },
+    "admin-page": {
+      "title": "Admin",
+      "description": "Admin."
+    }
+  }
+}
