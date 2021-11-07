@@ -14,7 +14,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 // PIPE
-// import { SafeHtmlPipe, SafeUrlPipe } from '@pipes';
+import { SafeHtmlPipe, SafeUrlPipe } from '@pipes';
 
 // COMPONENT NG-BOOTSTRAP
 import {
@@ -26,10 +26,10 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 
 // COMPONENT
-// import { AvatarComponent as CompAvatarComponent } from '@components/_components/avatar/avatar.component';
-// import { AvatarItemComponent as CompAvatarItemComponent } from '@components/_components/avatar-item/avatar-item.component';
+import { AvatarComponent as CompAvatarComponent } from '@components/_components/avatar/avatar.component';
+import { AvatarItemComponent as CompAvatarItemComponent } from '@components/_components/avatar-item/avatar-item.component';
 // import { FormInputComponent as CompInputComponent } from '@components/_components/form-input/form-input.component';
-// import { BreadcrumbComponent as CompBreadcrumbComponent } from '@components/_components/breadcrumb/breadcrumb.component';
+import { BreadcrumbComponent as CompBreadcrumbComponent } from '@components/_components/breadcrumb/breadcrumb.component';
 // import { IconComponent as CompIconComponent } from '@components/_components/icon/icon.component';
 import { LabelComponent as CompLabelComponent } from '@components/_components/label/label.component';
 // import { FormFileUploaderComponent as CompFormFileUploaderComponent } from '@components/_components/form/file-uploader/file-uploader.component';
@@ -77,13 +77,13 @@ import { FormAuthenticationLoginComponent } from '@components/form/authenticatio
   ],
   declarations: [
     // PIPE
-    // SafeHtmlPipe,
-    // SafeUrlPipe,
+    SafeHtmlPipe,
+    SafeUrlPipe,
     // COMPONENT
-    // CompAvatarComponent,
-    // CompAvatarItemComponent,
+    CompAvatarComponent,
+    CompAvatarItemComponent,
     // CompInputComponent,
-    // CompBreadcrumbComponent,
+    CompBreadcrumbComponent,
     // CompIconComponent,
     CompLabelComponent,
     // CompFormFileUploaderComponent,
@@ -116,8 +116,8 @@ import { FormAuthenticationLoginComponent } from '@components/form/authenticatio
     // CKEditorModule,
     FontAwesomeModule,
     // PIPE
-    // SafeHtmlPipe,
-    // SafeUrlPipe,
+    SafeHtmlPipe,
+    SafeUrlPipe,
     // COMPONENT NG-BOOTSTRAP
     NgbProgressbarModule,
     NgbTooltipModule,
@@ -125,9 +125,10 @@ import { FormAuthenticationLoginComponent } from '@components/form/authenticatio
     NgbDatepickerModule,
     NgbDropdownModule,
     // COMPONENT
-    // CompAvatarComponent,
-    // CompAvatarItemComponent,
-    // CompBreadcrumbComponent,
+    CompAvatarComponent,
+    CompAvatarItemComponent,
+    // CompInputComponent,
+    CompBreadcrumbComponent,
     // CompIconComponent,
     CompLabelComponent,
     // CompFormFileUploaderComponent,

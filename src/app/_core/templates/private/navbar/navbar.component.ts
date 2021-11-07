@@ -18,13 +18,17 @@ import { AuthenticationService } from '@services';
 import moment from 'moment';
 import { TranslateService } from '@ngx-translate/core';
 
+import { faBars, faCaretDown } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
-  selector: 'app-private-navbar',
+  selector: 'kb-private-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
+  faBars = faBars;
+  faCaretDown = faCaretDown;
   adminUser: any;
   moment: any = moment;
 

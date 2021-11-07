@@ -8,7 +8,7 @@
                 aria-expanded="false"
                 aria-label="Toggle navigation"
                 (click)="toggleMobileExpanded()">
-          <i class="fas fa-bars"></i>
+          <fa-icon [icon]="faBars"></fa-icon>
         </button>
       </div>
       <div class="navbar-collapse collapse flex-lg-1 order-2 order-lg-1">
@@ -30,10 +30,10 @@
             <a ngbDropdownToggle
                class="nav-link d-flex align-items-center"
                [routerLink]="[]">
-              <app-comp-avatar-item primaryText="{{ adminUser.name }}"
-                                    [avatar]="{ appearance: 'circle', size: 36, src: 'assets/images/avatar/admin.svg' }">
-              </app-comp-avatar-item>
-              <i class="fas fa-caret-down ms-2"></i>
+              <kb-avatar-item primaryText="{{ adminUser.profile.name }}"
+                              [avatar]="{ appearance: 'circle', size: 36, src: '' }">
+              </kb-avatar-item>
+              <fa-icon [icon]="faCaretDown"></fa-icon>
             </a>
             <ul ngbDropdownMenu
                 class="dropdown-menu end-0">

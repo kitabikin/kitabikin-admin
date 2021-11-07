@@ -19,9 +19,12 @@
     <a [routerLink]="['/dashboard']"
        class="d-inline-block">
       <img src="assets/images/logo/logo180x36.png"
-           class="sidebar-resize-hide" />
+           class="sidebar-resize-hide py-2" />
       <img src="assets/images/logo/logo36x36.png"
-           class="sidebar-resize-show" />
+           class="sidebar-resize-show"
+           [style.height.px]="24"
+           [style.marginTop.px]="7"
+           [style.marginBottom.px]="7" />
     </a>
   </div>
 </div>
@@ -55,10 +58,11 @@
 
         <ng-template #tempLink>
           <div class="icon">
-            <app-comp-icon [icon]="item.icon"></app-comp-icon>
+            <fa-icon [icon]="item.icon"></fa-icon>
           </div>
           <span>
             {{ item.name }}
+            <span class="fa-icon chevron"></span>
           </span>
         </ng-template>
 
@@ -71,6 +75,7 @@
               <a class="nav-link nav-link-sub"
                  [routerLink]="[child.link]"
                  [routerLinkActive]="['active']">
+                <span class="fa-icon circle"></span>
                 {{ child.name }}
               </a>
             </li>

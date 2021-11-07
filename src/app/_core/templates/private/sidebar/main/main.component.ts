@@ -19,7 +19,7 @@ import { state, style, trigger } from '@angular/animations';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: '[app-private-sidebar-main]',
+  selector: '[kb-private-sidebar-main]',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

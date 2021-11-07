@@ -1,0 +1,39 @@
+.avatar__item {
+  display: flex;
+}
+
+.avatar__item__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.avatar__item__primary {
+  white-space: nowrap;
+
+  &.truncation {
+    white-space: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+}
+
+.avatar__item__secondary {
+  white-space: nowrap;
+  color: var(--bs-gray-600);
+  font-size: 12px;
+
+  &.truncation {
+    white-space: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+}

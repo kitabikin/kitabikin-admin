@@ -2,7 +2,7 @@ import { Component, Inject, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
 @Component({
-  selector: 'app-private-admin',
+  selector: 'kb-private-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss'],
 })
