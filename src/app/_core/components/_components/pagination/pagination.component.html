@@ -1,0 +1,71 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <ng-container *ngIf="!vm.isLoading">
+    <ng-container *ngIf="!vm.pagination.empty">
+      <div class="paging row g-0">
+        <div class="paging-info col-md-12 col-lg-6">
+          <div class="paging-per-page">
+            <div class="px-2">Tampilkan</div>
+            <ng-select class="ng-select-paging"
+                       [items]="vm.perPageItems"
+                       bindValue="value"
+                       bindLabel="label"
+                       [placeholder]="'Single select'"
+                       [searchable]="false"
+                       [clearable]="false"
+                       (change)="changePerPage($event)"
+                       [(ngModel)]="vm.filterPerPage">
+            </ng-select>
+            <div class="ps-2 pe-1 pe-lg-2">Item</div>
+          </div>
+          <div class="paging-records ps-0 ps-lg-2 pe-2">
+            dari total {{ vm.pagination.total_items | number: '1.0-0':'id' }}
+          </div>
+        </div>
+        <div class="paging-nav col-sm-12 col-md-12 col-lg-6">
+          <div class="paging-button-start">
+            <div class="paging-prev">
+              <button type="button"
+                      class="btn btn-link link-green"
+                      [disabled]="vm.pagination.previous_page! < 1"
+                      (click)="changePage({ value: vm.pagination.previous_page })">
+                <fa-icon [icon]="faChevronLeft"></fa-icon>
+              </button>
+            </div>
+          </div>
+          <div class="paging-page">
+            <div class="px-2">Halaman</div>
+            <ng-select class="ng-select-paging"
+                       [items]="vm.pageItems"
+                       bindValue="value"
+                       bindLabel="label"
+                       [placeholder]="'Single select'"
+                       [searchable]="false"
+                       [clearable]="false"
+                       (change)="changePage($event)"
+                       [(ngModel)]="vm.filterPage">
+            </ng-select>
+            <div class="ps-2 pe-3">dari {{ vm.pagination.total_pages | number: '1.0-0':'id' }}</div>
+          </div>
+          <div class="paging-button-end">
+            <div class="paging-prev">
+              <button type="button"
+                      class="btn btn-link link-green"
+                      [disabled]="vm.pagination.previous_page! < 1"
+                      (click)="changePage({ value: vm.pagination.previous_page })">
+                <fa-icon [icon]="faChevronLeft"></fa-icon>
+              </button>
+            </div>
+            <div class="paging-next">
+              <button type="button"
+                      class="btn btn-link link-green"
+                      [disabled]="vm.pagination.next_page! > vm.pagination.total_pages!"
+                      (click)="changePage({ value: vm.pagination.next_page })">
+                <fa-icon [icon]="faChevronRight"></fa-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+</ng-container>

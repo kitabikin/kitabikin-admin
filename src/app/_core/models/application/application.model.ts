@@ -33,6 +33,7 @@ export class ApplicationData implements Deserializable {
   banner!: string;
   description!: string;
   is_active!: boolean;
+  is_delete!: boolean;
   created_id!: string;
   created_at!: Date;
   modified_id!: string;
@@ -40,5 +41,31 @@ export class ApplicationData implements Deserializable {
 
   deserialize(input: any): this {
     return Object.assign(this, input);
+  }
+
+  detailIsActive(): any {
+    let name = '';
+    let badge = '';
+
+    if (this.is_active) {
+      name = 'Aktif';
+      badge = 'bg-green-100 text-green-900';
+    } else {
+      name = 'Arsip';
+      badge = 'bg-gray-200 text-gray-600';
+    }
+
+    return {
+      name,
+      badge,
+    };
+  }
+
+  getIsActive(): string {
+    return this.detailIsActive().name;
+  }
+
+  getIsActiveBadge(): string {
+    return this.detailIsActive().badge;
   }
 }

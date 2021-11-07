@@ -87,7 +87,7 @@ export const updateApplicationFailure = createAction(
 // Delete
 export const deleteApplication = createAction(
   ApplicationActionTypes.DeleteApplication,
-  props<{ id: number; params: any }>()
+  props<{ delete: any }>()
 );
 
 export const deleteApplicationSuccess = createAction(

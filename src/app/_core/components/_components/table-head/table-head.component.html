@@ -1,0 +1,46 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <div class="table-head-column">
+    <div class="table-head-column-sortable"
+         [attr.role]="vm.isSortable ? 'button' : 'div'"
+         (click)="filterSort(vm.column)">
+      <ng-content></ng-content>
+      <div *ngIf="vm.isSortable"
+           class="ms-4">
+        <i [ngClass]="['table-head-column-sortable-icon', getSortClassname(vm.column)]"></i>
+      </div>
+    </div>
+
+    <!-- Filterable -->
+    <div *ngIf="vm.isFilterable"
+         class="table-head-column-filterable dropdown"
+         role="button"
+         ngbDropdown
+         container="body"
+         #myDrop="ngbDropdown">
+      <i class="table-head-column-filterable-icon"
+         [ngClass]="['table-head-column-filterable-icon', getFilterClassname(filterActive)]"
+         ngbDropdownToggle></i>
+      <div ngbDropdownMenu
+           class="p-3"
+           [style.minWidth.rem]="7"
+           [style.maxWidth.rem]="20"
+           [style.maxHeight.rem]="20"
+           [style.overflowY]="'auto'">
+        <!-- Filter Type Checkbox -->
+        <ng-container *ngIf="vm.filterType === 'checkbox'">
+          <div *ngFor="let row of vm.filterData; let last = last;"
+               class="form-check"
+               [ngClass]="[last ? 'mb-0' : '']">
+            <input class="form-check-input"
+                   type="checkbox"
+                   [(ngModel)]="row.checked"
+                   (change)="filterFilter(); myDrop.close();">
+            <label class="form-check-label">
+              {{ row.label }}
+            </label>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</ng-container>

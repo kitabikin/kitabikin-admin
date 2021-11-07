@@ -2,6 +2,8 @@
   "kitabikin": "Kitabikin",
   "kitabikincom": "kitabikin.com",
   "dashboard": "Dashboard",
+  "general": "Pengaturan Umum",
+  "application": "Aplikasi",
   "logout": "Keluar",
   "seo": {
     "dashboard-page": {
@@ -22,6 +24,9 @@
       "username-placeholder": "Masukan Username",
       "password": "Password",
       "password-placeholder": "Masukan Password"
+    },
+    "application": {
+      "name": "Aplikasi"
     }
   },
   "_comment_action": "=======================================================================================",
@@ -34,6 +39,7 @@
   "delete": "Hapus",
   "cancel": "Batal",
   "save": "Simpan",
+  "status": "Status",
   "download": "Unduh",
   "download-progress": "Proses Unduh Data",
   "file": "File",

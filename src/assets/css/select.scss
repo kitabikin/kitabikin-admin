@@ -45,6 +45,10 @@
       .ng-arrow-wrapper {
         .ng-arrow {
           &:before {
+            display: none;
+          }
+
+          &:before {
             font-family: 'Font Awesome 5 Free';
             font-size: 14px;
             font-weight: 900;
@@ -104,6 +108,10 @@
       .ng-arrow {
         border: none;
         width: unset;
+
+        &:before {
+          display: none;
+        }
 
         &:before {
           font-family: 'Font Awesome 5 Free';

@@ -33,10 +33,10 @@ import { BreadcrumbComponent as CompBreadcrumbComponent } from '@components/_com
 // import { IconComponent as CompIconComponent } from '@components/_components/icon/icon.component';
 import { LabelComponent as CompLabelComponent } from '@components/_components/label/label.component';
 // import { FormFileUploaderComponent as CompFormFileUploaderComponent } from '@components/_components/form/file-uploader/file-uploader.component';
-// import { TableHeadComponent as CompTableHeadComponent } from '@components/_components/table-head/table-head.component';
+import { TableHeadComponent as CompTableHeadComponent } from '@components/_components/table-head/table-head.component';
+import { PaginationComponent as CompPaginationComponent } from '@components/_components/pagination/pagination.component';
 
 // import { PageComponent as HeaderPageComponent } from '@components/header/page/page.component';
-// import { PaginationComponent } from '@components/pagination/pagination.component';
 // import { FormUserAddEditComponent } from '@components/form/user/add-edit/add-edit.component';
 // import { FormTopicAddEditComponent } from '@components/form/topic/add-edit/add-edit.component';
 // import { FormOrganizationAddEditComponent } from '@components/form/organization/add-edit/add-edit.component';
@@ -87,9 +87,9 @@ import { FormAuthenticationLoginComponent } from '@components/form/authenticatio
     // CompIconComponent,
     CompLabelComponent,
     // CompFormFileUploaderComponent,
-    // CompTableHeadComponent,
+    CompTableHeadComponent,
+    CompPaginationComponent,
     // HeaderPageComponent,
-    // PaginationComponent,
     // FormUserAddEditComponent,
     // FormTopicAddEditComponent,
     // FormArticleAddEditComponent,
@@ -132,9 +132,9 @@ import { FormAuthenticationLoginComponent } from '@components/form/authenticatio
     // CompIconComponent,
     CompLabelComponent,
     // CompFormFileUploaderComponent,
-    // CompTableHeadComponent,
+    CompTableHeadComponent,
+    CompPaginationComponent,
     // HeaderPageComponent,
-    // PaginationComponent,
     // FormUserAddEditComponent,
     // FormTopicAddEditComponent,
     // FormArticleAddEditComponent,

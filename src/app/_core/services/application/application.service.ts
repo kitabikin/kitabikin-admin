@@ -6,6 +6,9 @@ import { map } from 'rxjs/operators';
 // MODELS
 import { Application } from '@models';
 
+// PACKAGES
+import qs from 'qs';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -23,21 +26,21 @@ export class ApplicationService {
   constructor(private http: HttpClient) {}
 
   getTotal(params: any): Observable<Application> {
-    const merge = new URLSearchParams(params);
+    const merge = qs.stringify(params);
     return this.http
       .get<Application>(`${this.apiUrl}?${merge}&count=true`, this.httpOptions)
       .pipe(map((response) => new Application().deserialize(response)));
   }
 
   getList(params: any): Observable<Application> {
-    const merge = new URLSearchParams(params);
+    const merge = qs.stringify(params);
     return this.http
       .get<Application>(`${this.apiUrl}?${merge}`, this.httpOptions)
       .pipe(map((response) => new Application().deserialize(response)));
   }
 
   getSingle(uniq: any, params: any): Observable<Application> {
-    const merge = new URLSearchParams(params);
+    const merge = qs.stringify(params);
     return this.http
       .get<Application>(`${this.apiUrl}/${uniq}?${merge}`, this.httpOptions)
       .pipe(map((response) => new Application().deserialize(response)));
@@ -52,13 +55,6 @@ export class ApplicationService {
   updateItem(uniq: any, item: any): Observable<Application> {
     return this.http
       .put<Application>(`${this.apiUrl}/${uniq}`, JSON.stringify(item), this.httpOptions)
-      .pipe(map((response) => new Application().deserialize(response)));
-  }
-
-  deleteItem(uniq: any, params: any): Observable<Application> {
-    const merge = new URLSearchParams(params);
-    return this.http
-      .delete<Application>(`${this.apiUrl}/${uniq}?${merge}`, this.httpOptions)
       .pipe(map((response) => new Application().deserialize(response)));
   }
 }

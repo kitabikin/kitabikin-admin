@@ -136,7 +136,7 @@ export class ApplicationEffects {
     this.actions$.pipe(
       ofType(fromApplicationActions.deleteApplication),
       switchMap((action) =>
-        this.applicationService.deleteItem(action.id, action.params).pipe(
+        this.applicationService.updateItem(action.delete.id, action.delete).pipe(
           map((res: any) => {
             return fromApplicationActions.deleteApplicationSuccess({
               data: res.data,

@@ -41,6 +41,10 @@ export const AppRoutingModule: Routes = [
         path: 'dashboard',
         loadChildren: () => import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
+      {
+        path: 'general',
+        loadChildren: () => import('./views/general/general.module').then((m) => m.GeneralModule),
+      },
     ],
   },
 ];
