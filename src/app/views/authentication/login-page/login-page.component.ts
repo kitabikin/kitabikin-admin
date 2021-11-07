@@ -84,8 +84,8 @@ export class LoginPageComponent implements OnInit {
         this.isRememberMe
       )
       .pipe(first())
-      .subscribe(
-        (result) => {
+      .subscribe({
+        next: (result) => {
           if (result.error === 0) {
             this.isLoading = false;
             this.authenticationService.setSession(result.data);
@@ -96,10 +96,10 @@ export class LoginPageComponent implements OnInit {
             this.cdRef.markForCheck();
           }
         },
-        (error) => {
+        error: (error) => {
           this.error = error.message;
           this.isLoading = false;
-        }
-      );
+        },
+      });
   }
 }

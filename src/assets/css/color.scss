@@ -260,3 +260,8 @@ $theme-colors: (
   'emphasis-medium-2': $emphasis-medium-2,
   'emphasis-high': $emphasis-high,
 );
+
+$theme-colors-rgb: map-loop($theme-colors, to-rgb, '$value');
+$utilities-colors: map-merge($utilities-colors, $theme-colors-rgb);
+$utilities-text-colors: map-loop($utilities-colors, rgba-css-var, '$key', 'text');
+$utilities-bg-colors: map-loop($utilities-colors, rgba-css-var, '$key', 'bg');

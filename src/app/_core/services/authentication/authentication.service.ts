@@ -10,7 +10,7 @@ import { Login, LoginData } from '@models';
 })
 export class AuthenticationService {
   // API URL
-  apiUrl = `api-backend/auth`;
+  apiUrl = `api-core/v1/auth`;
 
   // Http Options
   httpOptions = {
@@ -43,12 +43,12 @@ export class AuthenticationService {
   }
 
   login(username: string, password: string, isRememberMe: boolean): Observable<any> {
-    const appCode = 'satudata-frontend';
+    const application = 'kitabikin';
     return this.http
-      .post<Login>(`${this.apiUrl}/login2`, {
+      .post<Login>(`${this.apiUrl}/login`, {
         username,
         password,
-        app_code: appCode,
+        application,
       })
       .pipe(
         map((result) => {

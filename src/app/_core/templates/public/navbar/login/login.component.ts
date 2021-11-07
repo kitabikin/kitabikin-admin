@@ -4,7 +4,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import moment from 'moment';
 
 @Component({
-  selector: 'app-public-navbar-login',
+  selector: 'kb-public-navbar-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

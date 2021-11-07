@@ -7,8 +7,7 @@
       <div kbInput
            class="input-group">
         <span class="input-group-text">
-          <i class="fas fa-user"
-             aria-hidden="true"></i>
+          <fa-icon [icon]="faUser"></fa-icon>
         </span>
         <input type="text"
                class="form-control"
@@ -24,8 +23,7 @@
       <div kbInput
            class="input-group">
         <span class="input-group-text">
-          <i class="fas fa-key"
-             aria-hidden="true"></i>
+          <fa-icon [icon]="faKey"></fa-icon>
         </span>
         <input [type]="fieldTextType ? 'text' : 'password'"
                class="form-control"
@@ -34,10 +32,7 @@
         <button class="btn btn-green-700"
                 type="button"
                 (click)="toggleFieldTextType()">
-          <i class="fa"
-             [ngClass]="{ 'fa-eye-slash': !fieldTextType, 'fa-eye': fieldTextType }"
-             aria-hidden="true">
-          </i>
+          <fa-icon [icon]="!fieldTextType ? faEyeSlash : faEye"></fa-icon>
         </button>
       </div>
     </kb-label>
@@ -47,7 +42,10 @@
               type="submit"
               [disabled]="vm.isLoading">
         <span *ngIf="!vm.isLoading">{{ 'page.login.title' | translate }}</span>
-        <span *ngIf="vm.isLoading"><i class="fas fa-circle-notch fa-spin"></i></span>
+        <span *ngIf="vm.isLoading">
+          <fa-icon [icon]="faCircleNotch"
+                   [spin]="true"></fa-icon>
+        </span>
       </button>
     </div>
   </div>

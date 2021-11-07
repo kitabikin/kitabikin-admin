@@ -11,6 +11,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ToastrModule } from 'ngx-toastr';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 // PIPE
 // import { SafeHtmlPipe, SafeUrlPipe } from '@pipes';
@@ -72,6 +73,7 @@ import { FormAuthenticationLoginComponent } from '@components/form/authenticatio
     }),
     SweetAlert2Module.forRoot(),
     // CKEditorModule,
+    FontAwesomeModule,
   ],
   declarations: [
     // PIPE
@@ -112,6 +114,7 @@ import { FormAuthenticationLoginComponent } from '@components/form/authenticatio
     ToastrModule,
     SweetAlert2Module,
     // CKEditorModule,
+    FontAwesomeModule,
     // PIPE
     // SafeHtmlPipe,
     // SafeUrlPipe,

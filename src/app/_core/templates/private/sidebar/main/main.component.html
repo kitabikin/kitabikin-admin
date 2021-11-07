@@ -5,22 +5,22 @@
               class="btn btn-transparent text-gray-800 border-transparent btn-icon d-none d-lg-inline-flex"
               [style.padding.px]="6.5"
               (click)="isMainResized = !isMainResized">
-        <i class="fas fa-bars"></i>
+        <fa-icon [icon]="faBars"></fa-icon>
       </button>
       <button type="button"
               class="btn btn-transparent text-gray-800 border-transparent btn-icon d-lg-none"
               [style.padding.px]="6.5"
               (click)="toggleMobileExpanded()">
-        <i class="fas fa-times"></i>
+        <fa-icon [icon]="faTimes"></fa-icon>
       </button>
     </li>
   </ul>
   <div class="navbar-brand flex-fill wmin-0">
     <a [routerLink]="['/dashboard']"
        class="d-inline-block">
-      <img src="assets/images/logo/edj-with-label.svg"
+      <img src="assets/images/logo/logo180x36.png"
            class="sidebar-resize-hide" />
-      <img src="assets/images/logo/edj-without-label.svg"
+      <img src="assets/images/logo/logo36x36.png"
            class="sidebar-resize-show" />
     </a>
   </div>

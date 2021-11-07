@@ -2,12 +2,20 @@ import { Component, Input } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { LoginStore } from '@components/form/authentication/login/login.store';
 
+import { faUser, faKey, faEyeSlash, faEye, faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'kb-form-authentication-login',
   templateUrl: './login.component.html',
   providers: [LoginStore],
 })
 export class FormAuthenticationLoginComponent {
+  faUser = faUser;
+  faKey = faKey;
+  faEyeSlash = faEyeSlash;
+  faEye = faEye;
+  faCircleNotch = faCircleNotch;
+
   // Input
   @Input() set formGroup(value: any) {
     this.loginStore.setFormGroup(value);
