@@ -149,24 +149,15 @@ export class ApplicationPageComponent implements OnInit, OnChanges, OnDestroy, A
     return false;
   }
 
-  paramMultiSelect(key: string, value: any): object {
-    let result = {};
-
-    if (isArray(value) && !isEmpty(value)) {
-      const arr = value.map((item) => `${item}`);
-      result = { [key]: arr };
-    } else if (!isArray(value)) {
-      result = { [key]: [value] };
-    }
-
-    return result;
-  }
-
   getAllApplication(): void {
     const pCurrent =
       Number(this.filter.perPage) * Number(this.filter.currentPage) - Number(this.filter.perPage);
 
-    const pWhere: any[] = [];
+    const pWhere: any[] = [
+      {
+        is_delete: false,
+      },
+    ];
 
     if (this.filter.status_is_active) {
       pWhere.push({

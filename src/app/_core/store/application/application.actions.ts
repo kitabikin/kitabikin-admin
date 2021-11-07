@@ -39,7 +39,7 @@ export const loadAllApplicationFailure = createAction(
 // Load Single
 export const loadApplication = createAction(
   ApplicationActionTypes.LoadApplication,
-  props<{ id: number; params: any }>()
+  props<{ id: string; params: any }>()
 );
 
 export const loadApplicationSuccess = createAction(

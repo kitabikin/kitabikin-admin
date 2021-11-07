@@ -2,6 +2,7 @@ import { Deserializable, Pagination } from '@models';
 
 // PACKAGE
 import { isArray } from 'lodash';
+import moment from 'moment';
 
 export class Application implements Deserializable {
   [x: string]: any;
@@ -67,5 +68,13 @@ export class ApplicationData implements Deserializable {
 
   getIsActiveBadge(): string {
     return this.detailIsActive().badge;
+  }
+
+  getCreatedAt(): string {
+    return moment(this.created_at).locale('id').format('DD MMMM YYYY HH:mm');
+  }
+
+  getModifiedAt(): string {
+    return moment(this.created_at).locale('id').format('DD MMMM YYYY HH:mm');
   }
 }

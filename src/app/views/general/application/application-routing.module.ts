@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SidebarResolver } from '@resolvers/private';
 
 // GUARD
-// import { StoreApplicationDetailGuard } from '@guards';
+import { StoreApplicationDetailGuard } from '@guards';
 
 const routes: Routes = [
   {
@@ -30,7 +30,13 @@ const routes: Routes = [
       //   path: 'edit/:id',
       //   canActivate: [StoreApplicationDetailGuard],
       //   loadChildren: () => import('./application-edit/application-edit.module').then((m) => m.ApplicationEditModule),
-      // },
+      // },,
+      {
+        path: 'detail/:id',
+        canActivate: [StoreApplicationDetailGuard],
+        loadChildren: () =>
+          import('./application-detail/application-detail.module').then((m) => m.ApplicationDetailModule),
+      },
     ],
   },
 ];

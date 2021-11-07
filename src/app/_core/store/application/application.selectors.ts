@@ -14,7 +14,7 @@ export const selectApplicationIds = createSelector(getState, selectIds);
 export const selectAllApplication = createSelector(getState, selectAll);
 
 // select the by id
-export const selectApplication = (id: number) =>
+export const selectApplication = (id: string) =>
   createSelector(getState, (state: State) => {
     return state.entities[id];
   });

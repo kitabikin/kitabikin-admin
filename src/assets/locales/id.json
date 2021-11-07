@@ -26,7 +26,8 @@
       "password-placeholder": "Masukan Password"
     },
     "application": {
-      "name": "Aplikasi"
+      "name": "Aplikasi",
+      "code": "Kode"
     }
   },
   "_comment_action": "=======================================================================================",
@@ -45,6 +46,12 @@
   "file": "File",
   "csv": "CSV",
   "excel": "Excel",
+  "_comment_word": "=========================================================================================",
+  "more-information": "Informasi Lainnya",
+  "created-id": "Dibuat Oleh",
+  "created-at": "Dibuat Tanggal",
+  "modified-id": "Diubah Oleh",
+  "modified-at": "Diubah Tanggal",
   "_comment_datepicker": "===================================================================================",
   "datepicker": {
     "date": "Tanggal",
