@@ -1,0 +1,55 @@
+.ngb-datepicker-custom {
+  text-align: center;
+  padding: 0.185rem 0.25rem;
+  display: inline-block;
+  height: 2rem;
+  width: 2rem;
+  line-height: 26px;
+  color: var(--bs-gray-700);
+}
+
+.ngb-datepicker-custom.focused {
+  background-color: var(--bs-gray-100);
+}
+
+.ngb-datepicker-custom.range {
+  background-color: var(--bs-green-700);
+  color: var(--bs-white);
+  border-radius: 100%;
+}
+
+.ngb-datepicker-custom:hover {
+  background-color: var(--bs-green-700);
+  color: var(--bs-white);
+  border-radius: 100%;
+}
+
+.ngb-datepicker-custom.faded {
+  background-color: var(--bs-green-50);
+  color: var(--bs-gray-700);
+  border-radius: 0;
+}
+
+.ngb-dp-arrow-btn {
+  color: var(--bs-green-700);
+}
+
+.ngb-dp-weekday {
+  color: black !important;
+  font-style: normal !important;
+  font-weight: 700;
+}
+
+.ngb-dp-month-name {
+  padding-top: 8px;
+}
+
+.ngb-dp-week {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.ngb-dp-weekdays {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

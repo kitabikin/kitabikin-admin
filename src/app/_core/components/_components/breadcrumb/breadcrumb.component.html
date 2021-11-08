@@ -1,0 +1,18 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <nav>
+    <ol class="breadcrumb"
+        aria-label="breadcrumb">
+      <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Dashboard</a></li>
+      <ng-container *ngFor="let row of vm.data; let last = last">
+        <li *ngIf="last; else normal"
+            class="breadcrumb-item active"
+            aria-current="page">{{ row.label }}</li>
+        <ng-template #normal>
+          <li class="breadcrumb-item">
+            <a [routerLink]="[row.link]">{{ row.label }}</a>
+          </li>
+        </ng-template>
+      </ng-container>
+    </ol>
+  </nav>
+</ng-container>

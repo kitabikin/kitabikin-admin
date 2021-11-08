@@ -1,0 +1,18 @@
+$pixel: 500;
+$pixel-fractions: '';
+
+@for $i from 1 through $pixel {
+  $pixel-fractions: $i + 'px';
+
+  .h-#{$i}px {
+    height: unquote($pixel-fractions) !important;
+  }
+}
+
+@for $i from 1 through $pixel {
+  $pixel-fractions: $i + 'px';
+
+  .w-#{$i}px {
+    width: unquote($pixel-fractions) !important;
+  }
+}

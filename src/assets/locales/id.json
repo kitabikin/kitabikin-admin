@@ -1,0 +1,65 @@
+{
+  "kitabikin": "Kitabikin",
+  "kitabikincom": "kitabikin.com",
+  "dashboard": "Dashboard",
+  "general": "Pengaturan Umum",
+  "application": "Aplikasi",
+  "logout": "Keluar",
+  "seo": {
+    "dashboard-page": {
+      "title": "Dashboard",
+      "description": "Deskripsi Dashboard."
+    }
+  },
+  "_comment_page": "=========================================================================================",
+  "page": {
+    "empty": {
+      "access": "Maaf, belum ada data yang dapat diakses.",
+      "search": "Maaf, hasil pencarian tidak ditemukan."
+    },
+    "login": {
+      "title": "Masuk",
+      "subtitle": "Masukkan username dan password Anda untuk melanjutkan.",
+      "username": "Username",
+      "username-placeholder": "Masukan Username",
+      "password": "Password",
+      "password-placeholder": "Masukan Password"
+    },
+    "application": {
+      "name": "Aplikasi",
+      "code": "Kode"
+    }
+  },
+  "_comment_action": "=======================================================================================",
+  "search": "Cari",
+  "action": "Aksi",
+  "list": "Daftar",
+  "detail": "Detail",
+  "add": "Tambah",
+  "edit": "Ubah",
+  "delete": "Hapus",
+  "cancel": "Batal",
+  "save": "Simpan",
+  "download": "Unduh",
+  "download-progress": "Proses Unduh Data",
+  "file": "File",
+  "csv": "CSV",
+  "excel": "Excel",
+  "_comment_word": "=========================================================================================",
+  "more-information": "Informasi Lainnya",
+  "description": "Deskripsi",
+  "status": "Status",
+  "created-id": "Dibuat Oleh",
+  "created-at": "Dibuat Tanggal",
+  "modified-id": "Diubah Oleh",
+  "modified-at": "Diubah Tanggal",
+  "_comment_datepicker": "===================================================================================",
+  "datepicker": {
+    "date": "Tanggal",
+    "start": "Awal",
+    "end": "Akhir",
+    "start-placeholder": "Pilih Tanggal Awal",
+    "end-placeholder": "Pilih Tanggal Akhir",
+    "range-label": "Pilih rentang waktu unduh"
+  }
+}

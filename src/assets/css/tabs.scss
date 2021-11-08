@@ -1,0 +1,27 @@
+$nav-link-padding-x: 12px;
+$nav-link-color: $gray-500;
+$nav-link-hover-color: $green-700;
+$nav-link-disabled-color: $gray-400;
+
+$nav-tabs-border-color: $green-700;
+$nav-tabs-border-width: 2px;
+$nav-tabs-border-radius: 8px;
+$nav-tabs-link-hover-border-color: $green-700 $green-700 $nav-tabs-border-color;
+$nav-tabs-link-active-color: $green-700;
+$nav-tabs-link-active-bg: $white;
+$nav-tabs-link-active-border-color: $green-700 $green-700 $nav-tabs-link-active-bg;
+
+$nav-pills-border-radius: 8px;
+$nav-pills-link-active-color: $component-active-color;
+$nav-pills-link-active-bg: $green-700;
+
+.nav-container {
+  border-bottom: 1px solid $gray-300;
+
+  .nav-link {
+    &.active {
+      color: $green-700;
+      border-bottom: 2px solid $green-700;
+    }
+  }
+}

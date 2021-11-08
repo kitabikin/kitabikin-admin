@@ -21,7 +21,34 @@
     "lib": [
       "es2020",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@core/*": ["src/app/_core/*"],
+      "@common": ["src/app/_core/common/index.ts"],
+      "@components/*": ["src/app/_core/components/*"],
+      "@directives": ["src/app/_core/directives/index.ts"],
+      "@guards": ["src/app/_core/guards/index.ts"],
+      "@helpers": ["src/app/_core/helpers/index.ts"],
+      "@interceptors": ["src/app/_core/interceptors/index.ts"],
+      "@interfaces": ["src/app/_core/interfaces/index.ts"],
+      "@models": ["src/app/_core/models/index.ts"],
+      "@pipes": ["src/app/_core/pipes/index.ts"],
+      "@resolvers": ["src/app/_core/resolvers/index.ts"],
+      "@resolvers/*": ["src/app/_core/resolvers/*"],
+      "@services": ["src/app/_core/services/index.ts"],
+      "@services/*": ["src/app/_core/services/*"],
+      "@store/*": ["src/app/_core/store/*"],
+      "@templates/*": ["src/app/_core/templates/*"],
+      "@validators": ["src/app/_core/validators/index.ts"],
+      "@workers": ["src/app/_core/workers/index.ts"],
+      "@views/*": ["src/app/views/*"],
+      "@data/*": ["src/assets/data/*"],
+      "@json/*": ["src/assets/json/*"],
+      "@script/*": ["src/assets/js/*"],
+      "@locales/*": ["src/assets/locales/*"]
+    },
+    "allowSyntheticDefaultImports": true,
+    "useUnknownInCatchVariables": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

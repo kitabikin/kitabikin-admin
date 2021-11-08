@@ -1,0 +1,52 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <div [formGroup]="vm.formGroup">
+    <kb-label class="d-block mb-3"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['username'], vm.submitted).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['username'], vm.submitted).text">
+      {{ 'page.login.username' | translate }}
+      <div kbInput
+           class="input-group">
+        <span class="input-group-text">
+          <fa-icon [icon]="faUser"></fa-icon>
+        </span>
+        <input type="text"
+               class="form-control"
+               [placeholder]="'page.login.username-placeholder' | translate"
+               formControlName="username">
+      </div>
+    </kb-label>
+
+    <kb-label class="d-block mb-4"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['password'], vm.submitted).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['password'], vm.submitted).text">
+      {{ 'page.login.password' | translate }}
+      <div kbInput
+           class="input-group">
+        <span class="input-group-text">
+          <fa-icon [icon]="faKey"></fa-icon>
+        </span>
+        <input [type]="fieldTextType ? 'text' : 'password'"
+               class="form-control"
+               [placeholder]="'page.login.password-placeholder' | translate"
+               formControlName="password">
+        <button class="btn btn-green-700"
+                type="button"
+                (click)="toggleFieldTextType()">
+          <fa-icon [icon]="!fieldTextType ? faEyeSlash : faEye"></fa-icon>
+        </button>
+      </div>
+    </kb-label>
+
+    <div class="d-grid gap-1">
+      <button class="btn btn-green-700"
+              type="submit"
+              [disabled]="vm.isLoading">
+        <span *ngIf="!vm.isLoading">{{ 'page.login.title' | translate }}</span>
+        <span *ngIf="vm.isLoading">
+          <fa-icon [icon]="faCircleNotch"
+                   [spin]="true"></fa-icon>
+        </span>
+      </button>
+    </div>
+  </div>
+</ng-container>

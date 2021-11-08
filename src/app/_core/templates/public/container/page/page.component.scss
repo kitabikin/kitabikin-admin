@@ -1,0 +1,72 @@
+#wrapper {
+  overflow-x: hidden;
+
+  #sidebar-wrapper {
+    min-height: 100vh;
+    margin-left: -15rem;
+    transition: margin 0.25s ease-out;
+    border-right: 1px solid #ccc;
+  }
+
+  #page-content-wrapper {
+    min-width: 100vw;
+  }
+
+  &.toggled {
+    #sidebar-wrapper {
+      margin-left: 0;
+    }
+  }
+
+  @media (min-width: 768px) {
+    #sidebar-wrapper {
+      margin-left: 0;
+    }
+
+    #page-content-wrapper {
+      min-width: 0;
+      width: 100%;
+    }
+
+    &.toggled {
+      #sidebar-wrapper {
+        margin-left: -15rem;
+      }
+    }
+  }
+}
+
+::ng-deep #wrapper {
+  #page-content-wrapper {
+
+    .header-page,
+    .main-page {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  &.toggled {
+    #page-content-wrapper {
+
+      .header-page,
+      .main-page {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  ::ng-deep #wrapper {
+    #page-content-wrapper {
+
+      .header-page,
+      .main-page {
+        padding-left: 3rem;
+        padding-right: 3rem;
+      }
+    }
+  }
+}

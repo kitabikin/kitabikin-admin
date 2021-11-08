@@ -1,0 +1,30 @@
+<section class="public-sidebar">
+  <div class="bg-white">
+    <div class="sidebar-heading">
+      {{ titleEmitter$ | async }}
+    </div>
+
+    <div class="list-group list-group-flush">
+      <ng-container *ngFor="let item of menuEmitter$ | async; let i = index">
+        <a class="list-group-item list-group-item-action border-0"
+           [routerLinkActive]="['active']"
+           [routerLinkActiveOptions]="{ exact: true }"
+           [routerLink]="[item.link | localize]"
+           (click)="redirectTo(item.link)">
+          {{ item.name | translate }}
+        </a>
+        <ng-container *ngIf="item.children">
+          <div *ngIf="(routeEmitter$ | async) === item.name">
+            <ng-container *ngFor="let child of item.children">
+              <a class="list-group-item list-group-item-action border-0 ps-4"
+                 [routerLinkActive]="['active']"
+                 [routerLink]="[item.link + child.link | localize]">
+                {{ child.name | translate }}
+              </a>
+            </ng-container>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</section>

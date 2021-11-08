@@ -1,0 +1,98 @@
+.satudata {
+  h1 {
+    font-size: 36px;
+  }
+  h2 {
+    font-size: 30px;
+  }
+  h3 {
+    font-size: 24px;
+  }
+  h4 {
+    font-size: 18px;
+  }
+  h5 {
+    font-size: 14px;
+  }
+  h6 {
+    font-size: 12px;
+  }
+
+  blockquote {
+    border-left: 3px solid var(--bs-gray-300);
+    margin: 0 0 1.5em;
+    padding: 0 1.5em;
+  }
+
+  table {
+    width: 100%;
+
+    tbody,
+    td,
+    tfoot,
+    th,
+    thead,
+    tr {
+      border: 0 solid;
+      border-color: var(--bs-gray-300);
+    }
+
+    > :not(caption) > * > * {
+      padding: 6px 16px;
+    }
+
+    > :not(caption) > * {
+      border-width: 1px 0;
+
+      > * {
+        border-width: 0 1px;
+      }
+    }
+  }
+
+  pre {
+    display: block;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    line-height: 1.42857143;
+    word-break: break-all;
+    word-wrap: break-word;
+    color: #333;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  code {
+    padding: 2px 4px;
+    border-radius: 4px;
+    background-color: #f9f2f4;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+    height: auto;
+  }
+
+  .image-style-align-left {
+    float: left;
+    margin-right: 24px;
+  }
+
+  .image-style-align-right {
+    float: right;
+    margin-left: 24px;
+  }
+
+  .image-style-block-align-left {
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  .image-style-block-align-right {
+    margin-right: 0;
+    margin-left: auto;
+  }
+}

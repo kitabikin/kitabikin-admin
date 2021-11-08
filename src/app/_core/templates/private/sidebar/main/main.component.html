@@ -1,0 +1,87 @@
+<div class="navbar bg-white px-3">
+  <ul class="navbar-nav align-self-center sidebar-resize-hide me-3">
+    <li class="nav-item dropdown">
+      <button type="button"
+              class="btn btn-transparent text-gray-800 border-transparent btn-icon d-none d-lg-inline-flex"
+              [style.padding.px]="6.5"
+              (click)="isMainResized = !isMainResized">
+        <fa-icon [icon]="faBars"></fa-icon>
+      </button>
+      <button type="button"
+              class="btn btn-transparent text-gray-800 border-transparent btn-icon d-lg-none"
+              [style.padding.px]="6.5"
+              (click)="toggleMobileExpanded()">
+        <fa-icon [icon]="faTimes"></fa-icon>
+      </button>
+    </li>
+  </ul>
+  <div class="navbar-brand flex-fill wmin-0">
+    <a [routerLink]="['/dashboard']"
+       class="d-inline-block">
+      <img src="assets/images/logo/logo180x36.png"
+           class="sidebar-resize-hide py-2" />
+      <img src="assets/images/logo/logo36x36.png"
+           class="sidebar-resize-show"
+           [style.height.px]="24"
+           [style.marginTop.px]="7"
+           [style.marginBottom.px]="7" />
+    </a>
+  </div>
+</div>
+<div class="sidebar-content">
+  <div class="sidebar-section">
+    <ul #navSidebar
+        class="nav nav-sidebar"
+        data-nav-type="accordion">
+      <li #navItem
+          *ngFor="let item of menuEmitter$ | async"
+          class="nav-item"
+          [ngClass]="[
+            item.children ? 'nav-item-submenu' : '',
+            item.slide ? 'nav-item-open' : ''
+          ]">
+        <ng-container *ngIf="item.link; else tempSub">
+          <a class="nav-link"
+             [routerLink]="[item.link]"
+             [routerLinkActive]="['active']">
+            <ng-template [ngTemplateOutlet]="tempLink"></ng-template>
+          </a>
+        </ng-container>
+
+        <ng-template #tempSub>
+          <a role="button"
+             class="nav-link"
+             (click)="onSlide($event)">
+            <ng-template [ngTemplateOutlet]="tempLink"></ng-template>
+          </a>
+        </ng-template>
+
+        <ng-template #tempLink>
+          <div class="icon">
+            <fa-icon [icon]="item.icon"></fa-icon>
+          </div>
+          <span>
+            {{ item.name }}
+            <span class="fa-icon chevron"></span>
+          </span>
+        </ng-template>
+
+        <ng-container *ngIf="item.children">
+          <ul class="nav nav-group-sub"
+              [attr.data-submenu-title]="item.name"
+              [@slideUpDown]="item.slide">
+            <li *ngFor="let child of item.children"
+                class="nav-item">
+              <a class="nav-link nav-link-sub"
+                 [routerLink]="[child.link]"
+                 [routerLinkActive]="['active']">
+                <span class="fa-icon circle"></span>
+                {{ child.name }}
+              </a>
+            </li>
+          </ul>
+        </ng-container>
+      </li>
+    </ul>
+  </div>
+</div>

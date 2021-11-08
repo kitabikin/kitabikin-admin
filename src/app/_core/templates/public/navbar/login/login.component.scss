@@ -1,0 +1,26 @@
+.public__navbar__login {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0;
+  padding-bottom: 0;
+
+  > .container,
+  > .container-fluid {
+    display: flex;
+    flex-wrap: inherit;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.public__navbar__login__brand {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  margin-right: 0;
+  font-size: 0;
+  text-decoration: none;
+  white-space: nowrap;
+}

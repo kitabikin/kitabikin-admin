@@ -1,0 +1,74 @@
+<header class="public-navbar">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" [routerLink]="['/' | localize]">
+        <img src="assets/images/logo_light.png" />
+      </a>
+      <div class="me-lg-2">
+        <button
+          class="toggler-navbar btn btn-outline-gray-300 me-2"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+          (click)="isMenuCollapsed = !isMenuCollapsed"
+        >
+          <i class="fas fa-project-diagram"></i>
+        </button>
+        <button class="toggler-sidebar btn btn-outline-gray-300" (click)="toggleSidebar()">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+      <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [routerLinkActive]="['active']"
+              [routerLink]="['/examples/foundations' | localize]"
+              (click)="isMenuCollapsed = true"
+            >
+              {{ 'foundations' | translate }}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [routerLinkActive]="['active']"
+              [routerLink]="['/examples/components' | localize]"
+              (click)="isMenuCollapsed = true"
+            >
+              {{ 'components' | translate }}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [routerLinkActive]="['active']"
+              [routerLink]="['/examples/examples' | localize]"
+              (click)="isMenuCollapsed = true"
+            >
+              {{ 'examples' | translate }}
+            </a>
+          </li>
+        </ul>
+        <div class="d-flex">
+          <ul class="navbar-nav mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                [routerLinkActive]="['active']"
+                [routerLink]="['/admin' | localize]"
+                (click)="isMenuCollapsed = true"
+              >
+                {{ 'admin' | translate }}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>

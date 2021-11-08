@@ -1,0 +1,17 @@
+<ng-container *ngIf="defaultInputs$ | async as vm">
+  <div class="avatar__item">
+    <ng-template #dynamicComponent></ng-template>
+    <div class="avatar__item__wrapper">
+      <div *ngIf="vm.primaryText"
+           class="avatar__item__primary"
+           [ngClass]="{'truncation': vm.isTruncation}">
+        {{ vm.primaryText }}
+      </div>
+      <div *ngIf="vm.secondaryText"
+           class="avatar__item__secondary"
+           [ngClass]="{'truncation': vm.isTruncation}">
+        {{ vm.secondaryText }}
+      </div>
+    </div>
+  </div>
+</ng-container>
