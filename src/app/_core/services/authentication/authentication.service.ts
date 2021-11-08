@@ -27,10 +27,10 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) {
     this.adminUserSubject = new BehaviorSubject<LoginData>(
-      JSON.parse(localStorage.getItem('admin-user') || 'null')
+      JSON.parse(localStorage.getItem('kitabikin-admin-user') || 'null')
     );
     this.adminUser = this.adminUserSubject.asObservable();
-    this.adminTokenSubject = new BehaviorSubject<string>(localStorage.getItem('admin-token') || '');
+    this.adminTokenSubject = new BehaviorSubject<string>(localStorage.getItem('kitabikin-admin-token') || '');
     this.adminToken = this.adminTokenSubject.asObservable();
   }
 
@@ -54,7 +54,7 @@ export class AuthenticationService {
         map((result) => {
           if (result.error === 0) {
             if (isRememberMe) {
-              localStorage.setItem('admin-username', username);
+              localStorage.setItem('kitabikin-admin-username', username);
             }
           }
           return result;
@@ -63,19 +63,19 @@ export class AuthenticationService {
   }
 
   setSession(data: LoginData) {
-    localStorage.setItem('admin-user', JSON.stringify(data));
+    localStorage.setItem('kitabikin-admin-user', JSON.stringify(data));
     this.adminUserSubject.next(data);
     this.setToken(data.token);
   }
 
   setToken(token: string) {
-    localStorage.setItem('admin-token', token);
+    localStorage.setItem('kitabikin-admin-token', token);
     this.adminTokenSubject.next(token);
   }
 
   async logout() {
-    localStorage.removeItem('admin-user');
-    localStorage.removeItem('admin-token');
+    localStorage.removeItem('kitabikin-admin-user');
+    localStorage.removeItem('kitabikin-admin-token');
 
     // @ts-ignore
     this.adminUserSubject.next(null);
@@ -87,6 +87,8 @@ export class AuthenticationService {
   }
 
   get dataRememberMe() {
-    return localStorage.getItem('admin-username') ? localStorage.getItem('admin-username') : null;
+    return localStorage.getItem('kitabikin-admin-username')
+      ? localStorage.getItem('kitabikin-admin-username')
+      : null;
   }
 }

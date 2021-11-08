@@ -9,18 +9,22 @@ import { handleUndo } from 'ngrx-undo';
 import { ApplicationReducer } from '@store/application/application.reducers';
 import { ApplicationEffects } from '@store/application/application.effects';
 
+import { RoleReducer } from '@store/role/role.reducers';
+import { RoleEffects } from '@store/role/role.effects';
+
 @NgModule({
   imports: [
     CommonModule,
     StoreModule.forRoot(
       {
         application: ApplicationReducer,
+        role: RoleReducer,
       },
       {
         metaReducers: [handleUndo],
       }
     ),
-    EffectsModule.forRoot([ApplicationEffects]),
+    EffectsModule.forRoot([ApplicationEffects, RoleEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
