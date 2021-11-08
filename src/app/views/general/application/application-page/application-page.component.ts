@@ -38,7 +38,7 @@ import { Store, select } from '@ngrx/store';
 import { Actions, ofType } from '@ngrx/effects';
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
-import { faSearchPlus, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faSearchPlus, faPlus, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'kb-application-page',
@@ -48,6 +48,7 @@ import { faSearchPlus, faPen, faTrash } from '@fortawesome/free-solid-svg-icons'
 })
 export class ApplicationPageComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
   faSearchPlus = faSearchPlus;
+  faPlus = faPlus;
   faPen = faPen;
   faTrash = faTrash;
 
@@ -254,10 +255,10 @@ export class ApplicationPageComponent implements OnInit, OnChanges, OnDestroy, A
     this.getAllApplication();
   }
 
-  onDelete(id: string | undefined, isDeleted: boolean = true): void {
+  onDelete(id: string | undefined, isDelete: boolean = true): void {
     const bodyApplication = {
       id,
-      is_deleted: !isDeleted,
+      is_delete: isDelete,
     };
 
     this.applicationIsLoadingDelete$ = this.store.pipe(select(selectIsLoadingDeleteApplication));

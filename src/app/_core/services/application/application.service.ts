@@ -28,7 +28,7 @@ export class ApplicationService {
   getTotal(params: any): Observable<Application> {
     const merge = qs.stringify(params);
     return this.http
-      .get<Application>(`${this.apiUrl}?${merge}&count=true`, this.httpOptions)
+      .get<Application>(`${this.apiUrl}/total?${merge}`, this.httpOptions)
       .pipe(map((response) => new Application().deserialize(response)));
   }
 

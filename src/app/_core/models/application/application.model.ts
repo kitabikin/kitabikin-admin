@@ -75,6 +75,6 @@ export class ApplicationData implements Deserializable {
   }
 
   getModifiedAt(): string {
-    return moment(this.created_at).locale('id').format('DD MMMM YYYY HH:mm');
+    return moment(this.modified_at).locale('id').format('DD MMMM YYYY HH:mm');
   }
 }

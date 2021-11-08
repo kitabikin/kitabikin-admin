@@ -1,3 +1,5 @@
+<ngx-loading [show]="(applicationIsLoadingDelete$ | async) || false"></ngx-loading>
+
 <section class="application__page">
   <div class="mb-4">
     <kb-breadcrumb [data]="breadcrumb"></kb-breadcrumb>
@@ -9,7 +11,7 @@
     </div>
     <div class="ms-auto">
       <div class="d-flex">
-        <div>
+        <div class="me-3">
           <div class="input-group input-search left">
             <span class="input-group-text">
               <i class="fas fa-search"></i>
@@ -23,6 +25,14 @@
                    [style.width.px]="232" />
           </div>
         </div>
+
+        <a role="button"
+           class="btn btn-green-700"
+           [routerLink]="['/general/application/add']">
+          <fa-icon class="me-2"
+                   [icon]="faPlus"></fa-icon>
+          {{ 'add' | translate }} {{ 'application' | translate }}
+        </a>
       </div>
     </div>
   </div>

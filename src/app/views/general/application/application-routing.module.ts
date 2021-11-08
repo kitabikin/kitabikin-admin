@@ -22,15 +22,17 @@ const routes: Routes = [
         loadChildren: () =>
           import('./application-page/application-page.module').then((m) => m.ApplicationPageModule),
       },
-      // {
-      //   path: 'add',
-      //   loadChildren: () => import('./application-add/application-add.module').then((m) => m.ApplicationAddModule),
-      // },
-      // {
-      //   path: 'edit/:id',
-      //   canActivate: [StoreApplicationDetailGuard],
-      //   loadChildren: () => import('./application-edit/application-edit.module').then((m) => m.ApplicationEditModule),
-      // },,
+      {
+        path: 'add',
+        loadChildren: () =>
+          import('./application-add/application-add.module').then((m) => m.ApplicationAddModule),
+      },
+      {
+        path: 'edit/:id',
+        canActivate: [StoreApplicationDetailGuard],
+        loadChildren: () =>
+          import('./application-edit/application-edit.module').then((m) => m.ApplicationEditModule),
+      },
       {
         path: 'detail/:id',
         canActivate: [StoreApplicationDetailGuard],

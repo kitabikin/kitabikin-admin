@@ -9,6 +9,7 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -36,18 +37,8 @@ import { LabelComponent as CompLabelComponent } from '@components/_components/la
 import { TableHeadComponent as CompTableHeadComponent } from '@components/_components/table-head/table-head.component';
 import { PaginationComponent as CompPaginationComponent } from '@components/_components/pagination/pagination.component';
 
-// import { PageComponent as HeaderPageComponent } from '@components/header/page/page.component';
-// import { FormUserAddEditComponent } from '@components/form/user/add-edit/add-edit.component';
-// import { FormTopicAddEditComponent } from '@components/form/topic/add-edit/add-edit.component';
-// import { FormOrganizationAddEditComponent } from '@components/form/organization/add-edit/add-edit.component';
-// import { FormUnitAddEditComponent } from '@components/form/unit/add-edit/add-edit.component';
-// import { FormAgreementAddEditComponent } from '@components/form/agreement/add-edit/add-edit.component';
-// import { FormArticleAddEditComponent } from '@components/form/article/add-edit/add-edit.component';
-// import { FormHighlightAddEditComponent } from './components/form/highlight/add-edit/add-edit.component';
 import { FormAuthenticationLoginComponent } from '@components/form/authentication/login/login.component';
-// import { FormMapsetAddEditComponent } from '@components/form/mapset/add-edit/add-edit.component';
-// import { ModalDownloadRequestDatasetComponent } from '@components/modal/download-request-dataset/download-request-dataset.component';
-// import { ModalProgressComponent } from '@components/modal/progress/progress.component';
+import { FormApplicationAddEditComponent } from '@components/form/application/add-edit/add-edit.component';
 
 @NgModule({
   imports: [
@@ -71,6 +62,15 @@ import { FormAuthenticationLoginComponent } from '@components/form/authenticatio
       preventDuplicates: true,
       progressBar: true,
     }),
+    NgxLoadingModule.forRoot({
+      animationType: ngxLoadingAnimationTypes.wanderingCubes,
+      backdropBackgroundColour: 'rgba(0,0,0,0.5)',
+      backdropBorderRadius: '4px',
+      fullScreenBackdrop: true,
+      primaryColour: '#FDCC29',
+      secondaryColour: '#289D56',
+      tertiaryColour: '#28B8F0',
+    }),
     SweetAlert2Module.forRoot(),
     // CKEditorModule,
     FontAwesomeModule,
@@ -89,18 +89,8 @@ import { FormAuthenticationLoginComponent } from '@components/form/authenticatio
     // CompFormFileUploaderComponent,
     CompTableHeadComponent,
     CompPaginationComponent,
-    // HeaderPageComponent,
-    // FormUserAddEditComponent,
-    // FormTopicAddEditComponent,
-    // FormArticleAddEditComponent,
-    // FormHighlightAddEditComponent,
-    // FormOrganizationAddEditComponent,
-    // FormUnitAddEditComponent,
-    // FormAgreementAddEditComponent,
     FormAuthenticationLoginComponent,
-    // FormMapsetAddEditComponent,
-    // ModalDownloadRequestDatasetComponent,
-    // ModalProgressComponent,
+    FormApplicationAddEditComponent,
   ],
   exports: [
     RouterModule,
@@ -112,6 +102,7 @@ import { FormAuthenticationLoginComponent } from '@components/form/authenticatio
     NgSelectModule,
     NgxSkeletonLoaderModule,
     ToastrModule,
+    NgxLoadingModule,
     SweetAlert2Module,
     // CKEditorModule,
     FontAwesomeModule,
@@ -134,18 +125,8 @@ import { FormAuthenticationLoginComponent } from '@components/form/authenticatio
     // CompFormFileUploaderComponent,
     CompTableHeadComponent,
     CompPaginationComponent,
-    // HeaderPageComponent,
-    // FormUserAddEditComponent,
-    // FormTopicAddEditComponent,
-    // FormArticleAddEditComponent,
-    // FormHighlightAddEditComponent,
-    // FormOrganizationAddEditComponent,
-    // FormUnitAddEditComponent,
-    // FormAgreementAddEditComponent,
     FormAuthenticationLoginComponent,
-    // FormMapsetAddEditComponent,
-    // ModalDownloadRequestDatasetComponent,
-    // ModalProgressComponent,
+    FormApplicationAddEditComponent,
   ],
   providers: [],
   schemas: [],
