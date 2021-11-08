@@ -23,7 +23,10 @@ export class SidebarService {
         name: 'Pengaturan Umum',
         icon: faCogs,
         link: null,
-        children: [{ name: 'Aplikasi', link: '/general/application' }],
+        children: [
+          { name: 'Aplikasi', link: '/general/application' },
+          { name: 'Peran', link: '/general/role' },
+        ],
       },
     ];
 

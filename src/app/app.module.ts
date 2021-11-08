@@ -55,7 +55,7 @@ export function createTranslateLoader(http: HttpClient): any {
 }
 
 export function tokenGetter(): any {
-  return localStorage.getItem('admin-token');
+  return localStorage.getItem('kitabikin-admin-token');
 }
 
 @NgModule({

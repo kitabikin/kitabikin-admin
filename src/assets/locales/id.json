@@ -4,6 +4,7 @@
   "dashboard": "Dashboard",
   "general": "Pengaturan Umum",
   "application": "Aplikasi",
+  "role": "Peran",
   "logout": "Keluar",
   "seo": {
     "dashboard-page": {
@@ -27,6 +28,10 @@
     },
     "application": {
       "name": "Aplikasi",
+      "code": "Kode"
+    },
+    "role": {
+      "name": "Peran",
       "code": "Kode"
     }
   },
