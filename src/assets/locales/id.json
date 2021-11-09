@@ -37,7 +37,10 @@
     },
     "user": {
       "name": "Nama",
-      "username": "Username"
+      "username": "Username",
+      "referral_code": "Kode Referral",
+      "signup_with": "Daftar Dengan",
+      "email_activation": "Aktifasi Email"
     }
   },
   "_comment_action": "=======================================================================================",
@@ -56,6 +59,7 @@
   "csv": "CSV",
   "excel": "Excel",
   "_comment_word": "=========================================================================================",
+  "email": "Email",
   "more-information": "Informasi Lainnya",
   "description": "Deskripsi",
   "status": "Status",

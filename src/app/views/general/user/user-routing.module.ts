@@ -30,11 +30,11 @@ const routes: Routes = [
       //   canActivate: [StoreUserDetailGuard],
       //   loadChildren: () => import('./user-edit/user-edit.module').then((m) => m.UserEditModule),
       // },
-      // {
-      //   path: 'detail/:id',
-      //   canActivate: [StoreUserDetailGuard],
-      //   loadChildren: () => import('./user-detail/user-detail.module').then((m) => m.UserDetailModule),
-      // },
+      {
+        path: 'detail/:id',
+        canActivate: [StoreUserDetailGuard],
+        loadChildren: () => import('./user-detail/user-detail.module').then((m) => m.UserDetailModule),
+      },
     ],
   },
 ];

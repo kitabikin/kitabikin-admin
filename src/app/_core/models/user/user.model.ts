@@ -30,7 +30,7 @@ export class UserData implements Deserializable {
   id_user!: string;
   username!: string;
   email!: string;
-  refferal_code!: string;
+  referral_code!: string;
   signup_with!: string;
   is_email!: boolean;
   is_active!: boolean;
@@ -70,6 +70,32 @@ export class UserData implements Deserializable {
 
   getIsActiveBadge(): string {
     return this.detailIsActive().badge;
+  }
+
+  detailIsEmail(): any {
+    let name = '';
+    let badge = '';
+
+    if (this.is_email) {
+      name = 'Ya';
+      badge = 'bg-green-100 text-green-900';
+    } else {
+      name = 'Tidak';
+      badge = 'bg-red-100 text-red-900';
+    }
+
+    return {
+      name,
+      badge,
+    };
+  }
+
+  getIsEmail(): string {
+    return this.detailIsEmail().name;
+  }
+
+  getIsEmailBadge(): string {
+    return this.detailIsEmail().badge;
   }
 
   getCreatedAt(): string {
