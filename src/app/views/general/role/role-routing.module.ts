@@ -21,11 +21,10 @@ const routes: Routes = [
         path: '',
         loadChildren: () => import('./role-page/role-page.module').then((m) => m.RolePageModule),
       },
-      // {
-      //   path: 'add',
-      //   loadChildren: () =>
-      //     import('./role-add/role-add.module').then((m) => m.RoleAddModule),
-      // },
+      {
+        path: 'add',
+        loadChildren: () => import('./role-add/role-add.module').then((m) => m.RoleAddModule),
+      },
       // {
       //   path: 'edit/:id',
       //   canActivate: [StoreRoleDetailGuard],
