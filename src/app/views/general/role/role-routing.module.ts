@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SidebarResolver } from '@resolvers/private';
 
 // GUARD
-// import { StoreRoleDetailGuard } from '@guards';
+import { StoreRoleDetailGuard } from '@guards';
 
 const routes: Routes = [
   {
@@ -21,23 +21,20 @@ const routes: Routes = [
         path: '',
         loadChildren: () => import('./role-page/role-page.module').then((m) => m.RolePageModule),
       },
-      // {
-      //   path: 'add',
-      //   loadChildren: () =>
-      //     import('./role-add/role-add.module').then((m) => m.RoleAddModule),
-      // },
-      // {
-      //   path: 'edit/:id',
-      //   canActivate: [StoreRoleDetailGuard],
-      //   loadChildren: () =>
-      //     import('./role-edit/role-edit.module').then((m) => m.RoleEditModule),
-      // },
-      // {
-      //   path: 'detail/:id',
-      //   canActivate: [StoreRoleDetailGuard],
-      //   loadChildren: () =>
-      //     import('./role-detail/role-detail.module').then((m) => m.RoleDetailModule),
-      // },
+      {
+        path: 'add',
+        loadChildren: () => import('./role-add/role-add.module').then((m) => m.RoleAddModule),
+      },
+      {
+        path: 'edit/:id',
+        canActivate: [StoreRoleDetailGuard],
+        loadChildren: () => import('./role-edit/role-edit.module').then((m) => m.RoleEditModule),
+      },
+      {
+        path: 'detail/:id',
+        canActivate: [StoreRoleDetailGuard],
+        loadChildren: () => import('./role-detail/role-detail.module').then((m) => m.RoleDetailModule),
+      },
     ],
   },
 ];

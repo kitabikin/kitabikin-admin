@@ -39,6 +39,7 @@ import { PaginationComponent as CompPaginationComponent } from '@components/_com
 
 import { FormAuthenticationLoginComponent } from '@components/form/authentication/login/login.component';
 import { FormApplicationAddEditComponent } from '@components/form/application/add-edit/add-edit.component';
+import { FormRoleAddEditComponent } from '@components/form/role/add-edit/add-edit.component';
 
 @NgModule({
   imports: [
@@ -91,6 +92,7 @@ import { FormApplicationAddEditComponent } from '@components/form/application/ad
     CompPaginationComponent,
     FormAuthenticationLoginComponent,
     FormApplicationAddEditComponent,
+    FormRoleAddEditComponent,
   ],
   exports: [
     RouterModule,
@@ -127,6 +129,7 @@ import { FormApplicationAddEditComponent } from '@components/form/application/ad
     CompPaginationComponent,
     FormAuthenticationLoginComponent,
     FormApplicationAddEditComponent,
+    FormRoleAddEditComponent,
   ],
   providers: [],
   schemas: [],
