@@ -25,12 +25,11 @@ const routes: Routes = [
         path: 'add',
         loadChildren: () => import('./role-add/role-add.module').then((m) => m.RoleAddModule),
       },
-      // {
-      //   path: 'edit/:id',
-      //   canActivate: [StoreRoleDetailGuard],
-      //   loadChildren: () =>
-      //     import('./role-edit/role-edit.module').then((m) => m.RoleEditModule),
-      // },
+      {
+        path: 'edit/:id',
+        canActivate: [StoreRoleDetailGuard],
+        loadChildren: () => import('./role-edit/role-edit.module').then((m) => m.RoleEditModule),
+      },
       {
         path: 'detail/:id',
         canActivate: [StoreRoleDetailGuard],
