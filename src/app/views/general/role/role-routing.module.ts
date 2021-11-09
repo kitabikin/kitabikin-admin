@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SidebarResolver } from '@resolvers/private';
 
 // GUARD
-// import { StoreRoleDetailGuard } from '@guards';
+import { StoreRoleDetailGuard } from '@guards';
 
 const routes: Routes = [
   {
@@ -32,12 +32,11 @@ const routes: Routes = [
       //   loadChildren: () =>
       //     import('./role-edit/role-edit.module').then((m) => m.RoleEditModule),
       // },
-      // {
-      //   path: 'detail/:id',
-      //   canActivate: [StoreRoleDetailGuard],
-      //   loadChildren: () =>
-      //     import('./role-detail/role-detail.module').then((m) => m.RoleDetailModule),
-      // },
+      {
+        path: 'detail/:id',
+        canActivate: [StoreRoleDetailGuard],
+        loadChildren: () => import('./role-detail/role-detail.module').then((m) => m.RoleDetailModule),
+      },
     ],
   },
 ];
