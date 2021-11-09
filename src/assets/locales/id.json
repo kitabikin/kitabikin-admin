@@ -5,6 +5,7 @@
   "general": "Pengaturan Umum",
   "application": "Aplikasi",
   "role": "Peran",
+  "user": "Pengguna",
   "logout": "Keluar",
   "seo": {
     "dashboard-page": {
@@ -33,6 +34,10 @@
     "role": {
       "name": "Peran",
       "code": "Kode"
+    },
+    "user": {
+      "name": "Nama",
+      "username": "Username"
     }
   },
   "_comment_action": "=======================================================================================",
