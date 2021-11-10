@@ -9,10 +9,13 @@ import {
   ChangeDetectorRef,
 } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, filter } from 'rxjs/operators';
+
+// MODEL
+import { UserData } from '@models';
 
 // SERVICE
 import { GlobalService } from '@services/private';
@@ -22,11 +25,11 @@ import { UserService } from '@services';
 import { UserValidators } from '@validators';
 
 // STORE
-import { selectIsLoadingCreate as selectIsLoadingCreateUser } from '@store/user/user.selectors';
+import { selectUser, selectIsLoadingUpdate as selectIsLoadingUpdateUser } from '@store/user/user.selectors';
 import { fromUserActions } from '@store/user/user.actions';
 
 // PACKAGE
-import { map, omit } from 'lodash';
+import { assign, map, omit } from 'lodash';
 import moment from 'moment';
 import { TranslateService } from '@ngx-translate/core';
 import { Store, select } from '@ngrx/store';
@@ -35,11 +38,11 @@ import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'kb-user-add',
-  templateUrl: './user-add.component.html',
-  styleUrls: ['./user-add.component.scss'],
+  selector: 'kb-user-edit',
+  templateUrl: './user-edit.component.html',
+  styleUrls: ['./user-edit.component.scss'],
 })
-export class UserAddComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
+export class UserEditComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
   moment: any = moment;
 
   // Settings
@@ -49,14 +52,16 @@ export class UserAddComponent implements OnInit, OnChanges, OnDestroy, AfterView
   breadcrumb: any[] = [
     { label: 'Pengaturan Umum', link: '/general' },
     { label: 'Pengguna', link: '/general/user' },
-    { label: 'Tambah', link: '/general/user/add' },
+    { label: 'Ubah', link: '/general/user/edit' },
   ];
 
   // Variable
+  id!: string;
   myForm!: FormGroup;
 
   // Data
-  userIsLoadingCreate$!: Observable<boolean>;
+  userData$!: Observable<UserData | undefined>;
+  userIsLoadingUpdate$!: Observable<boolean>;
 
   private unsubscribeUser$ = new Subject<void>();
 
@@ -78,13 +83,15 @@ export class UserAddComponent implements OnInit, OnChanges, OnDestroy, AfterView
     this.translateService.onLangChange.subscribe((event) => {
       this.settingsAll();
     });
+
+    this.id = this.route.snapshot.params['id'];
   }
 
   settingsAll(): void {
-    const word = ['user', 'add'];
+    const word = ['user', 'edit'];
     this.translateService.get(word).subscribe((trans) => {
-      this.label = `${trans.add} ${trans.user}`;
-      this.description = `${trans.add} ${trans.user}`;
+      this.label = `${trans.edit} ${trans.user}`;
+      this.description = `${trans.edit} ${trans.user}`;
 
       // Title & Description
       this.title = this.globalService.title;
@@ -97,21 +104,20 @@ export class UserAddComponent implements OnInit, OnChanges, OnDestroy, AfterView
   ngOnInit(): void {
     this.myForm = this.fb.group({
       profile: this.fb.group({
+        id_profile: [null, [Validators.required]],
         name: [null, [Validators.required]],
       }),
       username: [
         null,
         {
           validators: [Validators.required, Validators.maxLength(240)],
-          asyncValidators: [UserValidators.checkExist(this.userService, 'username')],
         },
       ],
-      password: [null, [Validators.required]],
+      password: [null],
       email: [
         null,
         {
           validators: [Validators.required],
-          asyncValidators: [UserValidators.checkExist(this.userService, 'email')],
         },
       ],
       signup_with: ['web'],
@@ -120,12 +126,13 @@ export class UserAddComponent implements OnInit, OnChanges, OnDestroy, AfterView
         null,
         {
           validators: [Validators.required, Validators.maxLength(6)],
-          asyncValidators: [UserValidators.checkExist(this.userService, 'referral_code')],
         },
       ],
       is_active: [false, [Validators.required]],
-      role: this.fb.array([this.createRole()]),
+      role: this.fb.array([]),
     });
+
+    this.getUser();
   }
 
   ngOnChanges(changes: SimpleChanges): void {}
@@ -141,13 +148,6 @@ export class UserAddComponent implements OnInit, OnChanges, OnDestroy, AfterView
     return this.myForm.controls['role'] as FormArray;
   }
 
-  createRole(): FormGroup {
-    return this.fb.group({
-      id_application: [null, Validators.required],
-      id_role: [null, Validators.required],
-    });
-  }
-
   addRole() {
     const roleForm = this.fb.group({
       id_application: [null, Validators.required],
@@ -160,26 +160,81 @@ export class UserAddComponent implements OnInit, OnChanges, OnDestroy, AfterView
     this.role.removeAt(roleIndex);
   }
 
+  // GET =====================================================================================================
+  getUser(): void {
+    this.userData$ = this.store.pipe(select(selectUser(this.id)));
+
+    this.store
+      .pipe(
+        select(selectUser(this.id)),
+        filter((val) => val !== undefined)
+      )
+      .subscribe((result) => {
+        this.setFormUser(result);
+      });
+  }
+
+  // SET FORM ================================================================================================
+  setFormUser(data: UserData | undefined): void {
+    this.myForm.patchValue({
+      profile: {
+        id_profile: data?.profile.id_profile,
+        name: data?.profile.name,
+      },
+      username: data?.username,
+      email: data?.email,
+      referral_code: data?.referral_code,
+      is_active: data?.is_active,
+    });
+
+    data?.role.map((item) => {
+      const roleForm = this.fb.group({
+        id_application: [item.application.id_application, Validators.required],
+        id_role: [item.id_role, Validators.required],
+      });
+      this.role.push(roleForm);
+    });
+
+    this.myForm.controls['username'].setAsyncValidators(
+      UserValidators.checkExist(this.userService, 'username', data?.username)
+    );
+
+    this.myForm.controls['email'].setAsyncValidators(
+      UserValidators.checkExist(this.userService, 'email', data?.email)
+    );
+
+    this.myForm.controls['referral_code'].setAsyncValidators(
+      UserValidators.checkExist(this.userService, 'referral_code', data?.referral_code)
+    );
+  }
+
+  // SAVE ====================================================================================================
   onSubmit(): void {
     const input = this.myForm.value;
 
     const bodyUser = input;
     bodyUser.role = map(bodyUser.role, (o) => omit(o, ['id_application']));
 
-    this.userIsLoadingCreate$ = this.store.pipe(select(selectIsLoadingCreateUser));
+    assign(bodyUser, { id_user: this.id });
+
+    if (bodyUser.password === null) {
+      delete bodyUser.password;
+    }
+
+    this.userIsLoadingUpdate$ = this.store.pipe(select(selectIsLoadingUpdateUser));
 
     this.store.dispatch(
-      fromUserActions.createUser({
-        create: bodyUser,
+      fromUserActions.updateUser({
+        update: bodyUser,
       })
     );
 
     this.actions$
-      .pipe(ofType(fromUserActions.createUserSuccess), takeUntil(this.unsubscribeUser$))
+      .pipe(ofType(fromUserActions.updateUserSuccess), takeUntil(this.unsubscribeUser$))
       .subscribe((result) => {
         Swal.fire({
           icon: 'success',
-          text: `Pengguna ${result.data.profile.name} berhasil ditambahkan.`,
+          text: `Pengguna ${result.data.profile.name} berhasil diubah.`,
           allowOutsideClick: false,
           confirmButtonColor: '#069550',
         }).then(() => {
@@ -188,7 +243,7 @@ export class UserAddComponent implements OnInit, OnChanges, OnDestroy, AfterView
       });
 
     this.actions$
-      .pipe(ofType(fromUserActions.createUserFailure), takeUntil(this.unsubscribeUser$))
+      .pipe(ofType(fromUserActions.updateUserFailure), takeUntil(this.unsubscribeUser$))
       .subscribe((result) => {
         this.toastr.error(result.error.message, 'User');
       });

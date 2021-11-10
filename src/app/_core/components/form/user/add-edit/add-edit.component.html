@@ -88,8 +88,9 @@
                        bindValue="id_application"
                        bindLabel="name"
                        [placeholder]="'application' | translate"
-                       (change)="onSelectedApplication($event, roleForm)"
-                       (clear)="onClearApplication(roleForm)">
+                       formControlName="id_application"
+                       (change)="onSelectedApplication(i, $event, roleForm)"
+                       (clear)="onClearApplication(i, roleForm)">
             </ng-select>
           </kb-label>
         </div>
@@ -99,7 +100,7 @@
                     [invalid]="getFormValidation(roleForm.get('id_role')).invalid"
                     [invalidText]="getFormValidation(roleForm.get('id_role')).text">
             <ng-select kbInput
-                       [items]="(roleData$ | async) || []"
+                       [items]="roleData[i]"
                        bindValue="id_role"
                        bindLabel="name"
                        [placeholder]="'role' | translate"

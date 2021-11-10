@@ -1,21 +1,21 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
 import { AddEditStore } from '@components/form/user/add-edit/add-edit.store';
-import { filter } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { filter, last } from 'rxjs/operators';
+import { lastValueFrom, Observable, of } from 'rxjs';
 
 // MODEL
 import { ApplicationData, RoleData } from '@models';
+
+// SERVICE
+import { RoleService } from '@services';
 
 // STORE
 import { selectAllApplication } from '@store/application/application.selectors';
 import { fromApplicationActions } from '@store/application/application.actions';
 
-import { selectAllRole } from '@store/role/role.selectors';
-import { fromRoleActions } from '@store/role/role.actions';
-
 // PACKAGE
-import { isEmpty } from 'lodash';
+import { isEmpty, map } from 'lodash';
 import { Store, select } from '@ngrx/store';
 import { Actions, ofType } from '@ngrx/effects';
 import { faEyeSlash, faEye, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -32,16 +32,22 @@ export class FormUserAddEditComponent implements OnInit {
   faTrash = faTrash;
 
   // Input
-  // tempFormGroup!: FormGroup;
+  tempFormGroup!: FormGroup;
   @Input() set formGroup(value: FormGroup) {
+    this.tempFormGroup = value;
     this.addEditStore.setFormGroup(value);
   }
-  // get formGroup(): FormGroup {
-  //   return this.tempFormGroup;
-  // }
+  get formGroup(): FormGroup {
+    return this.tempFormGroup;
+  }
 
+  tempIsAddMode!: boolean;
   @Input() set isAddMode(value: boolean) {
+    this.tempIsAddMode = value;
     this.addEditStore.setIsAddMode(value);
+  }
+  get isAddMode(): boolean {
+    return this.tempIsAddMode;
   }
 
   @Output() emitRoleAdd = new EventEmitter<any>();
@@ -52,18 +58,31 @@ export class FormUserAddEditComponent implements OnInit {
 
   // Data
   applicationData$!: Observable<ApplicationData[]>;
-  roleData$!: Observable<RoleData[]>;
+  roleData: any[] = [];
 
   readonly vm$ = this.addEditStore.vm$;
 
   constructor(
     private readonly addEditStore: AddEditStore,
+    private roleService: RoleService,
     private actions$: Actions,
     private store: Store<any>
   ) {}
 
   ngOnInit(): void {
     this.getAllApplication();
+
+    // Is Edit Mode
+    if (!this.isAddMode) {
+      this.initEditMode();
+    }
+  }
+
+  initEditMode(): void {
+    const roles = this.formGroup.controls['role'].value;
+    map(roles, (result, roleIndex: number) => {
+      this.getAllRole(roleIndex, result.id_application);
+    });
   }
 
   getFormValidation(control: AbstractControl | undefined | null): any {
@@ -121,7 +140,7 @@ export class FormUserAddEditComponent implements OnInit {
     );
   }
 
-  getAllRole(idApplication: string): void {
+  getAllRole(roleIndex: number, idApplication: string): void {
     const pSort = 'name:asc';
 
     const pWhere: any[] = [
@@ -138,18 +157,9 @@ export class FormUserAddEditComponent implements OnInit {
       where: pWhere,
     };
 
-    this.store.dispatch(
-      fromRoleActions.loadAllRole({
-        params,
-        pagination: false,
-        infinite: false,
-      })
-    );
-
-    this.roleData$ = this.store.pipe(
-      select(selectAllRole),
-      filter((val) => val.length !== 0)
-    );
+    this.roleService.getList(params).subscribe((result) => {
+      this.roleData[roleIndex] = result.data;
+    });
   }
 
   forceUppercaseConditionally(control: AbstractControl | undefined): any {
@@ -167,20 +177,21 @@ export class FormUserAddEditComponent implements OnInit {
   }
 
   deleteRole(roleIndex: number): void {
+    this.roleData.splice(roleIndex, 1);
     this.emitRoleDelete.emit(roleIndex);
   }
 
-  onSelectedApplication(event: any, roleForm: AbstractControl): void {
+  onSelectedApplication(roleIndex: number, event: any, roleForm: AbstractControl): void {
     if (isEmpty(event)) {
       return;
     }
 
-    this.onClearApplication(roleForm);
-    this.getAllRole(event.id_application);
+    this.onClearApplication(roleIndex, roleForm);
+    this.getAllRole(roleIndex, event.id_application);
   }
 
-  onClearApplication(roleForm: AbstractControl): void {
+  onClearApplication(roleIndex: number, roleForm: AbstractControl): void {
     roleForm.get('id_role')?.reset();
-    this.roleData$ = of([]);
+    this.roleData[roleIndex] = [];
   }
 }
