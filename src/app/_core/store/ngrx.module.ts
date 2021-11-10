@@ -12,6 +12,9 @@ import { ApplicationEffects } from '@store/application/application.effects';
 import { RoleReducer } from '@store/role/role.reducers';
 import { RoleEffects } from '@store/role/role.effects';
 
+import { UserReducer } from '@store/user/user.reducers';
+import { UserEffects } from '@store/user/user.effects';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -19,12 +22,13 @@ import { RoleEffects } from '@store/role/role.effects';
       {
         application: ApplicationReducer,
         role: RoleReducer,
+        user: UserReducer,
       },
       {
         metaReducers: [handleUndo],
       }
     ),
-    EffectsModule.forRoot([ApplicationEffects, RoleEffects]),
+    EffectsModule.forRoot([ApplicationEffects, RoleEffects, UserEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

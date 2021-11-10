@@ -1,5 +1,6 @@
 <ng-container *ngIf="vm$ | async as vm">
-  <label class="form-label fw-bold">
+  <label *ngIf="vm.isLabel"
+         class="form-label fw-bold">
     <ng-content></ng-content>
     <span *ngIf="vm.required"
           class="text-error">*</span>

@@ -26,6 +26,7 @@ export class SidebarService {
         children: [
           { name: 'Aplikasi', link: '/general/application' },
           { name: 'Peran', link: '/general/role' },
+          { name: 'Pengguna', link: '/general/user' },
         ],
       },
     ];

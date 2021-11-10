@@ -46,6 +46,7 @@
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "ngrx-undo": "^8.0.0",
+    "ngx-abstract-control-as": "^1.0.8",
     "ngx-loading": "^8.0.0",
     "ngx-skeleton-loader": "^4.0.0",
     "ngx-spinner": "^12.0.0",

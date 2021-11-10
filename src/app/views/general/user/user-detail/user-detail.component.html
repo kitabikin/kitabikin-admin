@@ -1,0 +1,116 @@
+<section *ngIf="userData$ | async as row"
+         class="user__detail">
+  <div class="mb-4">
+    <kb-breadcrumb [data]="breadcrumb"></kb-breadcrumb>
+  </div>
+
+  <div class="d-flex mb-4">
+    <div>
+      <h5>{{ label }}</h5>
+    </div>
+    <div class="ms-auto">
+      <div class="d-flex">
+        <a role="button"
+           class="btn btn-green-700"
+           [routerLink]="['/general/user/edit', row.id_user]">
+          <fa-icon class="me-2"
+                   [icon]="faPen"></fa-icon>
+          {{ 'edit' | translate }} {{ 'user' | translate }}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-9">
+      <div class="card border-0 mb-5">
+        <div class="card-body p-4">
+          <h6 class="mb-4">{{ row.profile.name }}</h6>
+
+          <kb-label class="d-block mb-3">
+            {{ 'page.user.username' | translate }}
+            <div kbInput>
+              {{ row.username }}
+            </div>
+          </kb-label>
+
+          <kb-label class="d-block mb-3">
+            {{ 'email' | translate }}
+            <div kbInput>
+              {{ row.email }}
+            </div>
+          </kb-label>
+
+          <kb-label class="d-block mb-3">
+            {{ 'role' | translate }}
+            <div kbInput>
+              <ul class="mb-0">
+                <li *ngFor="let role of row.role">
+                  {{ role.application.name }} — {{ role.name }}
+                </li>
+              </ul>
+            </div>
+          </kb-label>
+
+          <div class="text-green-700 mt-4 mb-1">
+            {{ 'more-information' | translate }}
+          </div>
+          <hr class="mt-2 mb-3" />
+
+          <kb-label class="d-block mb-3">
+            {{ 'page.user.signup_with' | translate }}
+            <div kbInput>
+              {{ row.signup_with }}
+            </div>
+          </kb-label>
+
+          <kb-label class="d-block mb-3">
+            {{ 'page.user.email_activation' | translate }}
+            <div kbInput>
+              <span class="badge badge-status rounded-pill"
+                    [ngClass]="[row.getIsEmailBadge()]">
+                {{ row.getIsEmail() }}
+              </span>
+            </div>
+          </kb-label>
+
+          <kb-label class="d-block mb-3">
+            {{ 'page.user.referral_code' | translate }}
+            <div kbInput>
+              {{ row.referral_code }}
+            </div>
+          </kb-label>
+
+          <kb-label class="d-block mb-3">
+            {{ 'status' | translate }}
+            <div kbInput>
+              <span class="badge badge-status rounded-pill"
+                    [ngClass]="[row.getIsActiveBadge()]">
+                {{ row.getIsActive() }}
+              </span>
+            </div>
+          </kb-label>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card border-0 mb-5">
+        <div class="card-body p-4">
+          <kb-label class="d-block mb-3">
+            {{ 'created-at' | translate }}
+            <div kbInput>
+              {{ row.getCreatedAt() }}
+            </div>
+          </kb-label>
+
+          <kb-label class="d-block mb-3">
+            {{ 'modified-at' | translate }}
+            <div kbInput>
+              {{ row.getModifiedAt() }}
+            </div>
+          </kb-label>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
