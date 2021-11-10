@@ -38,6 +38,7 @@
     "user": {
       "name": "Nama",
       "username": "Username",
+      "password": "Password",
       "referral_code": "Kode Referral",
       "signup_with": "Daftar Dengan",
       "email_activation": "Aktifasi Email"

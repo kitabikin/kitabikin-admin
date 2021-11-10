@@ -21,10 +21,10 @@ const routes: Routes = [
         path: '',
         loadChildren: () => import('./user-page/user-page.module').then((m) => m.UserPageModule),
       },
-      // {
-      //   path: 'add',
-      //   loadChildren: () => import('./user-add/user-add.module').then((m) => m.UserAddModule),
-      // },
+      {
+        path: 'add',
+        loadChildren: () => import('./user-add/user-add.module').then((m) => m.UserAddModule),
+      },
       // {
       //   path: 'edit/:id',
       //   canActivate: [StoreUserDetailGuard],

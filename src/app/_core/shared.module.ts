@@ -13,6 +13,7 @@ import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgxAbstractControlAsModule } from 'ngx-abstract-control-as';
 
 // PIPE
 import { SafeHtmlPipe, SafeUrlPipe } from '@pipes';
@@ -40,6 +41,7 @@ import { PaginationComponent as CompPaginationComponent } from '@components/_com
 import { FormAuthenticationLoginComponent } from '@components/form/authentication/login/login.component';
 import { FormApplicationAddEditComponent } from '@components/form/application/add-edit/add-edit.component';
 import { FormRoleAddEditComponent } from '@components/form/role/add-edit/add-edit.component';
+import { FormUserAddEditComponent } from '@components/form/user/add-edit/add-edit.component';
 
 @NgModule({
   imports: [
@@ -75,6 +77,7 @@ import { FormRoleAddEditComponent } from '@components/form/role/add-edit/add-edi
     SweetAlert2Module.forRoot(),
     // CKEditorModule,
     FontAwesomeModule,
+    NgxAbstractControlAsModule,
   ],
   declarations: [
     // PIPE
@@ -93,6 +96,7 @@ import { FormRoleAddEditComponent } from '@components/form/role/add-edit/add-edi
     FormAuthenticationLoginComponent,
     FormApplicationAddEditComponent,
     FormRoleAddEditComponent,
+    FormUserAddEditComponent,
   ],
   exports: [
     RouterModule,
@@ -108,6 +112,7 @@ import { FormRoleAddEditComponent } from '@components/form/role/add-edit/add-edi
     SweetAlert2Module,
     // CKEditorModule,
     FontAwesomeModule,
+    NgxAbstractControlAsModule,
     // PIPE
     SafeHtmlPipe,
     SafeUrlPipe,
@@ -130,6 +135,7 @@ import { FormRoleAddEditComponent } from '@components/form/role/add-edit/add-edi
     FormAuthenticationLoginComponent,
     FormApplicationAddEditComponent,
     FormRoleAddEditComponent,
+    FormUserAddEditComponent,
   ],
   providers: [],
   schemas: [],
