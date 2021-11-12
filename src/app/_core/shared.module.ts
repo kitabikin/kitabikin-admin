@@ -42,6 +42,7 @@ import { FormAuthenticationLoginComponent } from '@components/form/authenticatio
 import { FormApplicationAddEditComponent } from '@components/form/application/add-edit/add-edit.component';
 import { FormRoleAddEditComponent } from '@components/form/role/add-edit/add-edit.component';
 import { FormUserAddEditComponent } from '@components/form/user/add-edit/add-edit.component';
+import { FormEventAddEditComponent } from '@components/form/event/add-edit/add-edit.component';
 
 @NgModule({
   imports: [
@@ -97,6 +98,7 @@ import { FormUserAddEditComponent } from '@components/form/user/add-edit/add-edi
     FormApplicationAddEditComponent,
     FormRoleAddEditComponent,
     FormUserAddEditComponent,
+    FormEventAddEditComponent,
   ],
   exports: [
     RouterModule,
@@ -136,6 +138,7 @@ import { FormUserAddEditComponent } from '@components/form/user/add-edit/add-edi
     FormApplicationAddEditComponent,
     FormRoleAddEditComponent,
     FormUserAddEditComponent,
+    FormEventAddEditComponent,
   ],
   providers: [],
   schemas: [],

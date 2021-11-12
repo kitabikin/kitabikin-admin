@@ -21,17 +21,15 @@ const routes: Routes = [
         path: '',
         loadChildren: () => import('./event-page/event-page.module').then((m) => m.EventPageModule),
       },
-      // {
-      //   path: 'add',
-      //   loadChildren: () =>
-      //     import('./event-add/event-add.module').then((m) => m.EventAddModule),
-      // },
-      // {
-      //   path: 'edit/:id',
-      //   canActivate: [StoreEventDetailGuard],
-      //   loadChildren: () =>
-      //     import('./event-edit/event-edit.module').then((m) => m.EventEditModule),
-      // },
+      {
+        path: 'add',
+        loadChildren: () => import('./event-add/event-add.module').then((m) => m.EventAddModule),
+      },
+      {
+        path: 'edit/:id',
+        canActivate: [StoreEventDetailGuard],
+        loadChildren: () => import('./event-edit/event-edit.module').then((m) => m.EventEditModule),
+      },
       {
         path: 'detail/:id',
         canActivate: [StoreEventDetailGuard],

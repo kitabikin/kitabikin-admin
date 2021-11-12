@@ -1,0 +1,74 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <div [formGroup]="vm.formGroup">
+    <kb-label class="d-block mb-3"
+              [required]="true"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['code']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['code']).text">
+      {{ 'page.event.code' | translate }}
+      <div kbInput
+           class="form-control-spinner">
+        <input type="text"
+               class="form-control"
+               [placeholder]="'page.event.code' | translate"
+               formControlName="code">
+        <div *ngIf="vm.formGroup?.controls?.['code']?.pending"
+             class="spinner-border spinner-border-sm"
+             role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </kb-label>
+
+    <kb-label class="d-block mb-3"
+              [required]="true"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['name']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['name']).text">
+      {{ 'page.event.name' | translate }}
+      <input kbInput
+             type="text"
+             class="form-control"
+             [placeholder]="'page.event.name' | translate"
+             formControlName="name">
+    </kb-label>
+
+    <kb-label class="d-block mb-3"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['description']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['description']).text">
+      {{ 'description' | translate }}
+      <textarea kbInput
+                rows="3"
+                class="form-control"
+                [placeholder]="'description' | translate"
+                formControlName="description"></textarea>
+    </kb-label>
+
+    <div class="text-green-700 mt-4 mb-1">
+      {{ 'more-information' | translate }}
+    </div>
+    <hr class="my-2" />
+
+    <kb-label class="d-block mb-3"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['is_active']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['is_active']).text">
+      {{ 'status' | translate }}
+      <div kbInput
+           class="form-check form-switch">
+        <input class="form-check-input"
+               type="checkbox"
+               formControlName="is_active">
+      </div>
+    </kb-label>
+
+    <div class="d-grid gap-2 d-flex justify-content-end">
+      <a class="btn btn-outline-green-700"
+         [routerLink]="['/invitation/event']">
+        {{ 'cancel' | translate }}
+      </a>
+      <button type="submit"
+              class="btn btn-green-700"
+              [disabled]="!vm.formGroup.valid">
+        {{ 'save' | translate }}
+      </button>
+    </div>
+  </div>
+</ng-container>
