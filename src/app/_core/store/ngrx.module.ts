@@ -15,6 +15,9 @@ import { RoleEffects } from '@store/role/role.effects';
 import { UserReducer } from '@store/user/user.reducers';
 import { UserEffects } from '@store/user/user.effects';
 
+import { EventReducer } from '@store/event/event.reducers';
+import { EventEffects } from '@store/event/event.effects';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -23,12 +26,13 @@ import { UserEffects } from '@store/user/user.effects';
         application: ApplicationReducer,
         role: RoleReducer,
         user: UserReducer,
+        event: EventReducer,
       },
       {
         metaReducers: [handleUndo],
       }
     ),
-    EffectsModule.forRoot([ApplicationEffects, RoleEffects, UserEffects]),
+    EffectsModule.forRoot([ApplicationEffects, RoleEffects, UserEffects, EventEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

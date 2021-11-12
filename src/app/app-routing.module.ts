@@ -45,6 +45,10 @@ export const AppRoutingModule: Routes = [
         path: 'general',
         loadChildren: () => import('./views/general/general.module').then((m) => m.GeneralModule),
       },
+      {
+        path: 'invitation',
+        loadChildren: () => import('./views/invitation/invitation.module').then((m) => m.InvitationModule),
+      },
     ],
   },
 ];

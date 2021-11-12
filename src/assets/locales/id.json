@@ -6,6 +6,8 @@
   "application": "Aplikasi",
   "role": "Peran",
   "user": "Pengguna",
+  "invitation": "Undangan",
+  "event": "Acara",
   "logout": "Keluar",
   "seo": {
     "dashboard-page": {
@@ -42,6 +44,10 @@
       "referral_code": "Kode Referral",
       "signup_with": "Daftar Dengan",
       "email_activation": "Aktifasi Email"
+    },
+    "event": {
+      "name": "Acara",
+      "code": "Kode"
     }
   },
   "_comment_action": "=======================================================================================",
