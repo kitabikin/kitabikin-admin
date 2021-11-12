@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 import _ from 'lodash';
-import { faHome, faCogs } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faCogs, faEnvelopeOpenText } from '@fortawesome/free-solid-svg-icons';
 
 @Injectable()
 export class SidebarService {
@@ -27,6 +27,16 @@ export class SidebarService {
           { name: 'Aplikasi', link: '/general/application' },
           { name: 'Peran', link: '/general/role' },
           { name: 'Pengguna', link: '/general/user' },
+        ],
+      },
+      {
+        code: 'invitation',
+        name: 'Undangan',
+        icon: faEnvelopeOpenText,
+        link: null,
+        children: [
+          { name: 'Acara', link: '/invitation/event' },
+          { name: 'Paket Acara', link: '/invitation/event-package' },
         ],
       },
     ];
