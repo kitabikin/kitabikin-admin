@@ -32,12 +32,11 @@ const routes: Routes = [
       //   loadChildren: () =>
       //     import('./event-edit/event-edit.module').then((m) => m.EventEditModule),
       // },
-      // {
-      //   path: 'detail/:id',
-      //   canActivate: [StoreEventDetailGuard],
-      //   loadChildren: () =>
-      //     import('./event-detail/event-detail.module').then((m) => m.EventDetailModule),
-      // },
+      {
+        path: 'detail/:id',
+        canActivate: [StoreEventDetailGuard],
+        loadChildren: () => import('./event-detail/event-detail.module').then((m) => m.EventDetailModule),
+      },
     ],
   },
 ];
