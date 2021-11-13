@@ -8,6 +8,7 @@
   "user": "Pengguna",
   "invitation": "Undangan",
   "event": "Acara",
+  "event-package": "Paket Acara",
   "logout": "Keluar",
   "seo": {
     "dashboard-page": {
@@ -48,6 +49,15 @@
     "event": {
       "name": "Acara",
       "code": "Kode"
+    },
+    "event-package": {
+      "name": "Paket Acara",
+      "code": "Kode",
+      "price": "Harga",
+      "price-previous": "Harga Sebelumnya",
+      "discount": "Diskon",
+      "discount-type": "Tipe Diskon",
+      "recommendation": "Rekomendasi"
     }
   },
   "_comment_action": "=======================================================================================",

@@ -34,7 +34,7 @@ export class EventPackageData implements Deserializable {
   image!: string;
   banner!: string;
   description!: string;
-  is_recomendation!: boolean;
+  is_recommendation!: boolean;
   is_active!: boolean;
   is_delete!: boolean;
   created_id!: string;
@@ -45,7 +45,37 @@ export class EventPackageData implements Deserializable {
   event_price!: EventPriceData;
 
   deserialize(input: any): this {
-    return Object.assign(this, input);
+    Object.assign(this, input);
+
+    this.event_price = new EventPriceData().deserialize(input.event_price);
+
+    return this;
+  }
+
+  detailIsRecommendation(): any {
+    let name = '';
+    let badge = '';
+
+    if (this.is_recommendation) {
+      name = 'Ya';
+      badge = 'bg-green-100 text-green-900';
+    } else {
+      name = 'Tidak';
+      badge = 'bg-red-100 text-red-900';
+    }
+
+    return {
+      name,
+      badge,
+    };
+  }
+
+  getIsRecommendation(): string {
+    return this.detailIsRecommendation().name;
+  }
+
+  getIsRecommendationBadge(): string {
+    return this.detailIsRecommendation().badge;
   }
 
   detailIsActive(): any {

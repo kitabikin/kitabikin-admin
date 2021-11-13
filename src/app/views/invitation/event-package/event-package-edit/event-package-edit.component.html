@@ -1,0 +1,23 @@
+<ngx-loading [show]="(eventPackageIsLoadingUpdate$ | async) || false"></ngx-loading>
+
+<section class="event__package__edit">
+  <div class="mb-4">
+    <kb-breadcrumb [data]="breadcrumb"></kb-breadcrumb>
+  </div>
+
+  <div class="d-flex mb-4">
+    <h5>{{ label }}</h5>
+  </div>
+
+  <div class="card border-0 mb-5">
+    <div class="card-body p-4">
+      <form [formGroup]="myForm"
+            (ngSubmit)="onSubmit()"
+            (keydown.enter)="$event.stopPropagation()"
+            class="form">
+        <kb-form-event-package-add-edit [formGroup]="myForm"
+                                        [isAddMode]="false"></kb-form-event-package-add-edit>
+      </form>
+    </div>
+  </div>
+</section>
