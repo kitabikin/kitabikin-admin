@@ -9,3 +9,5 @@ export * from './user/user.model';
 export * from './event/event.model';
 export * from './event-package/event-package.model';
 export * from './event-price/event-price.model';
+export * from './theme-category/theme-category.model';
+export * from './theme/theme.model';

@@ -5,3 +5,5 @@ export * from './role.validator';
 export * from './user.validator';
 export * from './event.validator';
 export * from './event-package.validator';
+export * from './theme-category.validator';
+export * from './theme.validator';
