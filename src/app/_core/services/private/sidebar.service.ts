@@ -37,6 +37,8 @@ export class SidebarService {
         children: [
           { name: 'Acara', link: '/invitation/event' },
           { name: 'Paket Acara', link: '/invitation/event-package' },
+          { name: 'Kategori Tema', link: '/invitation/theme-category' },
+          { name: 'Tema', link: '/invitation/theme' },
         ],
       },
     ];

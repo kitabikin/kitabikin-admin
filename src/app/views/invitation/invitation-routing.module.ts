@@ -27,6 +27,11 @@ const routes: Routes = [
         path: 'event-package',
         loadChildren: () => import('./event-package/event-package.module').then((m) => m.EventPackageModule),
       },
+      {
+        path: 'theme-category',
+        loadChildren: () =>
+          import('./theme-category/theme-category.module').then((m) => m.ThemeCategoryModule),
+      },
     ],
   },
 ];

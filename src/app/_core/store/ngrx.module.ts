@@ -21,6 +21,12 @@ import { EventEffects } from '@store/event/event.effects';
 import { EventPackageReducer } from '@store/event-package/event-package.reducers';
 import { EventPackageEffects } from '@store/event-package/event-package.effects';
 
+import { ThemeCategoryReducer } from '@store/theme-category/theme-category.reducers';
+import { ThemeCategoryEffects } from '@store/theme-category/theme-category.effects';
+
+import { ThemeReducer } from '@store/theme/theme.reducers';
+import { ThemeEffects } from '@store/theme/theme.effects';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -31,12 +37,22 @@ import { EventPackageEffects } from '@store/event-package/event-package.effects'
         user: UserReducer,
         event: EventReducer,
         eventPackage: EventPackageReducer,
+        themeCategory: ThemeCategoryReducer,
+        theme: ThemeReducer,
       },
       {
         metaReducers: [handleUndo],
       }
     ),
-    EffectsModule.forRoot([ApplicationEffects, RoleEffects, UserEffects, EventEffects, EventPackageEffects]),
+    EffectsModule.forRoot([
+      ApplicationEffects,
+      RoleEffects,
+      UserEffects,
+      EventEffects,
+      EventPackageEffects,
+      ThemeCategoryEffects,
+      ThemeEffects,
+    ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
