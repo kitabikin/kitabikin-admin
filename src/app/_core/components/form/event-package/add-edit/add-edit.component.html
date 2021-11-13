@@ -1,0 +1,175 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <div [formGroup]="vm.formGroup">
+    <kb-label class="d-block mb-3"
+              [required]="true"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['code']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['code']).text">
+      {{ 'page.event.code' | translate }}
+      <div kbInput
+           class="form-control-spinner">
+        <input type="text"
+               class="form-control"
+               [placeholder]="'page.event.code' | translate"
+               formControlName="code">
+        <div *ngIf="vm.formGroup?.controls?.['code']?.pending"
+             class="spinner-border spinner-border-sm"
+             role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </kb-label>
+
+    <kb-label class="d-block mb-3"
+              [required]="true"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['name']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['name']).text">
+      {{ 'page.event-package.name' | translate }}
+      <input kbInput
+             type="text"
+             class="form-control"
+             [placeholder]="'page.event-package.name' | translate"
+             formControlName="name">
+    </kb-label>
+
+    <kb-label class="d-block mb-3"
+              [required]="true"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['id_event']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['id_event']).text">
+      {{ 'event' | translate }}
+      <ng-select kbInput
+                 [items]="(eventData$ | async) || []"
+                 bindValue="id_event"
+                 bindLabel="name"
+                 [placeholder]="'event' | translate"
+                 formControlName="id_event">
+      </ng-select>
+    </kb-label>
+
+    <kb-label class="d-block mb-3"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['description']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['description']).text">
+      {{ 'description' | translate }}
+      <textarea kbInput
+                rows="3"
+                class="form-control"
+                [placeholder]="'description' | translate"
+                formControlName="description"></textarea>
+    </kb-label>
+
+    <ng-container formGroupName="event_price">
+      <div class="text-green-700 mt-4 mb-1">
+        {{ 'page.event-package.price' | translate }}
+      </div>
+      <hr class="my-2" />
+
+      <kb-label class="d-block mb-3"
+                [invalid]="getFormValidation((vm.formGroup.controls['event_price'] | asFormGroup).controls['is_price']).invalid"
+                [invalidText]="getFormValidation((vm.formGroup.controls['event_price'] | asFormGroup).controls['is_price']).text">
+        {{ 'status' | translate }} {{ 'page.event-package.price' | translate }}
+        <div kbInput
+             class="form-check form-switch">
+          <input class="form-check-input"
+                 type="checkbox"
+                 formControlName="is_price"
+                 (change)="onSwitch(vm.formGroup.controls['event_price'], 'is_price')">
+        </div>
+      </kb-label>
+
+      <ng-container *ngIf="(vm.formGroup.controls['event_price'] | asFormGroup).controls['is_price'].value">
+        <kb-label class="d-block mb-3"
+                  [required]="true"
+                  [invalid]="getFormValidation((vm.formGroup.controls['event_price'] | asFormGroup).controls['price']).invalid"
+                  [invalidText]="getFormValidation((vm.formGroup.controls['event_price'] | asFormGroup).controls['price']).text">
+          {{ 'page.event-package.price' | translate }}
+          <input kbInput
+                 type="number"
+                 class="form-control"
+                 [placeholder]="'page.event-package.price' | translate"
+                 formControlName="price">
+        </kb-label>
+      </ng-container>
+
+      <kb-label class="d-block mb-3"
+                [invalid]="getFormValidation((vm.formGroup.controls['event_price'] | asFormGroup).controls['is_discount']).invalid"
+                [invalidText]="getFormValidation((vm.formGroup.controls['event_price'] | asFormGroup).controls['is_discount']).text">
+        {{ 'status' | translate }} {{ 'page.event-package.discount' | translate }}
+        <div kbInput
+             class="form-check form-switch">
+          <input class="form-check-input"
+                 type="checkbox"
+                 formControlName="is_discount"
+                 (change)="onSwitch(vm.formGroup.controls['event_price'], 'is_discount')">
+        </div>
+      </kb-label>
+
+      <ng-container *ngIf="(vm.formGroup.controls['event_price'] | asFormGroup).controls['is_discount'].value">
+        <kb-label class="d-block mb-3"
+                  [required]="true"
+                  [invalid]="getFormValidation((vm.formGroup.controls['event_price'] | asFormGroup).controls['discount_type']).invalid"
+                  [invalidText]="getFormValidation((vm.formGroup.controls['event_price'] | asFormGroup).controls['discount_type']).text">
+          {{ 'page.event-package.discount-type' | translate }}
+          <ng-select kbInput
+                     [items]="discountTypeData"
+                     bindValue="value"
+                     bindLabel="label"
+                     [placeholder]="'page.event-package.discount-type' | translate"
+                     formControlName="discount_type">
+          </ng-select>
+        </kb-label>
+
+        <kb-label class="d-block mb-3"
+                  [required]="true"
+                  [invalid]="getFormValidation((vm.formGroup.controls['event_price'] | asFormGroup).controls['discount']).invalid"
+                  [invalidText]="getFormValidation((vm.formGroup.controls['event_price'] | asFormGroup).controls['discount']).text">
+          {{ 'page.event-package.discount' | translate }}
+          <input kbInput
+                 type="number"
+                 class="form-control"
+                 [placeholder]="'page.event-package.discount' | translate"
+                 formControlName="discount">
+        </kb-label>
+      </ng-container>
+    </ng-container>
+
+    <div class="text-green-700 mt-4 mb-1">
+      {{ 'more-information' | translate }}
+    </div>
+    <hr class="my-2" />
+
+    <kb-label class="d-block mb-3"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['is_recommendation']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['is_recommendation']).text">
+      {{ 'page.event-package.recommendation' | translate }}
+      <div kbInput
+           class="form-check form-switch">
+        <input class="form-check-input"
+               type="checkbox"
+               formControlName="is_recommendation">
+      </div>
+    </kb-label>
+
+    <kb-label class="d-block mb-3"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['is_active']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['is_active']).text">
+      {{ 'status' | translate }}
+      <div kbInput
+           class="form-check form-switch">
+        <input class="form-check-input"
+               type="checkbox"
+               formControlName="is_active">
+      </div>
+    </kb-label>
+
+    <div class="d-grid gap-2 d-flex justify-content-end">
+      <a class="btn btn-outline-green-700"
+         [routerLink]="['/invitation/event-package']">
+        {{ 'cancel' | translate }}
+      </a>
+      <button type="submit"
+              class="btn btn-green-700"
+              [disabled]="!vm.formGroup.valid">
+        {{ 'save' | translate }}
+      </button>
+    </div>
+  </div>
+</ng-container>

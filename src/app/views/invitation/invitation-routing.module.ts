@@ -23,6 +23,10 @@ const routes: Routes = [
         path: 'event',
         loadChildren: () => import('./event/event.module').then((m) => m.EventModule),
       },
+      {
+        path: 'event-package',
+        loadChildren: () => import('./event-package/event-package.module').then((m) => m.EventPackageModule),
+      },
     ],
   },
 ];
