@@ -37,7 +37,7 @@ export class StoreThemeDetailGuard implements CanActivate {
       tap((load) => {
         if (!load) {
           const params = {
-            with: [{ event: true }],
+            with: [{ theme_category: true }, { event: true }],
           };
 
           this.store.dispatch(

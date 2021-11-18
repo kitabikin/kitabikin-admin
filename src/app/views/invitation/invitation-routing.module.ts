@@ -32,6 +32,10 @@ const routes: Routes = [
         loadChildren: () =>
           import('./theme-category/theme-category.module').then((m) => m.ThemeCategoryModule),
       },
+      {
+        path: 'theme',
+        loadChildren: () => import('./theme/theme.module').then((m) => m.ThemeModule),
+      },
     ],
   },
 ];

@@ -1,0 +1,35 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <div class="d-flex">
+    <img class="img-thumbnail form me-3"
+         [src]="getImageURL(value)"
+         loading="lazy"
+         *ngIf="vm.isImage" />
+    <div class="me-auto w-100">
+      <ngb-progressbar *ngIf="isLoading"
+                       class="mb-2"
+                       type="green-700"
+                       [value]="progress"
+                       height=".5rem"></ngb-progressbar>
+      <kb-label [required]="vm.required"
+                [invalid]="getFormValidation().invalid"
+                [invalidText]="getFormValidation().text">
+        {{ vm.label }}
+        <small kbLabelSecondary
+               class="d-block text-muted mb-2">
+          {{ vm.description }}
+        </small>
+        <div kbInput>
+          <input class="form-control"
+                 [ngClass]="[getClassname(vm.size)]"
+                 type="file"
+                 [accept]="vm.accept.join(',')"
+                 [disabled]="vm.disabled"
+                 (change)="onUpload($event)">
+          <input hidden
+                 [(ngModel)]="value"
+                 [disabled]="vm.disabled" />
+        </div>
+      </kb-label>
+    </div>
+  </div>
+</ng-container>

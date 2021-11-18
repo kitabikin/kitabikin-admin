@@ -34,7 +34,7 @@ import { AvatarItemComponent as CompAvatarItemComponent } from '@components/_com
 import { BreadcrumbComponent as CompBreadcrumbComponent } from '@components/_components/breadcrumb/breadcrumb.component';
 // import { IconComponent as CompIconComponent } from '@components/_components/icon/icon.component';
 import { LabelComponent as CompLabelComponent } from '@components/_components/label/label.component';
-// import { FormFileUploaderComponent as CompFormFileUploaderComponent } from '@components/_components/form/file-uploader/file-uploader.component';
+import { FileUploaderComponent as CompFileUploaderComponent } from '@components/_components/file-uploader/file-uploader.component';
 import { TableHeadComponent as CompTableHeadComponent } from '@components/_components/table-head/table-head.component';
 import { PaginationComponent as CompPaginationComponent } from '@components/_components/pagination/pagination.component';
 
@@ -45,6 +45,7 @@ import { FormUserAddEditComponent } from '@components/form/user/add-edit/add-edi
 import { FormEventAddEditComponent } from '@components/form/event/add-edit/add-edit.component';
 import { FormEventPackageAddEditComponent } from '@components/form/event-package/add-edit/add-edit.component';
 import { FormThemeCategoryAddEditComponent } from '@components/form/theme-category/add-edit/add-edit.component';
+import { FormThemeAddEditComponent } from '@components/form/theme/add-edit/add-edit.component';
 
 @NgModule({
   imports: [
@@ -93,7 +94,7 @@ import { FormThemeCategoryAddEditComponent } from '@components/form/theme-catego
     CompBreadcrumbComponent,
     // CompIconComponent,
     CompLabelComponent,
-    // CompFormFileUploaderComponent,
+    CompFileUploaderComponent,
     CompTableHeadComponent,
     CompPaginationComponent,
     FormAuthenticationLoginComponent,
@@ -103,6 +104,7 @@ import { FormThemeCategoryAddEditComponent } from '@components/form/theme-catego
     FormEventAddEditComponent,
     FormEventPackageAddEditComponent,
     FormThemeCategoryAddEditComponent,
+    FormThemeAddEditComponent,
   ],
   exports: [
     RouterModule,
@@ -135,7 +137,7 @@ import { FormThemeCategoryAddEditComponent } from '@components/form/theme-catego
     CompBreadcrumbComponent,
     // CompIconComponent,
     CompLabelComponent,
-    // CompFormFileUploaderComponent,
+    CompFileUploaderComponent,
     CompTableHeadComponent,
     CompPaginationComponent,
     FormAuthenticationLoginComponent,
@@ -145,6 +147,7 @@ import { FormThemeCategoryAddEditComponent } from '@components/form/theme-catego
     FormEventAddEditComponent,
     FormEventPackageAddEditComponent,
     FormThemeCategoryAddEditComponent,
+    FormThemeAddEditComponent,
   ],
   providers: [],
   schemas: [],
