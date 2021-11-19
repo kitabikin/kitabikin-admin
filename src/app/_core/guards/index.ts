@@ -8,3 +8,4 @@ export * from './store/event-detail.guard';
 export * from './store/event-package-detail.guard';
 export * from './store/theme-category.guard';
 export * from './store/theme.guard';
+export * from './store/theme-feature-detail.guard';

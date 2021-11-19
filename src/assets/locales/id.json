@@ -11,6 +11,7 @@
   "event-package": "Paket Acara",
   "theme-category": "Kategori Tema",
   "theme": "Tema",
+  "theme-feature": "Fitur Tema",
   "logout": "Keluar",
   "seo": {
     "dashboard-page": {
@@ -68,6 +69,20 @@
     "theme": {
       "name": "Tema",
       "code": "Kode"
+    },
+    "theme-feature": {
+      "name": "Fitur Tema",
+      "code": "Kode",
+      "order": "Urutan",
+      "column": {
+        "name": "Kolom",
+        "code": "Kode",
+        "label": "Label",
+        "label-helper": "Label Bantuan",
+        "default-value": "Default Value",
+        "configuration": "Konfigurasi",
+        "order": "Urutan"
+      }
     }
   },
   "_comment_action": "=======================================================================================",
@@ -91,6 +106,7 @@
   "more-information": "Informasi Lainnya",
   "description": "Deskripsi",
   "status": "Status",
+  "admin": "Admin",
   "created-id": "Dibuat Oleh",
   "created-at": "Dibuat Tanggal",
   "modified-id": "Diubah Oleh",

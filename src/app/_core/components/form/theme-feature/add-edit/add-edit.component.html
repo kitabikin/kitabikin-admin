@@ -1,0 +1,189 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <div [formGroup]="vm.formGroup">
+    <kb-label class="d-block mb-3"
+              [required]="true"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['code']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['code']).text">
+      {{ 'page.theme-feature.code' | translate }}
+      <div kbInput
+           class="form-control-spinner">
+        <input type="text"
+               class="form-control"
+               [placeholder]="'page.theme-feature.code' | translate"
+               formControlName="code">
+        <div *ngIf="vm.formGroup?.controls?.['code']?.pending"
+             class="spinner-border spinner-border-sm"
+             role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </kb-label>
+
+    <kb-label class="d-block mb-3"
+              [required]="true"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['name']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['name']).text">
+      {{ 'page.theme-feature.name' | translate }}
+      <input kbInput
+             type="text"
+             class="form-control"
+             [placeholder]="'page.theme-feature.name' | translate"
+             formControlName="name">
+    </kb-label>
+
+    <kb-label class="d-block mb-3"
+              [required]="true"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['order']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['order']).text">
+      {{ 'page.theme-feature.order' | translate }}
+      <input kbInput
+             type="number"
+             class="form-control"
+             [placeholder]="'page.theme-feature.order' | translate"
+             formControlName="order">
+    </kb-label>
+
+    <kb-label class="d-block mb-3"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['description']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['description']).text">
+      {{ 'description' | translate }}
+      <textarea kbInput
+                rows="3"
+                class="form-control"
+                [placeholder]="'description' | translate"
+                formControlName="description"></textarea>
+    </kb-label>
+
+    <div class="d-flex align-items-center justify-content-between mt-4 mb-1">
+      <div class="text-green-700">
+        {{ 'page.theme-feature.column.name' | translate }}
+      </div>
+      <div>
+        <button type="button"
+                class="btn btn-sm btn-green-700"
+                (click)="addThemeFeature()">
+          <fa-icon class="me-2"
+                   [icon]="faPlus"></fa-icon>
+          {{ 'add' | translate }} {{ 'page.theme-feature.column.name' | translate }}
+        </button>
+      </div>
+    </div>
+    <hr class="my-2" />
+
+    <ng-container
+                  *ngFor="let tfcForm of (vm.formGroup.controls['theme_feature_column'] | asFormArray).controls; let i = index">
+      <div [formGroup]="tfcForm | asFormGroup"
+           class="row g-2 mb-4">
+        <div class="col-md-3">
+          <kb-label class="d-block"
+                    [isLabel]="false">
+            <input kbInput
+                   type="text"
+                   class="form-control"
+                   [placeholder]="'page.theme-feature.column.code' | translate"
+                   formControlName="code">
+          </kb-label>
+        </div>
+        <div class="col-md-3">
+          <kb-label class="d-block"
+                    [isLabel]="false">
+            <input kbInput
+                   type="text"
+                   class="form-control"
+                   [placeholder]="'page.theme-feature.column.label' | translate"
+                   formControlName="label">
+          </kb-label>
+        </div>
+        <div class="col-md-3">
+          <kb-label class="d-block"
+                    [isLabel]="false">
+            <input kbInput
+                   type="text"
+                   class="form-control"
+                   [placeholder]="'page.theme-feature.column.label-helper' | translate"
+                   formControlName="label_helper">
+          </kb-label>
+        </div>
+        <div class="col-md-3">
+          <kb-label class="d-block"
+                    [isLabel]="false">
+            <input kbInput
+                   type="text"
+                   class="form-control"
+                   [placeholder]="'page.theme-feature.column.default-value' | translate"
+                   formControlName="default_value">
+          </kb-label>
+        </div>
+        <div class="col-md-9">
+          <kb-label class="d-block"
+                    [isLabel]="false">
+            <input kbInput
+                   type="text"
+                   class="form-control"
+                   [placeholder]="'page.theme-feature.column.configuration' | translate"
+                   formControlName="configuration">
+          </kb-label>
+        </div>
+        <div class="col-md-1">
+          <kb-label class="d-block"
+                    [isLabel]="false">
+            <input kbInput
+                   type="number"
+                   class="form-control"
+                   [placeholder]="'page.theme-feature.column.order' | translate"
+                   formControlName="order">
+          </kb-label>
+        </div>
+        <div class="col-md-1">
+          <kb-label class="d-block"
+                    [isLabel]="false">
+            <div kbInput
+                 class="form-check form-switch">
+              <input class="form-check-input"
+                     type="checkbox"
+                     formControlName="is_admin">
+            </div>
+          </kb-label>
+        </div>
+        <div class="col-md-1">
+          <div class="d-grid">
+            <button type="button"
+                    class="btn btn-red-700"
+                    (click)="deleteThemeFeature(i)">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <div class="text-green-700 mt-4 mb-1">
+      {{ 'more-information' | translate }}
+    </div>
+    <hr class="my-2" />
+
+    <kb-label class="d-block mb-3"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['is_active']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['is_active']).text">
+      {{ 'status' | translate }}
+      <div kbInput
+           class="form-check form-switch">
+        <input class="form-check-input"
+               type="checkbox"
+               formControlName="is_active">
+      </div>
+    </kb-label>
+
+    <div class="d-grid gap-2 d-flex justify-content-end">
+      <a class="btn btn-outline-green-700"
+         [routerLink]="['/invitation/theme-feature', idTheme]">
+        {{ 'cancel' | translate }}
+      </a>
+      <button type="submit"
+              class="btn btn-green-700"
+              [disabled]="!vm.formGroup.valid">
+        {{ 'save' | translate }}
+      </button>
+    </div>
+  </div>
+</ng-container>

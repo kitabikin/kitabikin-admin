@@ -27,6 +27,9 @@ import { ThemeCategoryEffects } from '@store/theme-category/theme-category.effec
 import { ThemeReducer } from '@store/theme/theme.reducers';
 import { ThemeEffects } from '@store/theme/theme.effects';
 
+import { ThemeFeatureReducer } from '@store/theme-feature/theme-feature.reducers';
+import { ThemeFeatureEffects } from '@store/theme-feature/theme-feature.effects';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -39,6 +42,7 @@ import { ThemeEffects } from '@store/theme/theme.effects';
         eventPackage: EventPackageReducer,
         themeCategory: ThemeCategoryReducer,
         theme: ThemeReducer,
+        themeFeature: ThemeFeatureReducer,
       },
       {
         metaReducers: [handleUndo],
@@ -52,6 +56,7 @@ import { ThemeEffects } from '@store/theme/theme.effects';
       EventPackageEffects,
       ThemeCategoryEffects,
       ThemeEffects,
+      ThemeFeatureEffects,
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
