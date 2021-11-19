@@ -12,3 +12,5 @@ export * from './event-package/event-package.model';
 export * from './event-price/event-price.model';
 export * from './theme-category/theme-category.model';
 export * from './theme/theme.model';
+export * from './theme-feature/theme-feature.model';
+export * from './theme-feature-column/theme-feature-column.model';

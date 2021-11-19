@@ -36,6 +36,10 @@ const routes: Routes = [
         path: 'theme',
         loadChildren: () => import('./theme/theme.module').then((m) => m.ThemeModule),
       },
+      {
+        path: 'theme-feature',
+        loadChildren: () => import('./theme-feature/theme-feature.module').then((m) => m.ThemeFeatureModule),
+      },
     ],
   },
 ];

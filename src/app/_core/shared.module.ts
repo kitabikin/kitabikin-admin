@@ -46,6 +46,7 @@ import { FormEventAddEditComponent } from '@components/form/event/add-edit/add-e
 import { FormEventPackageAddEditComponent } from '@components/form/event-package/add-edit/add-edit.component';
 import { FormThemeCategoryAddEditComponent } from '@components/form/theme-category/add-edit/add-edit.component';
 import { FormThemeAddEditComponent } from '@components/form/theme/add-edit/add-edit.component';
+import { FormThemeFeatureAddEditComponent } from '@components/form/theme-feature/add-edit/add-edit.component';
 
 @NgModule({
   imports: [
@@ -105,6 +106,7 @@ import { FormThemeAddEditComponent } from '@components/form/theme/add-edit/add-e
     FormEventPackageAddEditComponent,
     FormThemeCategoryAddEditComponent,
     FormThemeAddEditComponent,
+    FormThemeFeatureAddEditComponent,
   ],
   exports: [
     RouterModule,
@@ -148,6 +150,7 @@ import { FormThemeAddEditComponent } from '@components/form/theme/add-edit/add-e
     FormEventPackageAddEditComponent,
     FormThemeCategoryAddEditComponent,
     FormThemeAddEditComponent,
+    FormThemeFeatureAddEditComponent,
   ],
   providers: [],
   schemas: [],

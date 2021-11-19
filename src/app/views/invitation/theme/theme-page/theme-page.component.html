@@ -86,8 +86,8 @@
               {{ 'status' | translate }}
             </th>
             <th scope="col"
-                [style.minWidth.px]="120"
-                [style.width.px]="120">
+                [style.minWidth.px]="180"
+                [style.width.px]="180">
               {{ 'action' | translate }}
             </th>
           </tr>
@@ -120,14 +120,21 @@
                 </td>
                 <td>
                   <a role="button"
-                     class="btn btn-blue-gray-50 text-blue-gray-700"
+                     class="btn btn-green-700 me-2"
+                     [routerLink]="['/invitation/theme-feature', row.id_theme]"
+                     [style.padding.px]="6">
+                    Fitur
+                  </a>
+
+                  <a role="button"
+                     class="btn btn-blue-gray-50 text-blue-gray-700 me-2"
                      [routerLink]="['/invitation/theme/detail', row.id_theme]"
                      [style.padding.px]="6">
                     <fa-icon [icon]="faSearchPlus"></fa-icon>
                   </a>
 
                   <a role="button"
-                     class="btn btn-blue-50 text-blue-700 mx-2"
+                     class="btn btn-blue-50 text-blue-700 me-2"
                      [routerLink]="['/invitation/theme/edit', row.id_theme]"
                      [style.padding.px]="6">
                     <fa-icon [icon]="faPen"></fa-icon>
