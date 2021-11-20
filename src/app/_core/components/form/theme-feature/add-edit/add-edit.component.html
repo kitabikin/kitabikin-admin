@@ -54,6 +54,25 @@
                 formControlName="description"></textarea>
     </kb-label>
 
+
+    <kb-label class="d-block mb-3">
+      {{ 'page.theme-feature.mapping' | translate }}
+      <div kbInput>
+        <div
+             *ngFor="let tfmForm of (vm.formGroup.controls['theme_feature_mapping'] | asFormArray).controls; let i = index">
+          <div [formGroup]="tfmForm | asFormGroup"
+               class="form-check">
+            <input class="form-check-input"
+                   type="checkbox"
+                   formControlName="is_active">
+            <label class="form-check-label">
+              {{ eventPackageData[i].name }}
+            </label>
+          </div>
+        </div>
+      </div>
+    </kb-label>
+
     <div class="d-flex align-items-center justify-content-between mt-4 mb-1">
       <div class="text-green-700">
         {{ 'page.theme-feature.column.name' | translate }}
@@ -173,6 +192,8 @@
                formControlName="is_active">
       </div>
     </kb-label>
+
+    <pre>{{ vm.formGroup.value | json }}</pre>
 
     <div class="d-grid gap-2 d-flex justify-content-end">
       <a class="btn btn-outline-green-700"

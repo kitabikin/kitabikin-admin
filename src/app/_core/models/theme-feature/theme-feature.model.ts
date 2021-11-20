@@ -1,4 +1,4 @@
-import { Deserializable, Pagination, ThemeFeatureColumnData } from '@models';
+import { Deserializable, Pagination, ThemeFeatureColumnData, ThemeFeatureMappingData } from '@models';
 
 // PACKAGE
 import { isArray } from 'lodash';
@@ -40,6 +40,7 @@ export class ThemeFeatureData implements Deserializable {
   modified_id!: string;
   modified_at!: Date;
   theme_feature_column!: ThemeFeatureColumnData[];
+  theme_feature_mapping!: ThemeFeatureMappingData[];
 
   deserialize(input: any): this {
     Object.assign(this, input);

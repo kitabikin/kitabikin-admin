@@ -37,7 +37,7 @@ export class StoreThemeFeatureDetailGuard implements CanActivate {
       tap((load) => {
         if (!load) {
           const params = {
-            with: [{ theme_feature_column: true }],
+            with: [{ theme_feature_column: true }, { theme_feature_mapping: true }],
           };
 
           this.store.dispatch(

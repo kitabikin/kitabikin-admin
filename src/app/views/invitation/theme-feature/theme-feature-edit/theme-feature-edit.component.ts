@@ -32,7 +32,7 @@ import {
 import { fromThemeFeatureActions } from '@store/theme-feature/theme-feature.actions';
 
 // PACKAGE
-import { assign, map, omit } from 'lodash';
+import { assign, map, omit, unionBy, find } from 'lodash';
 import moment from 'moment';
 import { TranslateService } from '@ngx-translate/core';
 import { Store, select } from '@ngrx/store';
@@ -66,6 +66,7 @@ export class ThemeFeatureEditComponent implements OnInit, OnChanges, OnDestroy, 
 
   // Data
   themeFeatureData$!: Observable<ThemeFeatureData | undefined>;
+  themeFeatureData: ThemeFeatureData | undefined;
   themeFeatureIsLoadingUpdate$!: Observable<boolean>;
 
   private unsubscribeThemeFeature$ = new Subject<void>();
@@ -124,6 +125,7 @@ export class ThemeFeatureEditComponent implements OnInit, OnChanges, OnDestroy, 
       description: [null],
       is_active: [false, [Validators.required]],
       theme_feature_column: this.fb.array([]),
+      theme_feature_mapping: this.fb.array([]),
     });
 
     this.getThemeFeature();
@@ -159,6 +161,28 @@ export class ThemeFeatureEditComponent implements OnInit, OnChanges, OnDestroy, 
     this.themeFeature.removeAt(themeFeatureIndex);
   }
 
+  get themeFeatureMapping() {
+    return this.myForm.controls['theme_feature_mapping'] as FormArray;
+  }
+
+  addThemeFeatureMapping(event: any): any {
+    this.themeFeatureMapping.clear();
+
+    map(event, (result) => {
+      const findResult = find(this.themeFeatureData?.theme_feature_mapping, {
+        id_event_package: result.id_event_package,
+      });
+
+      const themeFeatureMappingForm = this.fb.group({
+        id_theme: [this.idTheme],
+        id_event_package: [result.id_event_package],
+        is_active: [findResult ? findResult.is_active : false],
+      });
+
+      this.themeFeatureMapping.push(themeFeatureMappingForm);
+    });
+  }
+
   // GET =====================================================================================================
   getThemeFeature(): void {
     this.themeFeatureData$ = this.store.pipe(select(selectThemeFeature(this.id)));
@@ -169,6 +193,8 @@ export class ThemeFeatureEditComponent implements OnInit, OnChanges, OnDestroy, 
         filter((val) => val !== undefined)
       )
       .subscribe((result) => {
+        this.themeFeatureData = result;
+
         this.setFormThemeFeature(result);
       });
   }

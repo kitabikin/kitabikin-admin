@@ -18,7 +18,8 @@
         <kb-form-theme-feature-add-edit [formGroup]="myForm"
                                         [isAddMode]="true"
                                         (emitThemeFeatureAdd)="addThemeFeature()"
-                                        (emitThemeFeatureDelete)="deleteThemeFeature($event)">
+                                        (emitThemeFeatureDelete)="deleteThemeFeature($event)"
+                                        (emitThemeFeatureMappingAdd)="addThemeFeatureMapping($event)">
         </kb-form-theme-feature-add-edit>
       </form>
     </div>
