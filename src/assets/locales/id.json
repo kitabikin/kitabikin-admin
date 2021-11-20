@@ -74,6 +74,7 @@
       "name": "Fitur Tema",
       "code": "Kode",
       "order": "Urutan",
+      "mapping": "Mapping Paket Acara",
       "column": {
         "name": "Kolom",
         "code": "Kode",

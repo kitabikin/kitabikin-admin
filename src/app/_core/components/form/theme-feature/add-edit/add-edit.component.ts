@@ -6,10 +6,13 @@ import { Observable, of, Subject } from 'rxjs';
 import { takeUntil, filter, map } from 'rxjs/operators';
 
 // MODEL
-import { ThemeData } from '@models';
+import { ThemeData, EventPackageData, EventPriceData } from '@models';
 
 // STORE
 import { selectTheme } from '@store/theme/theme.selectors';
+
+import { selectAllEventPackage } from '@store/event-package/event-package.selectors';
+import { fromEventPackageActions } from '@store/event-package/event-package.actions';
 
 // PACKAGE
 import { Store, select } from '@ngrx/store';
@@ -46,12 +49,14 @@ export class FormThemeFeatureAddEditComponent implements OnInit {
 
   @Output() emitThemeFeatureAdd = new EventEmitter<any>();
   @Output() emitThemeFeatureDelete = new EventEmitter<any>();
+  @Output() emitThemeFeatureMappingAdd = new EventEmitter<any>();
 
   // Variable
   idTheme!: string;
 
   // Data
   themeData$!: Observable<ThemeData | undefined>;
+  eventPackageData!: EventPackageData[];
 
   readonly vm$ = this.addEditStore.vm$;
 
@@ -73,12 +78,51 @@ export class FormThemeFeatureAddEditComponent implements OnInit {
   getTheme(): void {
     this.store
       .pipe(select(selectTheme(this.idTheme)), takeUntil(this.unsubscribeTheme$))
-      .subscribe((themeData: ThemeData | undefined) => {
-        this.themeData$ = of(themeData);
+      .subscribe((result: ThemeData | undefined) => {
+        this.themeData$ = of(result);
 
         this.formGroup.patchValue({
-          theme_code: themeData?.code,
+          theme_code: result?.code,
         });
+
+        this.getAllEventPackage(result?.theme_category.event.id_event);
+      });
+  }
+
+  getAllEventPackage(idEvent: string | undefined): void {
+    const pSort = 'name:asc';
+
+    const pWhere: any[] = [
+      {
+        is_delete: false,
+      },
+      {
+        id_event: idEvent,
+      },
+    ];
+
+    const params = {
+      sort: pSort,
+      where: pWhere,
+    };
+
+    this.store.dispatch(
+      fromEventPackageActions.loadAllEventPackage({
+        params,
+        pagination: false,
+        infinite: false,
+      })
+    );
+
+    this.store
+      .pipe(
+        select(selectAllEventPackage),
+        filter((val) => val.length !== 0)
+      )
+      .subscribe((result: EventPackageData[]) => {
+        this.eventPackageData = result;
+
+        this.addThemeFeatureMapping(result);
       });
   }
 
@@ -105,5 +149,9 @@ export class FormThemeFeatureAddEditComponent implements OnInit {
 
   deleteThemeFeature(themeFeatureIndex: number): void {
     this.emitThemeFeatureDelete.emit(themeFeatureIndex);
+  }
+
+  addThemeFeatureMapping(eventPackageData: EventPackageData[]): void {
+    this.emitThemeFeatureMappingAdd.emit(eventPackageData);
   }
 }

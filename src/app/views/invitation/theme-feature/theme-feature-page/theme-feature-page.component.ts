@@ -156,7 +156,7 @@ export class ThemeFeaturePageComponent implements OnInit, OnChanges, OnDestroy, 
 
     const params = {
       where: pWhere,
-      with: [{ theme_feature_column: true }],
+      with: [{ theme_feature_column: true }, { theme_feature_mapping: true }],
     };
 
     this.store.dispatch(

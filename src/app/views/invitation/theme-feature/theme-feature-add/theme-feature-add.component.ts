@@ -12,7 +12,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 
 // SERVICE
 import { GlobalService } from '@services/private';
@@ -26,7 +26,7 @@ import { selectIsLoadingCreate as selectIsLoadingCreateThemeFeature } from '@sto
 import { fromThemeFeatureActions } from '@store/theme-feature/theme-feature.actions';
 
 // PACKAGE
-import { assign } from 'lodash';
+import { assign, map } from 'lodash';
 import moment from 'moment';
 import { TranslateService } from '@ngx-translate/core';
 import { Store, select } from '@ngrx/store';
@@ -115,6 +115,7 @@ export class ThemeFeatureAddComponent implements OnInit, OnChanges, OnDestroy, A
       description: [null],
       is_active: [false, [Validators.required]],
       theme_feature_column: this.fb.array([]),
+      theme_feature_mapping: this.fb.array([]),
     });
   }
 
@@ -146,6 +147,24 @@ export class ThemeFeatureAddComponent implements OnInit, OnChanges, OnDestroy, A
 
   deleteThemeFeature(themeFeatureIndex: any) {
     this.themeFeature.removeAt(themeFeatureIndex);
+  }
+
+  get themeFeatureMapping() {
+    return this.myForm.controls['theme_feature_mapping'] as FormArray;
+  }
+
+  addThemeFeatureMapping(event: any): any {
+    this.themeFeatureMapping.clear();
+
+    map(event, (result) => {
+      const themeFeatureMappingForm = this.fb.group({
+        id_theme: [this.idTheme],
+        id_event_package: [result.id_event_package],
+        is_active: [false],
+      });
+
+      this.themeFeatureMapping.push(themeFeatureMappingForm);
+    });
   }
 
   onSubmit(): void {
