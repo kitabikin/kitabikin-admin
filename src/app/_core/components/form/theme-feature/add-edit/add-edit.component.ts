@@ -85,7 +85,7 @@ export class FormThemeFeatureAddEditComponent implements OnInit {
           theme_code: result?.code,
         });
 
-        this.getAllEventPackage(result?.theme_category.event.id_event);
+        this.getAllEventPackage(result?.theme_category?.event?.id_event);
       });
   }
 

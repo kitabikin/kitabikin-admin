@@ -65,7 +65,8 @@
                       formControlName="image"
                       [label]="'thumbnail' | translate"
                       [accept]="['.png', '.jpeg', '.jpg', '.svg']"
-                      [required]="true">
+                      [required]="true"
+                      [folder]="'invitation/theme/' + vm.formGroup.controls['code'].value">
     </kb-file-uploader>
 
     <kb-label class="d-block mb-3"

@@ -24,7 +24,9 @@ import {
   NgbTooltipModule,
   NgbModalModule,
   NgbDatepickerModule,
+  NgbTimepickerModule,
   NgbDropdownModule,
+  NgbAccordionModule,
 } from '@ng-bootstrap/ng-bootstrap';
 
 // COMPONENT
@@ -37,6 +39,7 @@ import { LabelComponent as CompLabelComponent } from '@components/_components/la
 import { FileUploaderComponent as CompFileUploaderComponent } from '@components/_components/file-uploader/file-uploader.component';
 import { TableHeadComponent as CompTableHeadComponent } from '@components/_components/table-head/table-head.component';
 import { PaginationComponent as CompPaginationComponent } from '@components/_components/pagination/pagination.component';
+import { DateTimePickerComponent as CompDateTimePickerComponent } from '@components/_components/datetime-picker/datetime-picker.component';
 
 import { FormAuthenticationLoginComponent } from '@components/form/authentication/login/login.component';
 import { FormApplicationAddEditComponent } from '@components/form/application/add-edit/add-edit.component';
@@ -47,6 +50,8 @@ import { FormEventPackageAddEditComponent } from '@components/form/event-package
 import { FormThemeCategoryAddEditComponent } from '@components/form/theme-category/add-edit/add-edit.component';
 import { FormThemeAddEditComponent } from '@components/form/theme/add-edit/add-edit.component';
 import { FormThemeFeatureAddEditComponent } from '@components/form/theme-feature/add-edit/add-edit.component';
+import { FormInvitationAddEditComponent } from '@components/form/invitation/add-edit/add-edit.component';
+import { FormInvitationDataComponent } from '@components/form/invitation/data/data.component';
 
 @NgModule({
   imports: [
@@ -59,7 +64,9 @@ import { FormThemeFeatureAddEditComponent } from '@components/form/theme-feature
     NgbTooltipModule,
     NgbModalModule,
     NgbDatepickerModule,
+    NgbTimepickerModule,
     NgbDropdownModule,
+    NgbAccordionModule,
     // PACKAGE
     TranslateModule,
     LoadingBarRouterModule,
@@ -98,6 +105,7 @@ import { FormThemeFeatureAddEditComponent } from '@components/form/theme-feature
     CompFileUploaderComponent,
     CompTableHeadComponent,
     CompPaginationComponent,
+    CompDateTimePickerComponent,
     FormAuthenticationLoginComponent,
     FormApplicationAddEditComponent,
     FormRoleAddEditComponent,
@@ -107,6 +115,8 @@ import { FormThemeFeatureAddEditComponent } from '@components/form/theme-feature
     FormThemeCategoryAddEditComponent,
     FormThemeAddEditComponent,
     FormThemeFeatureAddEditComponent,
+    FormInvitationAddEditComponent,
+    FormInvitationDataComponent,
   ],
   exports: [
     RouterModule,
@@ -131,7 +141,9 @@ import { FormThemeFeatureAddEditComponent } from '@components/form/theme-feature
     NgbTooltipModule,
     NgbModalModule,
     NgbDatepickerModule,
+    NgbTimepickerModule,
     NgbDropdownModule,
+    NgbAccordionModule,
     // COMPONENT
     CompAvatarComponent,
     CompAvatarItemComponent,
@@ -142,6 +154,7 @@ import { FormThemeFeatureAddEditComponent } from '@components/form/theme-feature
     CompFileUploaderComponent,
     CompTableHeadComponent,
     CompPaginationComponent,
+    CompDateTimePickerComponent,
     FormAuthenticationLoginComponent,
     FormApplicationAddEditComponent,
     FormRoleAddEditComponent,
@@ -151,6 +164,8 @@ import { FormThemeFeatureAddEditComponent } from '@components/form/theme-feature
     FormThemeCategoryAddEditComponent,
     FormThemeAddEditComponent,
     FormThemeFeatureAddEditComponent,
+    FormInvitationAddEditComponent,
+    FormInvitationDataComponent,
   ],
   providers: [],
   schemas: [],

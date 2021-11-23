@@ -12,3 +12,6 @@ export * from './event-package/event-package.service';
 export * from './theme-category/theme-category.service';
 export * from './theme/theme.service';
 export * from './theme-feature/theme-feature.service';
+export * from './invitation/invitation.service';
+export * from './invitation-feature/invitation-feature.service';
+export * from './invitation-feature-data/invitation-feature-data.service';

@@ -40,6 +40,10 @@ const routes: Routes = [
         path: 'theme-feature',
         loadChildren: () => import('./theme-feature/theme-feature.module').then((m) => m.ThemeFeatureModule),
       },
+      {
+        path: 'invitation',
+        loadChildren: () => import('./invitation/invitation.module').then((m) => m.InvitationModule),
+      },
     ],
   },
 ];

@@ -98,10 +98,10 @@ export class ThemeFeatureEditComponent implements OnInit, OnChanges, OnDestroy, 
   }
 
   settingsAll(): void {
-    const word = ['theme-feature', 'add'];
+    const word = ['theme-feature', 'edit'];
     this.translateService.get(word).subscribe((trans) => {
-      this.label = `${trans.add} ${trans['theme-feature']}`;
-      this.description = `${trans.add} ${trans['theme-feature']}`;
+      this.label = `${trans.edit} ${trans['theme-feature']}`;
+      this.description = `${trans.edit} ${trans['theme-feature']}`;
 
       // Title & Description
       this.title = this.globalService.title;
@@ -124,6 +124,8 @@ export class ThemeFeatureEditComponent implements OnInit, OnChanges, OnDestroy, 
       order: [null],
       description: [null],
       is_active: [false, [Validators.required]],
+      is_admin: [false, [Validators.required]],
+      is_new: [false, [Validators.required]],
       theme_feature_column: this.fb.array([]),
       theme_feature_mapping: this.fb.array([]),
     });
@@ -173,13 +175,19 @@ export class ThemeFeatureEditComponent implements OnInit, OnChanges, OnDestroy, 
         id_event_package: result.id_event_package,
       });
 
-      const themeFeatureMappingForm = this.fb.group({
+      const themeFeatureMappingForm = {
         id_theme: [this.idTheme],
         id_event_package: [result.id_event_package],
         is_active: [findResult ? findResult.is_active : false],
-      });
+      };
 
-      this.themeFeatureMapping.push(themeFeatureMappingForm);
+      if (findResult) {
+        assign(themeFeatureMappingForm, {
+          id_theme_feature_mapping: [findResult.id_theme_feature_mapping],
+        });
+      }
+
+      this.themeFeatureMapping.push(this.fb.group(themeFeatureMappingForm));
     });
   }
 
@@ -207,10 +215,13 @@ export class ThemeFeatureEditComponent implements OnInit, OnChanges, OnDestroy, 
       order: data?.order,
       description: data?.description,
       is_active: data?.is_active,
+      is_admin: data?.is_admin,
+      is_new: data?.is_new,
     });
 
     data?.theme_feature_column.map((item) => {
       const themeFeatureForm = this.fb.group({
+        id_theme_feature_column: [item.id_theme_feature_column],
         code: [item.code],
         label: [item.label],
         label_helper: [item.label_helper],

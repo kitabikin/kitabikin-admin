@@ -171,6 +171,7 @@ export class UserPageComponent implements OnInit, OnChanges, OnDestroy, AfterVie
       limit: this.filter.perPage,
       start: pCurrent,
       where: pWhere,
+      with: [{ profile: true }, { role: true }],
     };
 
     if (this.filter.sort) {

@@ -114,6 +114,8 @@ export class ThemeFeatureAddComponent implements OnInit, OnChanges, OnDestroy, A
       order: [null],
       description: [null],
       is_active: [false, [Validators.required]],
+      is_admin: [false, [Validators.required]],
+      is_new: [false, [Validators.required]],
       theme_feature_column: this.fb.array([]),
       theme_feature_mapping: this.fb.array([]),
     });

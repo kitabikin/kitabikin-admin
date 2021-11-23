@@ -1,0 +1,182 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <div [formGroup]="vm.formGroup">
+    <!-- User -->
+    <kb-label class="d-block mb-3"
+              [required]="true"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['id_user']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['id_user']).text">
+      {{ 'user' | translate }}
+      <ng-select kbInput
+                 [items]="(userData$ | async) || []"
+                 bindValue="id_user"
+                 bindLabel="profile.name"
+                 [placeholder]="'user' | translate"
+                 formControlName="id_user">
+      </ng-select>
+    </kb-label>
+
+    <!-- Event -->
+    <kb-label class="d-block mb-3"
+              [required]="true"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['id_event']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['id_event']).text">
+      {{ 'event' | translate }}
+      <ng-select kbInput
+                 [items]="(eventData$ | async) || []"
+                 bindValue="id_event"
+                 bindLabel="name"
+                 [placeholder]="'event' | translate"
+                 formControlName="id_event"
+                 (change)="onSelectedEvent($event)"
+                 (clear)="onClearEvent()">
+      </ng-select>
+    </kb-label>
+
+    <!-- Event Package -->
+    <kb-label class="d-block mb-3"
+              [required]="true"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['id_event_package']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['id_event_package']).text">
+      {{ 'event-package' | translate }}
+      <ng-select kbInput
+                 [items]="(eventPackageData$ | async) || []"
+                 bindValue="id_event_package"
+                 bindLabel="name"
+                 [placeholder]="'event-package' | translate"
+                 formControlName="id_event_package">
+      </ng-select>
+    </kb-label>
+
+    <!-- Theme Category -->
+    <kb-label class="d-block mb-3"
+              [required]="true"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['id_theme_category']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['id_theme_category']).text">
+      {{ 'theme-category' | translate }}
+      <ng-select kbInput
+                 [items]="(themeCategoryData$ | async) || []"
+                 bindValue="id_theme_category"
+                 bindLabel="name"
+                 [placeholder]="'theme-category' | translate"
+                 formControlName="id_theme_category"
+                 (change)="onSelectedThemeCategory($event)"
+                 (clear)="onClearThemeCategory()">
+      </ng-select>
+    </kb-label>
+
+    <!-- Theme -->
+    <kb-label class="d-block mb-3"
+              [required]="true"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['id_theme']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['id_theme']).text">
+      {{ 'theme' | translate }}
+      <ng-select kbInput
+                 [items]="(themeData$ | async) || []"
+                 bindValue="id_theme"
+                 bindLabel="name"
+                 [placeholder]="'theme' | translate"
+                 formControlName="id_theme">
+      </ng-select>
+    </kb-label>
+
+    <!-- Code -->
+    <kb-label class="d-block mb-3"
+              [required]="true"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['code']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['code']).text">
+      {{ 'page.invitation.code' | translate }} {{ 'invitation' | translate }}
+      <div kbInput
+           class="form-control-spinner">
+        <input type="text"
+               class="form-control"
+               [placeholder]="('page.invitation.code' | translate) + ' ' + ('invitation' | translate)"
+               formControlName="code">
+        <div *ngIf="vm.formGroup?.controls?.['code']?.pending"
+             class="spinner-border spinner-border-sm"
+             role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </kb-label>
+
+    <!-- Name -->
+    <kb-label class="d-block mb-3"
+              [required]="true"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['name']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['name']).text">
+      {{ 'page.invitation.name' | translate }} {{ 'invitation' | translate }}
+      <input kbInput
+             type="text"
+             class="form-control"
+             [placeholder]="('page.invitation.name' | translate) + ' ' + ('invitation' | translate)"
+             formControlName="name">
+    </kb-label>
+
+    <!-- Date -->
+    <kb-label class="d-block mb-3"
+              [required]="true"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['invitation_at']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['invitation_at']).text">
+      {{ 'datepicker.date' | translate }} {{ 'invitation' | translate }}
+      <div kbInput
+           class="input-group input-search right">
+        <input type="text"
+               class="form-control"
+               [placeholder]="('datepicker.date' | translate) + ' ' + ('invitation' | translate)"
+               formControlName="invitation_at"
+               autocomplete="off"
+               readonly
+               [style.cursor]="'pointer'"
+               ngbDatepicker
+               #d="ngbDatepicker"
+               (click)="d.toggle()" />
+        <span class="input-group-text">
+          <fa-icon class="me-2"
+                   [icon]="faCalendarAlt"></fa-icon>
+        </span>
+      </div>
+    </kb-label>
+
+    <!-- Description -->
+    <kb-label class="d-block mb-3"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['description']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['description']).text">
+      {{ 'description' | translate }}
+      <textarea kbInput
+                rows="3"
+                class="form-control"
+                [placeholder]="'description' | translate"
+                formControlName="description"></textarea>
+    </kb-label>
+
+    <div class="text-green-700 mt-4 mb-1">
+      {{ 'more-information' | translate }}
+    </div>
+    <hr class="my-2" />
+
+    <!-- Is Active -->
+    <kb-label class="d-block mb-3"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['is_active']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['is_active']).text">
+      {{ 'status' | translate }}
+      <div kbInput
+           class="form-check form-switch">
+        <input class="form-check-input"
+               type="checkbox"
+               formControlName="is_active">
+      </div>
+    </kb-label>
+
+    <div class="d-grid gap-2 d-flex justify-content-end">
+      <a class="btn btn-outline-green-700"
+         [routerLink]="['/invitation/theme']">
+        {{ 'cancel' | translate }}
+      </a>
+      <button type="submit"
+              class="btn btn-green-700"
+              [disabled]="!vm.formGroup.valid">
+        {{ 'save' | translate }}
+      </button>
+    </div>
+  </div>
+</ng-container>
