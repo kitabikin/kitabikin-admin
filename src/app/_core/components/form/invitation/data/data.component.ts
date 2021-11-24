@@ -4,6 +4,9 @@ import { DataStore } from '@components/form/invitation/data/data.store';
 
 import { DataBase } from './data-base';
 
+// SERVICE
+import { InvitationFeatureService, InvitationFeatureDataColumnService } from '@services';
+
 // PACKAGE
 import moment from 'moment';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
@@ -83,7 +86,9 @@ export class FormInvitationDataComponent implements OnInit {
 
   constructor(
     private readonly dataStore: DataStore,
-    private ngbDateParserFormatter: NgbDateParserFormatter
+    private ngbDateParserFormatter: NgbDateParserFormatter,
+    private featureService: InvitationFeatureService,
+    private dataService: InvitationFeatureDataColumnService
   ) {}
 
   ngOnInit(): void {}
@@ -114,27 +119,58 @@ export class FormInvitationDataComponent implements OnInit {
   }
 
   onChanges(event: any, options: any) {
+    let id;
+    let value;
+
     switch (options.control) {
       case 'switch':
-        console.log(event.target.dataset.id, event.target.checked);
+        id = event.target.dataset.id;
+        value = event.target.checked;
+        // console.log(event.target.dataset.id, event.target.checked);
         break;
       case 'text':
-        console.log(event.target.dataset.id, event.target.value);
+        id = event.target.dataset.id;
+        value = event.target.value;
+        // console.log(event.target.dataset.id, event.target.value);
         break;
       case 'file':
-        console.log(options.id, event);
+        id = options.id;
+        value = event;
+        // console.log(options.id, event);
         break;
       case 'datepicker':
         const datepicker = this.ngbDateParserFormatter.format(event);
-        console.log(options.id, datepicker);
+        id = options.id;
+        value = datepicker;
+        // console.log(options.id, datepicker);
         break;
       case 'timepicker':
         const timepicker =
           event != null ? `${pad(event.hour)}:${pad(event.minute)}:${pad(event.second)}` : null;
-        console.log(options.id, timepicker);
+        id = options.id;
+        value = timepicker;
+        // console.log(options.id, timepicker);
         break;
       default:
         break;
+    }
+
+    if (options.table === 'feature') {
+      const body = {
+        id_invitation_feature: id,
+        is_active: value,
+      };
+
+      this.featureService.updateItem(id, body).subscribe();
+    } else if (options.table === 'data') {
+      const body = {
+        id_invitation_feature_data: id,
+        value,
+      };
+
+      this.dataService.updateItem(id, body).subscribe();
+    } else {
+      return;
     }
   }
 }
