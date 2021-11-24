@@ -35,6 +35,8 @@ export class ThemeFeatureData implements Deserializable {
   description!: string;
   is_active!: boolean;
   is_delete!: boolean;
+  is_admin!: boolean;
+  is_new!: boolean;
   created_id!: string;
   created_at!: Date;
   modified_id!: string;

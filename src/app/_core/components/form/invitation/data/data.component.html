@@ -1,0 +1,150 @@
+<ng-container *ngIf="vm$ | async as vm">
+
+  <ngb-accordion #acc="ngbAccordion"
+                 [formGroup]="vm.formGroup">
+    <ng-container *ngFor="let form of featureForm.controls; let i = index">
+      <ng-container [formGroup]="form | asFormGroup">
+        <ngb-panel *ngIf="vm.dataBase?.[i] as row"
+                   [id]="'feature_' + i">
+          <ng-template ngbPanelHeader
+                       let-opened="opened">
+            <div class="d-flex align-items-center justify-content-between border-bottom">
+              <div class="form-check form-switch mb-0 ms-4">
+                <input class="form-check-input"
+                       type="checkbox"
+                       [attr.data-id]="row.id"
+                       [formControlName]="row.key"
+                       (change)="onChanges($event, { control: 'switch' })">
+              </div>
+              <button ngbPanelToggle
+                      class="accordion-button">
+                {{ row.label }}
+              </button>
+            </div>
+          </ng-template>
+          <ng-template ngbPanelContent>
+
+            <ng-container *ngFor="let subForm of getDataForm(form).controls; let j = index">
+              <div [formGroup]="subForm | asFormGroup">
+                <ng-container *ngIf="row.sub[j] as subRow">
+                  <ng-container [ngSwitch]="subRow.formType">
+                    <!-- Form Normal -->
+                    <ng-container *ngSwitchCase="'normal'">
+                      <ng-container [ngSwitch]="subRow.controlType">
+
+                        <!-- Form Normal Text -->
+                        <ng-container *ngSwitchCase="'text'">
+                          <kb-label class="d-block mb-3">
+                            {{ subRow.label }}
+                            <div kbInput>
+                              <input type="text"
+                                     class="form-control"
+                                     [placeholder]="subRow.label"
+                                     [formControlName]="subRow.key"
+                                     [attr.data-id]="subRow.id"
+                                     (change)="onChanges($event, { control: subRow.controlType })">
+                            </div>
+                          </kb-label>
+                        </ng-container>
+
+                        <!-- Form Normal File -->
+                        <ng-container *ngSwitchCase="'file'">
+                          <kb-file-uploader class="d-block mb-3"
+                                            [formControlName]="subRow.key"
+                                            [label]="subRow.label"
+                                            [accept]="['.png', '.jpeg', '.jpg', '.svg']"
+                                            [folder]="'invitation/invitation/' + vm.code"
+                                            (ngModelChange)="onChanges($event, { control: subRow.controlType, id: subRow.id })">
+                          </kb-file-uploader>
+                        </ng-container>
+
+                        <!-- Form Normal Datepicker -->
+                        <ng-container *ngSwitchCase="'datepicker'">
+                          <kb-label class="d-block mb-3">
+                            {{ subRow.label }}
+                            <div kbInput
+                                 class="input-group input-search right">
+                              <input type="text"
+                                     class="form-control"
+                                     [placeholder]="subRow.label"
+                                     autocomplete="off"
+                                     readonly
+                                     [style.cursor]="'pointer'"
+                                     ngbDatepicker
+                                     #d="ngbDatepicker"
+                                     (click)="d.toggle()"
+                                     [formControlName]="subRow.key"
+                                     (ngModelChange)="onChanges($event, { control: subRow.controlType, id: subRow.id })" />
+                              <span class="input-group-text">
+                                <fa-icon class="me-2"
+                                         [icon]="faCalendarAlt"></fa-icon>
+                              </span>
+                            </div>
+                          </kb-label>
+                        </ng-container>
+
+                        <!-- Form Normal Timepicker -->
+                        <ng-container *ngSwitchCase="'timepicker'">
+                          <kb-label class="d-block mb-3">
+                            {{ subRow.label }}
+                            <ngb-timepicker kbInput
+                                            [formControlName]="subRow.key"
+                                            [spinners]="false"
+                                            (ngModelChange)="onChanges($event, { control: subRow.controlType, id: subRow.id })">
+                            </ngb-timepicker>
+                          </kb-label>
+                        </ng-container>
+
+                      </ng-container>
+                    </ng-container>
+
+                    <!-- Form Dynamic -->
+                    <ng-container *ngSwitchCase="'dynamic'">
+                      <kb-label class="d-block mb-3">
+                        {{ subRow.label }}
+                        <div kbInput
+                             *ngFor="let dynamicForm of getDataDynamicForm(subForm).controls; let k = index">
+                          <div [formGroup]="dynamicForm | asFormGroup">
+                            <ng-container *ngIf="subRow.sub[k] as dynamicRow">
+                              <ng-container [ngSwitch]="dynamicRow.controlType">
+
+                                <!-- Form Dynamic Text -->
+                                <ng-container *ngSwitchCase="'text'">
+                                  <input type="text"
+                                         class="form-control mb-3"
+                                         [placeholder]="subRow.label"
+                                         [attr.data-id]="dynamicRow.id"
+                                         [formControlName]="dynamicRow.key"
+                                         (change)="onChanges($event, { control: dynamicRow.controlType })">
+                                </ng-container>
+
+                                <!-- Form Dynamic File -->
+                                <ng-container *ngSwitchCase="'file'">
+                                  File
+                                </ng-container>
+
+                                <!-- Form Dynamic Datetimepicker -->
+                                <ng-container *ngSwitchCase="'datetimepicker'">
+                                  Datetimepicker
+                                </ng-container>
+
+                              </ng-container>
+                            </ng-container>
+                          </div>
+                        </div>
+                      </kb-label>
+                    </ng-container>
+                  </ng-container>
+                </ng-container>
+              </div>
+            </ng-container>
+
+          </ng-template>
+        </ngb-panel>
+      </ng-container>
+    </ng-container>
+  </ngb-accordion>
+
+  <!-- <br>
+  <pre>{{ vm.formGroup.value | json }}</pre> -->
+</ng-container>

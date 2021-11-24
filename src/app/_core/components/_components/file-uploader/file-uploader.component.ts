@@ -50,6 +50,15 @@ export class FileUploaderComponent implements ControlValueAccessor {
     this.fileUploaderStore.setDisabled(value);
   }
 
+  iFolder!: string;
+  @Input() set folder(value: string) {
+    this.iFolder = value;
+    this.fileUploaderStore.setFolder(value);
+  }
+  get folder(): string {
+    return this.iFolder;
+  }
+
   // Variable
   val: any = '';
 
@@ -76,7 +85,8 @@ export class FileUploaderComponent implements ControlValueAccessor {
     return this.val;
   }
 
-  set value(val) {
+  @Input() set value(val) {
+    this.fileUploaderStore.setValue(val);
     if (val !== undefined && this.val !== val) {
       this.val = val;
       this.onChange(val);
@@ -158,6 +168,7 @@ export class FileUploaderComponent implements ControlValueAccessor {
 
     const formData: FormData = new FormData();
     formData.append('image', file, file.name);
+    formData.append('folder', this.folder);
 
     this.uploadService.createSingle(formData).subscribe((result) => {
       if (result['type'] === HttpEventType.UploadProgress) {

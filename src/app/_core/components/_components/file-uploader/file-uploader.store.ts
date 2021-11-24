@@ -10,6 +10,8 @@ export interface FileUploaderState {
   required: boolean;
   disabled: boolean;
   isImage: boolean;
+  value: string | null;
+  folder: string;
 }
 
 const DEFAULT_STATE: FileUploaderState = {
@@ -20,7 +22,9 @@ const DEFAULT_STATE: FileUploaderState = {
   size: 'normal',
   required: false,
   disabled: false,
-  isImage: true
+  isImage: true,
+  value: null,
+  folder: 'invitation',
 };
 
 @Injectable()
@@ -62,6 +66,14 @@ export class FileUploaderStore extends ComponentStore<FileUploaderState> {
     ...state,
     isImage: value || false,
   }));
+  readonly setValue = this.updater((state, value: string) => ({
+    ...state,
+    value: value || null,
+  }));
+  readonly setFolder = this.updater((state, value: string) => ({
+    ...state,
+    folder: value || 'invitation',
+  }));
 
   // *********** Selectors *********** //
   readonly getLabel$ = this.select(({ label }) => label);
@@ -72,6 +84,8 @@ export class FileUploaderStore extends ComponentStore<FileUploaderState> {
   readonly getRequired$ = this.select(({ required }) => required);
   readonly getDisabled$ = this.select(({ disabled }) => disabled);
   readonly getIsImage$ = this.select(({ isImage }) => isImage);
+  readonly getValue$ = this.select(({ value }) => value);
+  readonly getFolder$ = this.select(({ folder }) => folder);
 
   // ViewModel of FileUploader component
   readonly vm$ = this.select(
@@ -84,15 +98,10 @@ export class FileUploaderStore extends ComponentStore<FileUploaderState> {
     this.getRequired$,
     this.getDisabled$,
     this.getIsImage$,
-    (state, getLabel, getDescription, getAccept, getMultiple, getSize, getRequired, getDisabled, getIsImage) => ({
-      label: state.label,
-      description: state.description,
-      accept: state.accept,
-      multiple: state.multiple,
-      size: state.size,
-      required: state.required,
-      disabled: state.disabled,
-      isImage: state.isImage,
+    this.getValue$,
+    this.getFolder$,
+    (
+      state,
       getLabel,
       getDescription,
       getAccept,
@@ -101,6 +110,29 @@ export class FileUploaderStore extends ComponentStore<FileUploaderState> {
       getRequired,
       getDisabled,
       getIsImage,
+      getValue,
+      getFolder
+    ) => ({
+      label: state.label,
+      description: state.description,
+      accept: state.accept,
+      multiple: state.multiple,
+      size: state.size,
+      required: state.required,
+      disabled: state.disabled,
+      isImage: state.isImage,
+      value: state.value,
+      folder: state.folder,
+      getLabel,
+      getDescription,
+      getAccept,
+      getMultiple,
+      getSize,
+      getRequired,
+      getDisabled,
+      getIsImage,
+      getValue,
+      getFolder,
     })
   );
 }

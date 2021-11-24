@@ -54,6 +54,29 @@
                 formControlName="description"></textarea>
     </kb-label>
 
+    <kb-label class="d-block mb-3"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['is_new']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['is_new']).text">
+      {{ 'page.theme-feature.new' | translate }}
+      <div kbInput
+           class="form-check form-switch">
+        <input class="form-check-input"
+               type="checkbox"
+               formControlName="is_new">
+      </div>
+    </kb-label>
+
+    <kb-label class="d-block mb-3"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['is_admin']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['is_admin']).text">
+      {{ 'admin' | translate }}
+      <div kbInput
+           class="form-check form-switch">
+        <input class="form-check-input"
+               type="checkbox"
+               formControlName="is_admin">
+      </div>
+    </kb-label>
 
     <kb-label class="d-block mb-3">
       {{ 'page.theme-feature.mapping' | translate }}

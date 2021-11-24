@@ -15,3 +15,6 @@ export * from './theme/theme.model';
 export * from './theme-feature/theme-feature.model';
 export * from './theme-feature-column/theme-feature-column.model';
 export * from './theme-feature-mapping/theme-feature-mapping.model';
+export * from './invitation/invitation.model';
+export * from './invitation-feature/invitation-feature.model';
+export * from './invitation-feature-data/invitation-feature-data.model';

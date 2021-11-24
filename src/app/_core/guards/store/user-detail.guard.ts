@@ -36,7 +36,9 @@ export class StoreUserDetailGuard implements CanActivate {
       take(1),
       tap((load) => {
         if (!load) {
-          const params = {};
+          const params = {
+            with: [{ profile: true }, { role: true }],
+          };
 
           this.store.dispatch(
             fromUserActions.loadUser({

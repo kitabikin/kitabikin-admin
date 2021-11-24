@@ -149,7 +149,7 @@ export class ThemeEditComponent implements OnInit, OnChanges, OnDestroy, AfterVi
   // SET FORM ================================================================================================
   setFormTheme(data: ThemeData | undefined): void {
     this.myForm.patchValue({
-      id_event: data?.theme_category.event.id_event,
+      id_event: data?.theme_category?.event?.id_event,
       id_theme_category: data?.id_theme_category,
       code: data?.code,
       name: data?.name,

@@ -74,6 +74,7 @@
       "name": "Fitur Tema",
       "code": "Kode",
       "order": "Urutan",
+      "new": "Fitur Baru",
       "mapping": "Mapping Paket Acara",
       "column": {
         "name": "Kolom",
@@ -84,6 +85,10 @@
         "configuration": "Konfigurasi",
         "order": "Urutan"
       }
+    },
+    "invitation": {
+      "name": "Nama",
+      "code": "Kode"
     }
   },
   "_comment_action": "=======================================================================================",
@@ -101,6 +106,7 @@
   "file": "File",
   "csv": "CSV",
   "excel": "Excel",
+  "data": "Data",
   "_comment_word": "=========================================================================================",
   "thumbnail": "Thumbnail",
   "email": "Email",
