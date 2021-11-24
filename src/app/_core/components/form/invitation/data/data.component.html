@@ -14,7 +14,7 @@
                        type="checkbox"
                        [attr.data-id]="row.id"
                        [formControlName]="row.key"
-                       (change)="onChanges($event, { control: 'switch' })">
+                       (change)="onChanges($event, { table: 'feature', control: 'switch' })">
               </div>
               <button ngbPanelToggle
                       class="accordion-button">
@@ -42,7 +42,7 @@
                                      [placeholder]="subRow.label"
                                      [formControlName]="subRow.key"
                                      [attr.data-id]="subRow.id"
-                                     (change)="onChanges($event, { control: subRow.controlType })">
+                                     (change)="onChanges($event, { table: 'data', control: subRow.controlType })">
                             </div>
                           </kb-label>
                         </ng-container>
@@ -54,7 +54,7 @@
                                             [label]="subRow.label"
                                             [accept]="['.png', '.jpeg', '.jpg', '.svg']"
                                             [folder]="'invitation/invitation/' + vm.code"
-                                            (ngModelChange)="onChanges($event, { control: subRow.controlType, id: subRow.id })">
+                                            (ngModelChange)="onChanges($event, { table: 'data', control: subRow.controlType, id: subRow.id })">
                           </kb-file-uploader>
                         </ng-container>
 
@@ -74,7 +74,7 @@
                                      #d="ngbDatepicker"
                                      (click)="d.toggle()"
                                      [formControlName]="subRow.key"
-                                     (ngModelChange)="onChanges($event, { control: subRow.controlType, id: subRow.id })" />
+                                     (ngModelChange)="onChanges($event, { table: 'data', control: subRow.controlType, id: subRow.id })" />
                               <span class="input-group-text">
                                 <fa-icon class="me-2"
                                          [icon]="faCalendarAlt"></fa-icon>
@@ -90,7 +90,7 @@
                             <ngb-timepicker kbInput
                                             [formControlName]="subRow.key"
                                             [spinners]="false"
-                                            (ngModelChange)="onChanges($event, { control: subRow.controlType, id: subRow.id })">
+                                            (ngModelChange)="onChanges($event, { table: 'data', control: subRow.controlType, id: subRow.id })">
                             </ngb-timepicker>
                           </kb-label>
                         </ng-container>
@@ -115,7 +115,7 @@
                                          [placeholder]="subRow.label"
                                          [attr.data-id]="dynamicRow.id"
                                          [formControlName]="dynamicRow.key"
-                                         (change)="onChanges($event, { control: dynamicRow.controlType })">
+                                         (change)="onChanges($event, { table: 'data', control: dynamicRow.controlType })">
                                 </ng-container>
 
                                 <!-- Form Dynamic File -->
