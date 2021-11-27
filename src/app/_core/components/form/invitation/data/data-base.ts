@@ -9,7 +9,7 @@ export class DataBase<T> {
   controlType: string;
   type: string;
   options: { key: string; value: string }[];
-  sub: DataBase<T>[];
+  sub: any[];
 
   constructor(
     options: {
@@ -23,7 +23,7 @@ export class DataBase<T> {
       controlType?: string;
       type?: string;
       options?: { key: string; value: string }[];
-      sub?: DataBase<T>[];
+      sub?: any[];
     } = {}
   ) {
     this.value = options.value;
