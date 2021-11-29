@@ -51,7 +51,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 registerLocaleData(localeId);
 
 export function createTranslateLoader(http: HttpClient): any {
-  return new TranslateHttpLoader(http, `${environment.locales}assets/locales/`, '.json');
+  return new TranslateHttpLoader(http, `assets/locales/`, '.json');
 }
 
 export function tokenGetter(): any {
