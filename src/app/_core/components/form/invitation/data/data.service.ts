@@ -5,7 +5,7 @@ import { DataBase } from './data-base';
 import { GroupData } from './data-input';
 
 // PACKAGE
-import { assign, map, filter } from 'lodash';
+import { assign, map, filter, find } from 'lodash';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable()
@@ -49,15 +49,20 @@ export class DataService {
         const invitationFeatureData = {
           id_invitation_feature_data: data.id,
           value: this.formatValue(data.controlType, data.value),
+          is_active: data.is_active,
         };
 
         if (data.sub) {
           const dynamic: any[] = [];
           map(data.sub, (subData) => {
-            dynamic.push({
-              id_invitation_feature_data: subData.id,
-              value: this.formatValue(subData.controlType, subData.value),
+            const dynamicData = {};
+
+            map(subData, (item: any) => {
+              assign(dynamicData, { id_invitation_feature_data: item.id });
+              assign(dynamicData, { [item.key]: this.formatValue(item.controlType, item.value) });
             });
+
+            dynamic.push(this.fb.group(dynamicData));
           });
 
           assign(invitationFeatureData, {
@@ -105,7 +110,7 @@ export class DataService {
             id_theme_feature_column: themeFeature.id_theme_feature_column,
           });
 
-          if (search.length === 1) {
+          if (themeFeature.configuration.form === 'normal') {
             invitationFeatureData.push({
               formType: themeFeature.configuration.form,
               controlType: themeFeature.configuration.type,
@@ -113,24 +118,36 @@ export class DataService {
               key: 'value',
               label: themeFeature.label,
               value: search[0].value,
+              is_active: search[0].is_active,
             });
-          } else if (search.length > 1) {
+          } else {
             const sub: any[] = [];
 
-            map(search, (searchData) => {
-              sub.push({
-                formType: themeFeature.configuration.form,
-                controlType: themeFeature.configuration.type,
-                id: searchData.id_invitation_feature_data,
-                key: 'value',
-                value: searchData.value,
+            map(JSON.parse(search[0].value), (searchData) => {
+              const subDynamic: any[] = [];
+              map(Object.keys(searchData), (key) => {
+                const searchDynamic = find(themeFeature.configuration.field, {
+                  code: key,
+                });
+
+                subDynamic.push({
+                  formType: 'normal',
+                  controlType: searchDynamic.type,
+                  id: search[0].id_invitation_feature_data,
+                  key: key,
+                  value: searchData[key],
+                });
               });
+
+              sub.push(subDynamic);
             });
 
             invitationFeatureData.push({
               formType: themeFeature.configuration.form,
               controlType: 'group',
               label: themeFeature.label,
+              id: search[0].id_invitation_feature_data,
+              is_active: search[0].is_active,
               sub,
             });
           }

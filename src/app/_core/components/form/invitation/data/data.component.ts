@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { AbstractControl, FormGroup, FormArray } from '@angular/forms';
+import { Component, OnInit, Input, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
+import { AbstractControl, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { DataStore } from '@components/form/invitation/data/data.store';
 
 import { DataBase } from './data-base';
@@ -8,9 +8,11 @@ import { DataBase } from './data-base';
 import { InvitationFeatureService, InvitationFeatureDataColumnService } from '@services';
 
 // PACKAGE
+import { find } from 'lodash';
 import moment from 'moment';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
+import { map, assign } from 'lodash';
 
 const pad = (i: number): string => (i < 10 ? `0${i}` : `${i}`);
 
@@ -19,13 +21,16 @@ const pad = (i: number): string => (i < 10 ? `0${i}` : `${i}`);
   templateUrl: './data.component.html',
   styles: [
     `
+      .accordion-button {
+        background-color: var(--bs-green-50);
+      }
       .accordion-button:focus {
         box-shadow: unset;
       }
 
       .accordion-button:not(.collapsed) {
         color: var(--bs-green-700);
-        background-color: transparent;
+        background-color: var(--bs-green-50);
         box-shadow: unset;
       }
     `,
@@ -82,13 +87,18 @@ export class FormInvitationDataComponent implements OnInit {
     return this.tempIsAddMode;
   }
 
+  @Output() emitDynamicColumnAdd = new EventEmitter<any>();
+  @Output() emitDynamicColumnDelete = new EventEmitter<any>();
+
   readonly vm$ = this.dataStore.vm$;
 
   constructor(
+    private cdRef: ChangeDetectorRef,
     private readonly dataStore: DataStore,
     private ngbDateParserFormatter: NgbDateParserFormatter,
     private featureService: InvitationFeatureService,
-    private dataService: InvitationFeatureDataColumnService
+    private dataService: InvitationFeatureDataColumnService,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {}
@@ -118,59 +128,106 @@ export class FormInvitationDataComponent implements OnInit {
     return form.controls['dynamic'] as FormArray;
   }
 
-  onChanges(event: any, options: any) {
-    let id;
-    let value;
+  addDynamicColumn(i: number, j: number, id: string) {
+    const obj = {
+      indexFeature: i,
+      indexData: j,
+      id,
+    };
 
-    switch (options.control) {
-      case 'switch':
-        id = event.target.dataset.id;
-        value = event.target.checked;
-        // console.log(event.target.dataset.id, event.target.checked);
-        break;
-      case 'text':
-        id = event.target.dataset.id;
-        value = event.target.value;
-        // console.log(event.target.dataset.id, event.target.value);
-        break;
-      case 'file':
-        id = options.id;
-        value = event;
-        // console.log(options.id, event);
-        break;
+    this.emitDynamicColumnAdd.emit(obj);
+  }
+
+  deleteDynamicColumn(i: number, j: number, k: number) {
+    const obj = {
+      indexFeature: i,
+      indexData: j,
+      indexDynamic: k,
+    };
+
+    this.emitDynamicColumnDelete.emit(obj);
+  }
+
+  formatValue(value: any, control = '') {
+    let newValue;
+    switch (control) {
       case 'datepicker':
-        const datepicker = this.ngbDateParserFormatter.format(event);
-        id = options.id;
-        value = datepicker;
-        // console.log(options.id, datepicker);
+        const datepicker = this.ngbDateParserFormatter.format(value);
+        newValue = datepicker;
         break;
       case 'timepicker':
-        const timepicker =
-          event != null ? `${pad(event.hour)}:${pad(event.minute)}:${pad(event.second)}` : null;
-        id = options.id;
-        value = timepicker;
-        // console.log(options.id, timepicker);
+        if (value !== null) {
+          newValue = `${pad(value.hour)}:${pad(value.minute)}:${pad(value.second)}`;
+        } else {
+          newValue = null;
+        }
         break;
       default:
+        newValue = value;
         break;
     }
 
-    if (options.table === 'feature') {
-      const body = {
-        id_invitation_feature: id,
-        is_active: value,
-      };
+    return newValue;
+  }
 
-      this.featureService.updateItem(id, body).subscribe();
-    } else if (options.table === 'data') {
-      const body = {
-        id_invitation_feature_data: id,
-        value,
-      };
+  onChangesFeature(options: any) {
+    const value = options.form.controls['is_active'].value;
 
-      this.dataService.updateItem(id, body).subscribe();
-    } else {
-      return;
-    }
+    const body = {
+      id_invitation_feature: options.id,
+      is_active: value,
+    };
+
+    // console.log(body);
+    this.featureService.updateItem(options.id, body).subscribe();
+  }
+
+  onChangesIsActive(options: any) {
+    const value = options.normal.controls['is_active'].value;
+
+    const body = {
+      id_invitation_feature_data: options.id,
+      is_active: value,
+    };
+
+    // console.log(body);
+    this.dataService.updateItem(options.id, body).subscribe();
+  }
+
+  onChangesNormal(options: any) {
+    const value = options.normal.controls['value'].value;
+
+    const body = {
+      id_invitation_feature_data: options.id,
+      value: this.formatValue(value, options.control),
+    };
+
+    // console.log(body);
+    this.dataService.updateItem(options.id, body).subscribe();
+  }
+
+  onChangesDynamic(options: any) {
+    const value = options.dynamic.controls['dynamic'].value;
+
+    const newData: any[] = [];
+    map(value, (item: any) => {
+      const body = {};
+      map(Object.keys(item), (key: any) => {
+        if (key !== 'id_invitation_feature_data') {
+          const findControl = find(options.base, { key: key });
+          const control = findControl ? findControl.controlType : null;
+          assign(body, { [key]: this.formatValue(item[key], control) });
+        }
+      });
+      newData.push(body);
+    });
+
+    const body = {
+      id_invitation_feature_data: options.id,
+      value: JSON.stringify(newData),
+    };
+
+    // console.log(body);
+    this.dataService.updateItem(options.id, body).subscribe();
   }
 }

@@ -200,4 +200,38 @@ export class InvitationDataComponent implements OnInit, OnChanges, OnDestroy, Af
         this.myForm = this.dataService.toForm(this.datas as DataBase<string>[]);
       });
   }
+
+  addDynamicColumn(event: any) {
+    const data = this.datas[event.indexFeature].sub[event.indexData];
+    const newData = data.sub[0];
+    this.datas[event.indexFeature].sub[event.indexData].sub.push(newData);
+
+    const invitation_feature = this.myForm.controls['invitation_feature'] as FormArray;
+    const invitation_feature_group = invitation_feature.controls[event.indexFeature] as FormGroup;
+    const invitation_feature_data = invitation_feature_group.controls['invitation_feature_data'] as FormArray;
+    const invitation_feature_data_group = invitation_feature_data.controls[event.indexData] as FormGroup;
+    const dynamic = invitation_feature_data_group.controls['dynamic'] as FormArray;
+
+    const dynamicForm = {
+      id_invitation_feature_data: data.id,
+    };
+
+    newData.map((res: any) => {
+      assign(dynamicForm, { [res.key]: [''] });
+    });
+
+    dynamic.push(this.fb.group(dynamicForm));
+  }
+
+  deleteDynamicColumn(event: any) {
+    this.datas[event.indexFeature].sub[event.indexData].sub.splice(event.indexDynamic, 1);
+
+    const invitation_feature = this.myForm.controls['invitation_feature'] as FormArray;
+    const invitation_feature_group = invitation_feature.controls[event.indexFeature] as FormGroup;
+    const invitation_feature_data = invitation_feature_group.controls['invitation_feature_data'] as FormArray;
+    const invitation_feature_data_group = invitation_feature_data.controls[event.indexData] as FormGroup;
+    const dynamic = invitation_feature_data_group.controls['dynamic'] as FormArray;
+
+    dynamic.removeAt(event.indexDynamic);
+  }
 }

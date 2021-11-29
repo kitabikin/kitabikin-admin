@@ -33,7 +33,9 @@
           <kb-form-invitation-data [code]="row.code"
                                    [dataBase]="datas"
                                    [formGroup]="myForm"
-                                   [isAddMode]="true"></kb-form-invitation-data>
+                                   [isAddMode]="true"
+                                   (emitDynamicColumnAdd)="addDynamicColumn($event)"
+                                   (emitDynamicColumnDelete)="deleteDynamicColumn($event)"></kb-form-invitation-data>
         </form>
 
       </ng-container>
