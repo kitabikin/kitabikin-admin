@@ -4,8 +4,8 @@ services:
     build:
       context: .
       dockerfile: .docker/dev.dockerfile
-    image: rendiriz/kitabikin-admin:dev
+    image: kitabikincom/kitabikin-admin:dev
     container_name: 'kitabikin-admin-dev'
     ports:
-      - '18021:1801'
+      - '18021:80'
     restart: always
