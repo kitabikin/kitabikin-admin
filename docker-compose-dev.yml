@@ -1,0 +1,11 @@
+version: '3'
+services:
+  kitabikin-admin-dev:
+    build:
+      context: .
+      dockerfile: .docker/dev.dockerfile
+    image: rendiriz/kitabikin-admin:dev
+    container_name: 'kitabikin-admin-dev'
+    ports:
+      - '18021:1801'
+    restart: always

@@ -6,6 +6,10 @@
     "config": "node ./src/config-env.js",
     "dev": "npm run config -- && ng serve --port 1801 --proxy-config proxy.config.json",
     "build": "ng build",
+    "build:local": "npm run config --environment=localhost && ng build --configuration development --output-path=./dist/out",
+    "build:dev": "npm run config --environment=development && ng build --configuration development --output-path=./dist/out",
+    "build:main": "npm run config --environment=production && ng build --configuration production --output-path=./dist/out",
+    "build:stats": "ng build --stats-json",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
