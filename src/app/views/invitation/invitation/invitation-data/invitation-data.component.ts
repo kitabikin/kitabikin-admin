@@ -157,7 +157,7 @@ export class InvitationDataComponent implements OnInit, OnChanges, OnDestroy, Af
 
   getAllInvitationFeature(): void {
     // const pWhere: any[] = [{ ['theme_feature:is_admin']: false }];
-    const pWhere: any[] = [];
+    const pWhere: any[] = [{ id_invitation: this.id }];
 
     const params = {
       where: pWhere,
