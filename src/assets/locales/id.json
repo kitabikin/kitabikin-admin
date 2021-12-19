@@ -89,6 +89,15 @@
     "invitation": {
       "name": "Nama",
       "code": "Kode"
+    },
+    "invitation-guest-book": {
+      "name": "Nama",
+      "address": "Alamat",
+      "no-telp": "No. Telepon",
+      "confirmation": "Konfirmasi Kehadiran",
+      "send": "Kirim Undangan",
+      "qr-code": "QR Code",
+      "total": "Jumlah Reservasi"
     }
   },
   "_comment_action": "=======================================================================================",
@@ -107,6 +116,7 @@
   "csv": "CSV",
   "excel": "Excel",
   "data": "Data",
+  "guest-book": "Buku Tamu",
   "_comment_word": "=========================================================================================",
   "thumbnail": "Thumbnail",
   "email": "Email",

@@ -45,6 +45,14 @@ const routes: Routes = [
         loadChildren: () =>
           import('./invitation-data/invitation-data.module').then((m) => m.InvitationDataModule),
       },
+      {
+        path: 'guest-book/:id_invitation',
+        canActivate: [StoreInvitationDetailGuard],
+        loadChildren: () =>
+          import('./invitation-guest-book/invitation-guest-book.module').then(
+            (m) => m.InvitationGuestBookModule
+          ),
+      },
     ],
   },
 ];

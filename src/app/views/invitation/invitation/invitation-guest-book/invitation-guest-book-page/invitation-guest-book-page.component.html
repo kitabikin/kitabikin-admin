@@ -1,6 +1,7 @@
-<ngx-loading [show]="(invitationIsLoadingDelete$ | async) || false"></ngx-loading>
+<ngx-loading [show]="(invitationGuestBookIsLoadingDelete$ | async) || false"></ngx-loading>
 
-<section class="invitation__page">
+<section *ngIf="invitationData$ | async as row"
+         class="invitation__guset__book__page">
   <div class="mb-4">
     <kb-breadcrumb [data]="breadcrumb"></kb-breadcrumb>
   </div>
@@ -8,6 +9,7 @@
   <div class="d-flex mb-4">
     <div>
       <h5>{{ label }}</h5>
+      <div>{{ row.name }}</div>
     </div>
     <div class="ms-auto">
       <div class="d-flex">
@@ -18,7 +20,7 @@
             </span>
             <input class="form-control"
                    type="text"
-                   placeholder="{{ 'search' | translate }} {{ 'invitation' | translate }}"
+                   placeholder="{{ 'search' | translate }} {{ 'guest-book' | translate }}"
                    #search
                    [value]="filter.search"
                    (keyup.enter)="filterSearch(search.value)"
@@ -28,10 +30,10 @@
 
         <a role="button"
            class="btn btn-green-700"
-           [routerLink]="['/invitation/invitation/add']">
+           [routerLink]="['/invitation/invitation/guest-book/' + idInvitation + '/add']">
           <fa-icon class="me-2"
                    [icon]="faPlus"></fa-icon>
-          {{ 'add' | translate }} {{ 'invitation' | translate }}
+          {{ 'add' | translate }} {{ 'guest-book' | translate }}
         </a>
       </div>
     </div>
@@ -43,83 +45,54 @@
         <thead>
           <tr>
             <th scope="col"
-                [style.minWidth.px]="150"
-                kb-table-head
-                [column]="'code'"
-                [filter]="filter"
-                [isSortable]="true"
-                (emitFilterSort)="filterSort($event)">
-              {{ 'page.invitation.code' | translate }}
-            </th>
-            <th scope="col"
                 kb-table-head
                 [column]="'name'"
                 [filter]="filter"
                 [isSortable]="true"
                 (emitFilterSort)="filterSort($event)">
-              {{ 'page.invitation.name' | translate }} {{ 'invitation' | translate }}
+              {{ 'page.invitation-guest-book.name' | translate }}
             </th>
             <th scope="col"
                 kb-table-head
-                [column]="'user'"
+                [column]="'address'"
                 [filter]="filter"
                 [isSortable]="true"
                 (emitFilterSort)="filterSort($event)">
-              {{ 'user' | translate }}
+              {{ 'page.invitation-guest-book.address' | translate }}
             </th>
             <th scope="col"
                 kb-table-head
-                [column]="'event'"
+                [column]="'no_telp'"
+                [filter]="filter"
+                [isSortable]="true"
+                (emitFilterSort)="filterSort($event)">
+              {{ 'page.invitation-guest-book.no-telp' | translate }}
+            </th>
+            <th scope="col"
+                kb-table-head
+                [column]="'confirmation'"
                 [filter]="filter"
                 [isSortable]="true"
                 (emitFilterSort)="filterSort($event)"
                 [isFilterable]="true"
-                [filterData]="eventData"
-                (emitFilterFilter)="filterEvent($event)">
-              {{ 'event' | translate }}
+                [filterData]="confirmationData"
+                (emitFilterFilter)="filterConfirmation($event)"
+                [style.minWidth.px]="145"
+                [style.width.px]="145">
+              {{ 'page.invitation-guest-book.confirmation' | translate }}
             </th>
             <th scope="col"
                 kb-table-head
-                [column]="'event_package'"
+                [column]="'is_send'"
                 [filter]="filter"
                 [isSortable]="true"
                 (emitFilterSort)="filterSort($event)"
                 [isFilterable]="true"
-                [filterData]="eventPackageData"
-                (emitFilterFilter)="filterEventPackage($event)">
-              {{ 'event-package' | translate }}
-            </th>
-            <th scope="col"
-                kb-table-head
-                [column]="'theme_category'"
-                [filter]="filter"
-                [isSortable]="true"
-                (emitFilterSort)="filterSort($event)"
-                [isFilterable]="true"
-                [filterData]="themeCategoryData"
-                (emitFilterFilter)="filterThemeCategory($event)">
-              {{ 'theme-category' | translate }}
-            </th>
-            <th scope="col"
-                kb-table-head
-                [column]="'theme'"
-                [filter]="filter"
-                [isSortable]="true"
-                (emitFilterSort)="filterSort($event)"
-                [isFilterable]="true"
-                [filterData]="themeData"
-                (emitFilterFilter)="filterTheme($event)">
-              {{ 'theme' | translate }}
-            </th>
-            <th scope="col"
-                kb-table-head
-                [column]="'invitation_at'"
-                [filter]="filter"
-                [isSortable]="true"
-                (emitFilterSort)="filterSort($event)"
-                [style.minWidth.px]="165"
-                [style.width.px]="165">
-              {{ 'datepicker.date' | translate }} {{ 'page.invitation.name' | translate }}
+                [filterData]="statusSendData"
+                (emitFilterFilter)="filterStatusSend($event)"
+                [style.minWidth.px]="145"
+                [style.width.px]="145">
+              {{ 'page.invitation-guest-book.send' | translate }}
             </th>
             <th scope="col"
                 kb-table-head
@@ -135,14 +108,14 @@
               {{ 'status' | translate }}
             </th>
             <th scope="col"
-                [style.minWidth.px]="260"
-                [style.width.px]="260">
+                [style.minWidth.px]="240"
+                [style.width.px]="240">
               {{ 'action' | translate }}
             </th>
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngIf="invitationIsLoadingList$ | async">
+          <ng-container *ngIf="invitationGuestBookIsLoadingList$ | async">
             <tr *ngFor="let tr of [1,2,3,4,5]">
               <td *ngFor="let td of totalColumn">
                 <ngx-skeleton-loader [theme]="{
@@ -155,17 +128,24 @@
             </tr>
           </ng-container>
 
-          <ng-container *ngIf="!(invitationIsLoadingList$ | async)">
-            <ng-container *ngIf="(invitationData$ | async)!.length > 0">
-              <tr *ngFor="let row of invitationData$ | async">
-                <td>{{ row.code }}</td>
+          <ng-container *ngIf="!(invitationGuestBookIsLoadingList$ | async)">
+            <ng-container *ngIf="(invitationGuestBookData$ | async)!.length > 0">
+              <tr *ngFor="let row of invitationGuestBookData$ | async">
                 <td>{{ row.name }}</td>
-                <td>{{ row.user.profile.name }}</td>
-                <td>{{ row.event.name }}</td>
-                <td>{{ row.event_package.name }}</td>
-                <td>{{ row.theme_category.name }}</td>
-                <td>{{ row.theme.name }}</td>
-                <td>{{ row.getInvitationAt() }}</td>
+                <td>{{ row.address }}</td>
+                <td>{{ row.no_telp }}</td>
+                <td>
+                  <span class="badge badge-status rounded-pill"
+                        [ngClass]="[row.getConfirmationBadge()]">
+                    {{ row.getConfirmation() }}
+                  </span>
+                </td>
+                <td>
+                  <span class="badge badge-status rounded-pill"
+                        [ngClass]="[row.getIsSendBadge()]">
+                    {{ row.getIsSend() }}
+                  </span>
+                </td>
                 <td>
                   <span class="badge badge-status rounded-pill"
                         [ngClass]="[row.getIsActiveBadge()]">
@@ -175,28 +155,21 @@
                 <td>
                   <a role="button"
                      class="btn btn-green-700 me-2"
-                     [routerLink]="['/invitation/invitation/data', row.id_invitation]"
+                     [routerLink]="['/invitation/invitation/guest-book' + idInvitation + '/send', row.id_invitation_guest_book]"
                      [style.padding.px]="6">
-                    Data
-                  </a>
-
-                  <a role="button"
-                     class="btn btn-green-700 me-2"
-                     [routerLink]="['/invitation/invitation/guest-book', row.id_invitation]"
-                     [style.padding.px]="6">
-                    Buku Tamu
+                    {{ 'page.invitation-guest-book.send' | translate }}
                   </a>
 
                   <a role="button"
                      class="btn btn-blue-gray-50 text-blue-gray-700 me-2"
-                     [routerLink]="['/invitation/invitation/detail', row.id_invitation]"
+                     [routerLink]="['/invitation/invitation/guest-book/' + idInvitation + '/detail', row.id_invitation_guest_book]"
                      [style.padding.px]="6">
                     <fa-icon [icon]="faSearchPlus"></fa-icon>
                   </a>
 
                   <a role="button"
                      class="btn btn-blue-50 text-blue-700 me-2"
-                     [routerLink]="['/invitation/invitation/edit', row.id_invitation]"
+                     [routerLink]="['/invitation/invitation/guest-book/' + idInvitation + '/edit', row.id_invitation_guest_book]"
                      [style.padding.px]="6">
                     <fa-icon [icon]="faPen"></fa-icon>
                   </a>
@@ -208,7 +181,7 @@
                         [showCancelButton]="true"
                         confirmButtonColor="#d32f2f"
                         cancelButtonText="Batal"
-                        (confirm)="onDelete(row.id_invitation)">
+                        (confirm)="onDelete(row.id_invitation_guest_book)">
                   </swal>
 
                   <button [swal]="deleteSwal"
@@ -222,7 +195,7 @@
             </ng-container>
           </ng-container>
 
-          <ng-container *ngIf="(invitationData$ | async)?.length === 0 && checkFilter">
+          <ng-container *ngIf="(invitationGuestBookData$ | async)?.length === 0 && checkFilter">
             <tr>
               <td class="text-center"
                   [attr.colspan]="totalColumn.length">
@@ -231,7 +204,7 @@
             </tr>
           </ng-container>
 
-          <ng-container *ngIf="(invitationData$ | async)?.length === 0 && !checkFilter">
+          <ng-container *ngIf="(invitationGuestBookData$ | async)?.length === 0 && !checkFilter">
             <tr>
               <td class="text-center"
                   [attr.colspan]="totalColumn.length">
@@ -244,8 +217,8 @@
     </div>
 
     <kb-pagination [perPageItems]="perPageItems"
-                   [isLoading]="(invitationIsLoadingList$ | async) || false"
-                   [pagination]="invitationPagination$ | async"
+                   [isLoading]="(invitationGuestBookIsLoadingList$ | async) || false"
+                   [pagination]="invitationGuestBookPagination$ | async"
                    [filterPerPage]="filter.perPage"
                    [filterPage]="filter.currentPage"
                    (filterPagination)="filterPagination($event)"></kb-pagination>

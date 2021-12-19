@@ -529,9 +529,9 @@ export class InvitationPageComponent implements OnInit, OnChanges, OnDestroy, Af
       });
 
     this.actions$
-      .pipe(ofType(fromThemeActions.deleteThemeFailure), takeUntil(this.unsubscribeInvitation$))
+      .pipe(ofType(fromInvitationActions.deleteInvitationFailure), takeUntil(this.unsubscribeInvitation$))
       .subscribe((result) => {
-        this.toastr.error(result.error.message, 'Theme');
+        this.toastr.error(result.error.message, 'Invitation');
       });
   }
 }

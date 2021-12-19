@@ -36,6 +36,9 @@ import { InvitationEffects } from '@store/invitation/invitation.effects';
 import { InvitationFeatureReducer } from '@store/invitation-feature/invitation-feature.reducers';
 import { InvitationFeatureEffects } from '@store/invitation-feature/invitation-feature.effects';
 
+import { InvitationGuestBookReducer } from '@store/invitation-guest-book/invitation-guest-book.reducers';
+import { InvitationGuestBookEffects } from '@store/invitation-guest-book/invitation-guest-book.effects';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -51,6 +54,7 @@ import { InvitationFeatureEffects } from '@store/invitation-feature/invitation-f
         themeFeature: ThemeFeatureReducer,
         invitation: InvitationReducer,
         invitationFeature: InvitationFeatureReducer,
+        invitationGuestBook: InvitationGuestBookReducer,
       },
       {
         metaReducers: [handleUndo],
@@ -67,6 +71,7 @@ import { InvitationFeatureEffects } from '@store/invitation-feature/invitation-f
       ThemeFeatureEffects,
       InvitationEffects,
       InvitationFeatureEffects,
+      InvitationGuestBookEffects,
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

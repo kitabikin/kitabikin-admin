@@ -52,6 +52,7 @@ import { FormThemeAddEditComponent } from '@components/form/theme/add-edit/add-e
 import { FormThemeFeatureAddEditComponent } from '@components/form/theme-feature/add-edit/add-edit.component';
 import { FormInvitationAddEditComponent } from '@components/form/invitation/add-edit/add-edit.component';
 import { FormInvitationDataComponent } from '@components/form/invitation/data/data.component';
+import { FormGuestBookAddEditComponent } from '@components/form/guest-book/add-edit/add-edit.component';
 
 @NgModule({
   imports: [
@@ -117,6 +118,7 @@ import { FormInvitationDataComponent } from '@components/form/invitation/data/da
     FormThemeFeatureAddEditComponent,
     FormInvitationAddEditComponent,
     FormInvitationDataComponent,
+    FormGuestBookAddEditComponent,
   ],
   exports: [
     RouterModule,
@@ -166,6 +168,7 @@ import { FormInvitationDataComponent } from '@components/form/invitation/data/da
     FormThemeFeatureAddEditComponent,
     FormInvitationAddEditComponent,
     FormInvitationDataComponent,
+    FormGuestBookAddEditComponent,
   ],
   providers: [],
   schemas: [],
