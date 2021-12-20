@@ -110,7 +110,7 @@ export class InvitationGuestBookData implements Deserializable {
     let name = '';
     let badge = '';
 
-    if (this.is_send) {
+    if (this.is_checkin) {
       name = 'Hadir';
       badge = 'bg-green-100 text-green-900';
     } else {
