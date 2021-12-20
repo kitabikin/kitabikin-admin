@@ -113,6 +113,8 @@ export class InvitationGuestBookEditComponent implements OnInit, OnChanges, OnDe
       name: [null, [Validators.required, Validators.maxLength(240)]],
       address: [null, [Validators.required]],
       no_telp: [null, [Validators.required]],
+      confirmation: [null, [Validators.required]],
+      total_reservation: [null],
       is_active: [true, [Validators.required]],
     });
 
@@ -148,6 +150,8 @@ export class InvitationGuestBookEditComponent implements OnInit, OnChanges, OnDe
       name: data?.name,
       address: data?.address,
       no_telp: data?.no_telp,
+      confirmation: data?.confirmation,
+      total_reservation: data?.total_reservation,
       is_active: data?.is_active,
     });
   }

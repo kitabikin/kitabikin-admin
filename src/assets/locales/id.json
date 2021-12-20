@@ -96,6 +96,7 @@
       "no-telp": "No. Telepon",
       "confirmation": "Konfirmasi Kehadiran",
       "send": "Kirim Undangan",
+      "checkin": "Kehadiran",
       "qr-code": "QR Code",
       "total": "Jumlah Reservasi"
     }

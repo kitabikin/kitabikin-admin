@@ -37,6 +37,7 @@ export class InvitationGuestBookData implements Deserializable {
   confirmation!: string;
   total_reservation!: number;
   is_send!: boolean;
+  is_checkin!: boolean;
   is_active!: boolean;
   is_delete!: boolean;
   created_id!: string;
@@ -59,7 +60,7 @@ export class InvitationGuestBookData implements Deserializable {
       badge = 'bg-green-100 text-green-900';
     } else if (this.confirmation === 'no') {
       name = 'Tidak Hadir';
-      badge = 'bg-red-100 text-green-900';
+      badge = 'bg-red-100 text-red-900';
     } else {
       name = 'Belum';
       badge = 'bg-gray-200 text-gray-600';
@@ -103,6 +104,32 @@ export class InvitationGuestBookData implements Deserializable {
 
   getIsSendBadge(): string {
     return this.detailIsSend().badge;
+  }
+
+  detailIsCheckin(): any {
+    let name = '';
+    let badge = '';
+
+    if (this.is_send) {
+      name = 'Hadir';
+      badge = 'bg-green-100 text-green-900';
+    } else {
+      name = 'Tidak Hadir';
+      badge = 'bg-red-100 text-red-900';
+    }
+
+    return {
+      name,
+      badge,
+    };
+  }
+
+  getIsCheckin(): string {
+    return this.detailIsCheckin().name;
+  }
+
+  getIsCheckinBadge(): string {
+    return this.detailIsCheckin().badge;
   }
 
   detailIsActive(): any {

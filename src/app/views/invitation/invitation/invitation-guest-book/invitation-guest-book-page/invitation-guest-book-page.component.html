@@ -83,6 +83,19 @@
             </th>
             <th scope="col"
                 kb-table-head
+                [column]="'is_checkin'"
+                [filter]="filter"
+                [isSortable]="true"
+                (emitFilterSort)="filterSort($event)"
+                [isFilterable]="true"
+                [filterData]="statusCheckinData"
+                (emitFilterFilter)="filterStatusCheckin($event)"
+                [style.minWidth.px]="145"
+                [style.width.px]="145">
+              {{ 'page.invitation-guest-book.checkin' | translate }}
+            </th>
+            <th scope="col"
+                kb-table-head
                 [column]="'is_send'"
                 [filter]="filter"
                 [isSortable]="true"
@@ -142,6 +155,12 @@
                 </td>
                 <td>
                   <span class="badge badge-status rounded-pill"
+                        [ngClass]="[row.getIsCheckinBadge()]">
+                    {{ row.getIsCheckin() }}
+                  </span>
+                </td>
+                <td>
+                  <span class="badge badge-status rounded-pill"
                         [ngClass]="[row.getIsSendBadge()]">
                     {{ row.getIsSend() }}
                   </span>
@@ -153,7 +172,8 @@
                   </span>
                 </td>
                 <td>
-                  <a role="button"
+                  <a *ngIf="row.no_telp !== null"
+                     role="button"
                      class="btn btn-green-700 me-2"
                      [routerLink]="['/invitation/invitation/guest-book' + idInvitation + '/send', row.id_invitation_guest_book]"
                      [style.padding.px]="6">
@@ -167,7 +187,8 @@
                     <fa-icon [icon]="faSearchPlus"></fa-icon>
                   </a>
 
-                  <a role="button"
+                  <a *ngIf="row.no_telp !== null"
+                     role="button"
                      class="btn btn-blue-50 text-blue-700 me-2"
                      [routerLink]="['/invitation/invitation/guest-book/' + idInvitation + '/edit', row.id_invitation_guest_book]"
                      [style.padding.px]="6">
@@ -184,7 +205,8 @@
                         (confirm)="onDelete(row.id_invitation_guest_book)">
                   </swal>
 
-                  <button [swal]="deleteSwal"
+                  <button *ngIf="row.no_telp !== null"
+                          [swal]="deleteSwal"
                           type="button"
                           class="btn btn-red-50 text-red-700"
                           [style.padding.px]="6">

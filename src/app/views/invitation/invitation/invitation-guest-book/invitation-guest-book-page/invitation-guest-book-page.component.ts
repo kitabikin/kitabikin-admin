@@ -66,7 +66,7 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
     { label: 'Undangan ', link: '/invitation/invitation' },
     { label: 'Buku Tamu ', link: '/invitation/invitation/guest-book/id' },
   ];
-  totalColumn = new Array(7);
+  totalColumn = new Array(8);
 
   // Variable
   idInvitation!: string;
@@ -85,6 +85,7 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
     search: '',
     confirmation: [],
     status_is_send: [],
+    status_is_checkin: [],
     status_is_active: [],
   };
 
@@ -108,6 +109,10 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
   statusSendData = [
     { value: true, label: 'Sudah', checked: false },
     { value: false, label: 'Belum', checked: false },
+  ];
+  statusCheckinData = [
+    { value: true, label: 'Hadir', checked: false },
+    { value: false, label: 'Tidak Hadir', checked: false },
   ];
   statusActiveData = [
     { value: true, label: 'Aktif', checked: false },
@@ -201,6 +206,12 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
     if (this.filter.status_is_send) {
       pWhere.push({
         is_send: this.filter.status_is_send,
+      });
+    }
+
+    if (this.filter.status_is_checkin) {
+      pWhere.push({
+        is_checkin: this.filter.status_is_checkin,
       });
     }
 
@@ -301,6 +312,12 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
 
   filterStatusSend(event: any): void {
     this.filter.status_is_send = event;
+    this.filter.currentPage = 1;
+    this.getAllInvitationGuestBook();
+  }
+
+  filterStatusCheckin(event: any): void {
+    this.filter.status_is_checkin = event;
     this.filter.currentPage = 1;
     this.getAllInvitationGuestBook();
   }
