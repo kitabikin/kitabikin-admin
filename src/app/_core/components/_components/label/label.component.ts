@@ -22,6 +22,9 @@ export class LabelComponent {
   @Input() set invalidText(value: string | null) {
     this.labelStore.setInvalidText(value);
   }
+  @Input() set isLabel(value: boolean) {
+    this.labelStore.setIsLabel(value);
+  }
 
   readonly vm$ = this.labelStore.vm$;
 

@@ -4,6 +4,14 @@
   "dashboard": "Dashboard",
   "general": "Pengaturan Umum",
   "application": "Aplikasi",
+  "role": "Peran",
+  "user": "Pengguna",
+  "invitation": "Undangan",
+  "event": "Acara",
+  "event-package": "Paket Acara",
+  "theme-category": "Kategori Tema",
+  "theme": "Tema",
+  "theme-feature": "Fitur Tema",
   "logout": "Keluar",
   "seo": {
     "dashboard-page": {
@@ -28,6 +36,69 @@
     "application": {
       "name": "Aplikasi",
       "code": "Kode"
+    },
+    "role": {
+      "name": "Peran",
+      "code": "Kode"
+    },
+    "user": {
+      "name": "Nama",
+      "username": "Username",
+      "password": "Password",
+      "referral_code": "Kode Referral",
+      "signup_with": "Daftar Dengan",
+      "email_activation": "Aktifasi Email"
+    },
+    "event": {
+      "name": "Acara",
+      "code": "Kode"
+    },
+    "event-package": {
+      "name": "Paket Acara",
+      "code": "Kode",
+      "price": "Harga",
+      "price-previous": "Harga Sebelumnya",
+      "discount": "Diskon",
+      "discount-type": "Tipe Diskon",
+      "recommendation": "Rekomendasi"
+    },
+    "theme-category": {
+      "name": "Kategori Tema",
+      "code": "Kode"
+    },
+    "theme": {
+      "name": "Tema",
+      "code": "Kode"
+    },
+    "theme-feature": {
+      "name": "Fitur Tema",
+      "code": "Kode",
+      "order": "Urutan",
+      "new": "Fitur Baru",
+      "mapping": "Mapping Paket Acara",
+      "column": {
+        "name": "Kolom",
+        "code": "Kode",
+        "label": "Label",
+        "label-helper": "Label Bantuan",
+        "default-value": "Default Value",
+        "configuration": "Konfigurasi",
+        "order": "Urutan"
+      }
+    },
+    "invitation": {
+      "name": "Nama",
+      "code": "Kode"
+    },
+    "invitation-guest-book": {
+      "name": "Nama",
+      "address": "Alamat",
+      "no-telp": "No. Telepon",
+      "confirmation": "Konfirmasi Kehadiran",
+      "send": "Kirim Undangan",
+      "checkin": "Kehadiran",
+      "qr-code": "QR Code",
+      "total": "Jumlah Reservasi"
     }
   },
   "_comment_action": "=======================================================================================",
@@ -45,10 +116,15 @@
   "file": "File",
   "csv": "CSV",
   "excel": "Excel",
+  "data": "Data",
+  "guest-book": "Buku Tamu",
   "_comment_word": "=========================================================================================",
+  "thumbnail": "Thumbnail",
+  "email": "Email",
   "more-information": "Informasi Lainnya",
   "description": "Deskripsi",
   "status": "Status",
+  "admin": "Admin",
   "created-id": "Dibuat Oleh",
   "created-at": "Dibuat Tanggal",
   "modified-id": "Diubah Oleh",

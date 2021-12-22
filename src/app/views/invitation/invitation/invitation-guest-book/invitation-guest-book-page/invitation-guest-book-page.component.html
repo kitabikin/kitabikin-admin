@@ -1,0 +1,248 @@
+<ngx-loading [show]="(invitationGuestBookIsLoadingDelete$ | async) || false"></ngx-loading>
+
+<section *ngIf="invitationData$ | async as row"
+         class="invitation__guset__book__page">
+  <div class="mb-4">
+    <kb-breadcrumb [data]="breadcrumb"></kb-breadcrumb>
+  </div>
+
+  <div class="d-flex mb-4">
+    <div>
+      <h5>{{ label }}</h5>
+      <div>{{ row.name }}</div>
+    </div>
+    <div class="ms-auto">
+      <div class="d-flex">
+        <div class="me-3">
+          <div class="input-group input-search left">
+            <span class="input-group-text">
+              <i class="fas fa-search"></i>
+            </span>
+            <input class="form-control"
+                   type="text"
+                   placeholder="{{ 'search' | translate }} {{ 'guest-book' | translate }}"
+                   #search
+                   [value]="filter.search"
+                   (keyup.enter)="filterSearch(search.value)"
+                   [style.width.px]="232" />
+          </div>
+        </div>
+
+        <a role="button"
+           class="btn btn-green-700"
+           [routerLink]="['/invitation/invitation/guest-book/' + idInvitation + '/add']">
+          <fa-icon class="me-2"
+                   [icon]="faPlus"></fa-icon>
+          {{ 'add' | translate }} {{ 'guest-book' | translate }}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-paging mb-5">
+    <div class="table-responsive table-custom">
+      <table class="table table-striped table-green">
+        <thead>
+          <tr>
+            <th scope="col"
+                kb-table-head
+                [column]="'name'"
+                [filter]="filter"
+                [isSortable]="true"
+                (emitFilterSort)="filterSort($event)">
+              {{ 'page.invitation-guest-book.name' | translate }}
+            </th>
+            <th scope="col"
+                kb-table-head
+                [column]="'address'"
+                [filter]="filter"
+                [isSortable]="true"
+                (emitFilterSort)="filterSort($event)">
+              {{ 'page.invitation-guest-book.address' | translate }}
+            </th>
+            <th scope="col"
+                kb-table-head
+                [column]="'no_telp'"
+                [filter]="filter"
+                [isSortable]="true"
+                (emitFilterSort)="filterSort($event)">
+              {{ 'page.invitation-guest-book.no-telp' | translate }}
+            </th>
+            <th scope="col"
+                kb-table-head
+                [column]="'confirmation'"
+                [filter]="filter"
+                [isSortable]="true"
+                (emitFilterSort)="filterSort($event)"
+                [isFilterable]="true"
+                [filterData]="confirmationData"
+                (emitFilterFilter)="filterConfirmation($event)"
+                [style.minWidth.px]="145"
+                [style.width.px]="145">
+              {{ 'page.invitation-guest-book.confirmation' | translate }}
+            </th>
+            <th scope="col"
+                kb-table-head
+                [column]="'is_checkin'"
+                [filter]="filter"
+                [isSortable]="true"
+                (emitFilterSort)="filterSort($event)"
+                [isFilterable]="true"
+                [filterData]="statusCheckinData"
+                (emitFilterFilter)="filterStatusCheckin($event)"
+                [style.minWidth.px]="145"
+                [style.width.px]="145">
+              {{ 'page.invitation-guest-book.checkin' | translate }}
+            </th>
+            <th scope="col"
+                kb-table-head
+                [column]="'is_send'"
+                [filter]="filter"
+                [isSortable]="true"
+                (emitFilterSort)="filterSort($event)"
+                [isFilterable]="true"
+                [filterData]="statusSendData"
+                (emitFilterFilter)="filterStatusSend($event)"
+                [style.minWidth.px]="145"
+                [style.width.px]="145">
+              {{ 'page.invitation-guest-book.send' | translate }}
+            </th>
+            <th scope="col"
+                kb-table-head
+                [column]="'is_active'"
+                [filter]="filter"
+                [isSortable]="true"
+                (emitFilterSort)="filterSort($event)"
+                [isFilterable]="true"
+                [filterData]="statusActiveData"
+                (emitFilterFilter)="filterStatusActive($event)"
+                [style.minWidth.px]="145"
+                [style.width.px]="145">
+              {{ 'status' | translate }}
+            </th>
+            <th scope="col"
+                [style.minWidth.px]="240"
+                [style.width.px]="240">
+              {{ 'action' | translate }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngIf="invitationGuestBookIsLoadingList$ | async">
+            <tr *ngFor="let tr of [1,2,3,4,5]">
+              <td *ngFor="let td of totalColumn">
+                <ngx-skeleton-loader [theme]="{
+                  'height.px': 20,
+                  'margin-top.px': 5,
+                  'margin-bottom.px': 0,
+                  'background-color': '#E3E7ED'
+                }"></ngx-skeleton-loader>
+              </td>
+            </tr>
+          </ng-container>
+
+          <ng-container *ngIf="!(invitationGuestBookIsLoadingList$ | async)">
+            <ng-container *ngIf="(invitationGuestBookData$ | async)!.length > 0">
+              <tr *ngFor="let row of invitationGuestBookData$ | async">
+                <td>{{ row.name }}</td>
+                <td>{{ row.address }}</td>
+                <td>{{ row.no_telp }}</td>
+                <td>
+                  <span class="badge badge-status rounded-pill"
+                        [ngClass]="[row.getConfirmationBadge()]">
+                    {{ row.getConfirmation() }}
+                  </span>
+                </td>
+                <td>
+                  <span class="badge badge-status rounded-pill"
+                        [ngClass]="[row.getIsCheckinBadge()]">
+                    {{ row.getIsCheckin() }}
+                  </span>
+                </td>
+                <td>
+                  <span class="badge badge-status rounded-pill"
+                        [ngClass]="[row.getIsSendBadge()]">
+                    {{ row.getIsSend() }}
+                  </span>
+                </td>
+                <td>
+                  <span class="badge badge-status rounded-pill"
+                        [ngClass]="[row.getIsActiveBadge()]">
+                    {{ row.getIsActive() }}
+                  </span>
+                </td>
+                <td>
+                  <a *ngIf="row.no_telp !== null"
+                     role="button"
+                     class="btn btn-green-700 me-2"
+                     [routerLink]="['/invitation/invitation/guest-book' + idInvitation + '/send', row.id_invitation_guest_book]"
+                     [style.padding.px]="6">
+                    {{ 'page.invitation-guest-book.send' | translate }}
+                  </a>
+
+                  <a role="button"
+                     class="btn btn-blue-gray-50 text-blue-gray-700 me-2"
+                     [routerLink]="['/invitation/invitation/guest-book/' + idInvitation + '/detail', row.id_invitation_guest_book]"
+                     [style.padding.px]="6">
+                    <fa-icon [icon]="faSearchPlus"></fa-icon>
+                  </a>
+
+                  <a *ngIf="row.no_telp !== null"
+                     role="button"
+                     class="btn btn-blue-50 text-blue-700 me-2"
+                     [routerLink]="['/invitation/invitation/guest-book/' + idInvitation + '/edit', row.id_invitation_guest_book]"
+                     [style.padding.px]="6">
+                    <fa-icon [icon]="faPen"></fa-icon>
+                  </a>
+
+                  <swal #deleteSwal
+                        text="Apakah anda yakin akan menghapus data ini?"
+                        icon="question"
+                        [focusCancel]="true"
+                        [showCancelButton]="true"
+                        confirmButtonColor="#d32f2f"
+                        cancelButtonText="Batal"
+                        (confirm)="onDelete(row.id_invitation_guest_book)">
+                  </swal>
+
+                  <button *ngIf="row.no_telp !== null"
+                          [swal]="deleteSwal"
+                          type="button"
+                          class="btn btn-red-50 text-red-700"
+                          [style.padding.px]="6">
+                    <fa-icon [icon]="faTrash"></fa-icon>
+                  </button>
+                </td>
+              </tr>
+            </ng-container>
+          </ng-container>
+
+          <ng-container *ngIf="(invitationGuestBookData$ | async)?.length === 0 && checkFilter">
+            <tr>
+              <td class="text-center"
+                  [attr.colspan]="totalColumn.length">
+                {{ 'page.empty.search' | translate }}
+              </td>
+            </tr>
+          </ng-container>
+
+          <ng-container *ngIf="(invitationGuestBookData$ | async)?.length === 0 && !checkFilter">
+            <tr>
+              <td class="text-center"
+                  [attr.colspan]="totalColumn.length">
+                {{ 'page.empty.access' | translate }}
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+
+    <kb-pagination [perPageItems]="perPageItems"
+                   [isLoading]="(invitationGuestBookIsLoadingList$ | async) || false"
+                   [pagination]="invitationGuestBookPagination$ | async"
+                   [filterPerPage]="filter.perPage"
+                   [filterPage]="filter.currentPage"
+                   (filterPagination)="filterPagination($event)"></kb-pagination>
+  </div>
+</section>

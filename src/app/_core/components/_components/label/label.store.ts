@@ -6,6 +6,7 @@ export interface LabelState {
   required: boolean;
   invalid: boolean;
   invalidText: string | null;
+  isLabel: boolean;
 }
 
 const DEFAULT_STATE: LabelState = {
@@ -13,6 +14,7 @@ const DEFAULT_STATE: LabelState = {
   required: false,
   invalid: false,
   invalidText: null,
+  isLabel: true,
 };
 
 @Injectable()
@@ -42,11 +44,17 @@ export class LabelStore extends ComponentStore<LabelState> {
     invalidText: value || null,
   }));
 
+  readonly setIsLabel = this.updater((state, value: boolean) => ({
+    ...state,
+    isLabel: value || false,
+  }));
+
   // *********** Selectors *********** //
   readonly getHelperText$ = this.select(({ helperText }) => helperText);
   readonly getRequired$ = this.select(({ required }) => required);
   readonly getInvalid$ = this.select(({ invalid }) => invalid);
   readonly getInvalidText$ = this.select(({ invalidText }) => invalidText);
+  readonly getIsLabel$ = this.select(({ isLabel }) => isLabel);
 
   // ViewModel of Label component
   readonly vm$ = this.select(
@@ -55,15 +63,18 @@ export class LabelStore extends ComponentStore<LabelState> {
     this.getRequired$,
     this.getInvalid$,
     this.getInvalidText$,
-    (state, getHelperText, getRequired, getInvalid, getInvalidText) => ({
+    this.getIsLabel$,
+    (state, getHelperText, getRequired, getInvalid, getInvalidText, getIsLabel) => ({
       helperText: state.helperText,
       required: state.required,
       invalid: state.invalid,
       invalidText: state.invalidText,
+      isLabel: state.isLabel,
       getHelperText,
       getRequired,
       getInvalid,
       getInvalidText,
+      getIsLabel,
     })
   );
 }

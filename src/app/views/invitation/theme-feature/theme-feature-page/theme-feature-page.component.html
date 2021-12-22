@@ -1,0 +1,120 @@
+<ngx-loading [show]="(themeFeatureIsLoadingDelete$ | async) || false"></ngx-loading>
+
+<section *ngIf="themeData$ | async as row"
+         class="theme__feature__detail">
+  <div class="mb-4">
+    <kb-breadcrumb [data]="breadcrumb"></kb-breadcrumb>
+  </div>
+
+  <div class="d-flex mb-4">
+    <div>
+      <h5>{{ label }}</h5>
+    </div>
+    <div class="ms-auto">
+      <div class="d-flex">
+        <a role="button"
+           class="btn btn-green-700"
+           [routerLink]="['/invitation/theme-feature/' + idTheme + '/add']">
+          <fa-icon class="me-2"
+                   [icon]="faPlus"></fa-icon>
+          {{ 'add' | translate }} {{ 'theme-feature' | translate }}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-paging mb-5">
+    <div class="table-responsive table-custom">
+      <table class="table table-striped table-green">
+        <thead>
+          <tr>
+            <th scope="col"
+                kb-table-head>
+              {{ 'page.theme-feature.name' | translate }}
+            </th>
+            <th scope="col"
+                kb-table-head
+                [style.minWidth.px]="145"
+                [style.width.px]="145">
+              {{ 'status' | translate }}
+            </th>
+            <th scope="col"
+                [style.minWidth.px]="120"
+                [style.width.px]="120">
+              {{ 'action' | translate }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngIf="themeFeatureIsLoadingList$ | async">
+            <tr *ngFor="let tr of [1,2,3,4,5]">
+              <td *ngFor="let td of totalColumn">
+                <ngx-skeleton-loader [theme]="{
+                  'height.px': 20,
+                  'margin-top.px': 5,
+                  'margin-bottom.px': 0,
+                  'background-color': '#E3E7ED'
+                }"></ngx-skeleton-loader>
+              </td>
+            </tr>
+          </ng-container>
+
+          <ng-container *ngIf="!(themeFeatureIsLoadingList$ | async)">
+            <ng-container *ngIf="(themeFeatureData$ | async)!.length > 0">
+              <tr *ngFor="let row of themeFeatureData$ | async">
+                <td>{{ row.name }}</td>
+                <td>
+                  <span class="badge badge-status rounded-pill"
+                        [ngClass]="[row.getIsActiveBadge()]">
+                    {{ row.getIsActive() }}
+                  </span>
+                </td>
+                <td>
+                  <a role="button"
+                     class="btn btn-blue-gray-50 text-blue-gray-700 me-2"
+                     [routerLink]="['/invitation/theme-feature/' + idTheme + '/detail', row.id_theme_feature]"
+                     [style.padding.px]="6">
+                    <fa-icon [icon]="faSearchPlus"></fa-icon>
+                  </a>
+
+                  <a role="button"
+                     class="btn btn-blue-50 text-blue-700 me-2"
+                     [routerLink]="['/invitation/theme-feature/' + idTheme + '/edit', row.id_theme_feature]"
+                     [style.padding.px]="6">
+                    <fa-icon [icon]="faPen"></fa-icon>
+                  </a>
+
+                  <swal #deleteSwal
+                        text="Apakah anda yakin akan menghapus data ini?"
+                        icon="question"
+                        [focusCancel]="true"
+                        [showCancelButton]="true"
+                        confirmButtonColor="#d32f2f"
+                        cancelButtonText="Batal"
+                        (confirm)="onDelete(row.id_theme_feature)">
+                  </swal>
+
+                  <button [swal]="deleteSwal"
+                          type="button"
+                          class="btn btn-red-50 text-red-700"
+                          [style.padding.px]="6">
+                    <fa-icon [icon]="faTrash"></fa-icon>
+                  </button>
+                </td>
+              </tr>
+            </ng-container>
+          </ng-container>
+
+          <ng-container *ngIf="(themeFeatureData$ | async)?.length === 0">
+            <tr>
+              <td class="text-center"
+                  [attr.colspan]="totalColumn.length">
+                {{ 'page.empty.access' | translate }}
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

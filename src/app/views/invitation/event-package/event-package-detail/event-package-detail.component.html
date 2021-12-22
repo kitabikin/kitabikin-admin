@@ -1,0 +1,162 @@
+<section *ngIf="eventPackageData$ | async as row"
+         class="event__package__detail">
+  <div class="mb-4">
+    <kb-breadcrumb [data]="breadcrumb"></kb-breadcrumb>
+  </div>
+
+  <div class="d-flex mb-4">
+    <div>
+      <h5>{{ label }}</h5>
+    </div>
+    <div class="ms-auto">
+      <div class="d-flex">
+        <a role="button"
+           class="btn btn-green-700"
+           [routerLink]="['/invitation/event-package/edit', row.id_event_package]">
+          <fa-icon class="me-2"
+                   [icon]="faPen"></fa-icon>
+          {{ 'edit' | translate }} {{ 'event-package' | translate }}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-9">
+      <div class="card border-0 mb-5">
+        <div class="card-body p-4">
+          <h6 class="mb-4">{{ row.name }}</h6>
+
+          <kb-label class="d-block mb-3">
+            {{ 'page.event-package.code' | translate }}
+            <div kbInput>
+              {{ row.code }}
+            </div>
+          </kb-label>
+
+          <kb-label class="d-block mb-3">
+            {{ 'event' | translate }}
+            <div kbInput>
+              {{ row.event.name }}
+            </div>
+          </kb-label>
+
+          <kb-label class="d-block mb-3">
+            {{ 'description' | translate }}
+            <div kbInput>
+              {{ row.description || '-' }}
+            </div>
+          </kb-label>
+
+          <div class="text-green-700 mt-4 mb-1">
+            {{ 'page.event-package.price' | translate }}
+          </div>
+          <hr class="mt-2 mb-3" />
+
+          <kb-label class="d-block mb-3">
+            {{ 'status' | translate }} {{ 'page.event-package.price' | translate }}
+            <div kbInput>
+              <span class="badge badge-status rounded-pill"
+                    [ngClass]="[row.event_price.getIsPriceBadge()]">
+                {{ row.event_price.getIsPrice() }}
+              </span>
+            </div>
+          </kb-label>
+
+          <ng-container *ngIf="row.event_price.is_price">
+            <kb-label class="d-block mb-3">
+              {{ 'page.event-package.price-previous' | translate }}
+              <div kbInput>
+                {{ row.event_price.price | currency:'IDR' }}
+              </div>
+            </kb-label>
+          </ng-container>
+
+          <kb-label class="d-block mb-3">
+            {{ 'status' | translate }} {{ 'page.event-package.discount' | translate }}
+            <div kbInput>
+              <span class="badge badge-status rounded-pill"
+                    [ngClass]="[row.event_price.getIsDiscountBadge()]">
+                {{ row.event_price.getIsDiscount() }}
+              </span>
+            </div>
+          </kb-label>
+
+          <ng-container *ngIf="row.event_price.is_discount">
+            <kb-label class="d-block mb-3">
+              {{ 'page.event-package.discount-type' | translate }}
+              <div kbInput>
+                {{ row.event_price.getIsDiscountType() }}
+              </div>
+            </kb-label>
+
+            <kb-label class="d-block mb-3">
+              {{ 'page.event-package.discount' | translate }}
+              <div kbInput>
+                <ng-container *ngIf="row.event_price.discount_type === 'fixed'; else percentage">
+                  {{ row.event_price.discount | currency:'IDR' }}
+                </ng-container>
+                <ng-template #percentage>
+                  {{ row.event_price.discount | number }}%
+                </ng-template>
+              </div>
+            </kb-label>
+          </ng-container>
+
+          <ng-container *ngIf="row.event_price.is_price">
+            <kb-label class="d-block mb-3">
+              {{ 'page.event-package.price' | translate }}
+              <div kbInput>
+                {{ row.event_price.getIsPriceDiscount() | currency:'IDR' }}
+              </div>
+            </kb-label>
+          </ng-container>
+
+          <div class="text-green-700 mt-4 mb-1">
+            {{ 'more-information' | translate }}
+          </div>
+          <hr class="mt-2 mb-3" />
+
+          <kb-label class="d-block mb-3">
+            {{ 'page.event-package.recommendation' | translate }}
+            <div kbInput>
+              <span class="badge badge-status rounded-pill"
+                    [ngClass]="[row.getIsRecommendationBadge()]">
+                {{ row.getIsRecommendation() }}
+              </span>
+            </div>
+          </kb-label>
+
+          <kb-label class="d-block mb-3">
+            {{ 'status' | translate }}
+            <div kbInput>
+              <span class="badge badge-status rounded-pill"
+                    [ngClass]="[row.getIsActiveBadge()]">
+                {{ row.getIsActive() }}
+              </span>
+            </div>
+          </kb-label>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card border-0 mb-5">
+        <div class="card-body p-4">
+          <kb-label class="d-block mb-3">
+            {{ 'created-at' | translate }}
+            <div kbInput>
+              {{ row.getCreatedAt() }}
+            </div>
+          </kb-label>
+
+          <kb-label class="d-block mb-3">
+            {{ 'modified-at' | translate }}
+            <div kbInput>
+              {{ row.getModifiedAt() }}
+            </div>
+          </kb-label>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

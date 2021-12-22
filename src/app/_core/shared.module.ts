@@ -13,6 +13,7 @@ import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgxAbstractControlAsModule } from 'ngx-abstract-control-as';
 
 // PIPE
 import { SafeHtmlPipe, SafeUrlPipe } from '@pipes';
@@ -23,7 +24,9 @@ import {
   NgbTooltipModule,
   NgbModalModule,
   NgbDatepickerModule,
+  NgbTimepickerModule,
   NgbDropdownModule,
+  NgbAccordionModule,
 } from '@ng-bootstrap/ng-bootstrap';
 
 // COMPONENT
@@ -33,12 +36,23 @@ import { AvatarItemComponent as CompAvatarItemComponent } from '@components/_com
 import { BreadcrumbComponent as CompBreadcrumbComponent } from '@components/_components/breadcrumb/breadcrumb.component';
 // import { IconComponent as CompIconComponent } from '@components/_components/icon/icon.component';
 import { LabelComponent as CompLabelComponent } from '@components/_components/label/label.component';
-// import { FormFileUploaderComponent as CompFormFileUploaderComponent } from '@components/_components/form/file-uploader/file-uploader.component';
+import { FileUploaderComponent as CompFileUploaderComponent } from '@components/_components/file-uploader/file-uploader.component';
 import { TableHeadComponent as CompTableHeadComponent } from '@components/_components/table-head/table-head.component';
 import { PaginationComponent as CompPaginationComponent } from '@components/_components/pagination/pagination.component';
+import { DateTimePickerComponent as CompDateTimePickerComponent } from '@components/_components/datetime-picker/datetime-picker.component';
 
 import { FormAuthenticationLoginComponent } from '@components/form/authentication/login/login.component';
 import { FormApplicationAddEditComponent } from '@components/form/application/add-edit/add-edit.component';
+import { FormRoleAddEditComponent } from '@components/form/role/add-edit/add-edit.component';
+import { FormUserAddEditComponent } from '@components/form/user/add-edit/add-edit.component';
+import { FormEventAddEditComponent } from '@components/form/event/add-edit/add-edit.component';
+import { FormEventPackageAddEditComponent } from '@components/form/event-package/add-edit/add-edit.component';
+import { FormThemeCategoryAddEditComponent } from '@components/form/theme-category/add-edit/add-edit.component';
+import { FormThemeAddEditComponent } from '@components/form/theme/add-edit/add-edit.component';
+import { FormThemeFeatureAddEditComponent } from '@components/form/theme-feature/add-edit/add-edit.component';
+import { FormInvitationAddEditComponent } from '@components/form/invitation/add-edit/add-edit.component';
+import { FormInvitationDataComponent } from '@components/form/invitation/data/data.component';
+import { FormGuestBookAddEditComponent } from '@components/form/guest-book/add-edit/add-edit.component';
 
 @NgModule({
   imports: [
@@ -51,7 +65,9 @@ import { FormApplicationAddEditComponent } from '@components/form/application/ad
     NgbTooltipModule,
     NgbModalModule,
     NgbDatepickerModule,
+    NgbTimepickerModule,
     NgbDropdownModule,
+    NgbAccordionModule,
     // PACKAGE
     TranslateModule,
     LoadingBarRouterModule,
@@ -74,6 +90,7 @@ import { FormApplicationAddEditComponent } from '@components/form/application/ad
     SweetAlert2Module.forRoot(),
     // CKEditorModule,
     FontAwesomeModule,
+    NgxAbstractControlAsModule,
   ],
   declarations: [
     // PIPE
@@ -86,11 +103,22 @@ import { FormApplicationAddEditComponent } from '@components/form/application/ad
     CompBreadcrumbComponent,
     // CompIconComponent,
     CompLabelComponent,
-    // CompFormFileUploaderComponent,
+    CompFileUploaderComponent,
     CompTableHeadComponent,
     CompPaginationComponent,
+    CompDateTimePickerComponent,
     FormAuthenticationLoginComponent,
     FormApplicationAddEditComponent,
+    FormRoleAddEditComponent,
+    FormUserAddEditComponent,
+    FormEventAddEditComponent,
+    FormEventPackageAddEditComponent,
+    FormThemeCategoryAddEditComponent,
+    FormThemeAddEditComponent,
+    FormThemeFeatureAddEditComponent,
+    FormInvitationAddEditComponent,
+    FormInvitationDataComponent,
+    FormGuestBookAddEditComponent,
   ],
   exports: [
     RouterModule,
@@ -106,6 +134,7 @@ import { FormApplicationAddEditComponent } from '@components/form/application/ad
     SweetAlert2Module,
     // CKEditorModule,
     FontAwesomeModule,
+    NgxAbstractControlAsModule,
     // PIPE
     SafeHtmlPipe,
     SafeUrlPipe,
@@ -114,7 +143,9 @@ import { FormApplicationAddEditComponent } from '@components/form/application/ad
     NgbTooltipModule,
     NgbModalModule,
     NgbDatepickerModule,
+    NgbTimepickerModule,
     NgbDropdownModule,
+    NgbAccordionModule,
     // COMPONENT
     CompAvatarComponent,
     CompAvatarItemComponent,
@@ -122,11 +153,22 @@ import { FormApplicationAddEditComponent } from '@components/form/application/ad
     CompBreadcrumbComponent,
     // CompIconComponent,
     CompLabelComponent,
-    // CompFormFileUploaderComponent,
+    CompFileUploaderComponent,
     CompTableHeadComponent,
     CompPaginationComponent,
+    CompDateTimePickerComponent,
     FormAuthenticationLoginComponent,
     FormApplicationAddEditComponent,
+    FormRoleAddEditComponent,
+    FormUserAddEditComponent,
+    FormEventAddEditComponent,
+    FormEventPackageAddEditComponent,
+    FormThemeCategoryAddEditComponent,
+    FormThemeAddEditComponent,
+    FormThemeFeatureAddEditComponent,
+    FormInvitationAddEditComponent,
+    FormInvitationDataComponent,
+    FormGuestBookAddEditComponent,
   ],
   providers: [],
   schemas: [],

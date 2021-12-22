@@ -9,18 +9,70 @@ import { handleUndo } from 'ngrx-undo';
 import { ApplicationReducer } from '@store/application/application.reducers';
 import { ApplicationEffects } from '@store/application/application.effects';
 
+import { RoleReducer } from '@store/role/role.reducers';
+import { RoleEffects } from '@store/role/role.effects';
+
+import { UserReducer } from '@store/user/user.reducers';
+import { UserEffects } from '@store/user/user.effects';
+
+import { EventReducer } from '@store/event/event.reducers';
+import { EventEffects } from '@store/event/event.effects';
+
+import { EventPackageReducer } from '@store/event-package/event-package.reducers';
+import { EventPackageEffects } from '@store/event-package/event-package.effects';
+
+import { ThemeCategoryReducer } from '@store/theme-category/theme-category.reducers';
+import { ThemeCategoryEffects } from '@store/theme-category/theme-category.effects';
+
+import { ThemeReducer } from '@store/theme/theme.reducers';
+import { ThemeEffects } from '@store/theme/theme.effects';
+
+import { ThemeFeatureReducer } from '@store/theme-feature/theme-feature.reducers';
+import { ThemeFeatureEffects } from '@store/theme-feature/theme-feature.effects';
+
+import { InvitationReducer } from '@store/invitation/invitation.reducers';
+import { InvitationEffects } from '@store/invitation/invitation.effects';
+
+import { InvitationFeatureReducer } from '@store/invitation-feature/invitation-feature.reducers';
+import { InvitationFeatureEffects } from '@store/invitation-feature/invitation-feature.effects';
+
+import { InvitationGuestBookReducer } from '@store/invitation-guest-book/invitation-guest-book.reducers';
+import { InvitationGuestBookEffects } from '@store/invitation-guest-book/invitation-guest-book.effects';
+
 @NgModule({
   imports: [
     CommonModule,
     StoreModule.forRoot(
       {
         application: ApplicationReducer,
+        role: RoleReducer,
+        user: UserReducer,
+        event: EventReducer,
+        eventPackage: EventPackageReducer,
+        themeCategory: ThemeCategoryReducer,
+        theme: ThemeReducer,
+        themeFeature: ThemeFeatureReducer,
+        invitation: InvitationReducer,
+        invitationFeature: InvitationFeatureReducer,
+        invitationGuestBook: InvitationGuestBookReducer,
       },
       {
         metaReducers: [handleUndo],
       }
     ),
-    EffectsModule.forRoot([ApplicationEffects]),
+    EffectsModule.forRoot([
+      ApplicationEffects,
+      RoleEffects,
+      UserEffects,
+      EventEffects,
+      EventPackageEffects,
+      ThemeCategoryEffects,
+      ThemeEffects,
+      ThemeFeatureEffects,
+      InvitationEffects,
+      InvitationFeatureEffects,
+      InvitationGuestBookEffects,
+    ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

@@ -7,7 +7,7 @@ export class FunctionService {
       if (value.indexOf('http://') === 0 || value.indexOf('https://') === 0) {
         return value;
       } else {
-        return `api-backend/${value}`;
+        return `assets/images/${value}`;
       }
     } else {
       return 'assets/images/thumbnail.svg';
