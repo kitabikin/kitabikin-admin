@@ -32,6 +32,8 @@ export class InvitationGuestBookData implements Deserializable {
   name!: string;
   address!: string;
   no_telp!: string;
+  type!: string;
+  from!: string;
   qr_code!: string;
   qr_code_url!: string;
   confirmation!: string;
@@ -44,6 +46,7 @@ export class InvitationGuestBookData implements Deserializable {
   created_at!: Date;
   modified_id!: string;
   modified_at!: Date;
+  checkin_at!: Date;
 
   deserialize(input: any): this {
     Object.assign(this, input);
@@ -78,6 +81,24 @@ export class InvitationGuestBookData implements Deserializable {
 
   getConfirmationBadge(): string {
     return this.detailConfirmation().badge;
+  }
+
+  detailType(): any {
+    let name = '';
+
+    if (this.type === 'biasa') {
+      name = 'Biasa';
+    } else {
+      name = 'VIP';
+    }
+
+    return {
+      name,
+    };
+  }
+
+  getType(): string {
+    return this.detailType().name;
   }
 
   detailIsSend(): any {
@@ -164,5 +185,9 @@ export class InvitationGuestBookData implements Deserializable {
 
   getModifiedAt(): string {
     return moment(this.modified_at).locale('id').format('DD MMMM YYYY HH:mm');
+  }
+
+  getCheckInAt(): string {
+    return moment(this.checkin_at).locale('id').format('DD MMMM YYYY HH:mm');
   }
 }

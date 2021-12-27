@@ -42,6 +42,13 @@
           </kb-label>
 
           <kb-label class="d-block mb-3">
+            {{ 'page.invitation-guest-book.type' | translate }}
+            <div kbInput>
+              {{ row.getType() }}
+            </div>
+          </kb-label>
+
+          <kb-label class="d-block mb-3">
             {{ 'page.invitation-guest-book.qr-code' | translate }}
             <div kbInput>
               <img class="img-thumbnail form"
@@ -49,33 +56,6 @@
                    loading="lazy"
                    [style.width.px]="250"
                    [style.height.px]="250" />
-            </div>
-          </kb-label>
-
-          <kb-label class="d-block mb-3">
-            {{ 'page.invitation-guest-book.confirmation' | translate }}
-            <div kbInput>
-              <span class="badge badge-status rounded-pill"
-                    [ngClass]="[row.getConfirmationBadge()]">
-                {{ row.getConfirmation() }}
-              </span>
-            </div>
-          </kb-label>
-
-          <kb-label class="d-block mb-3">
-            {{ 'page.invitation-guest-book.checkin' | translate }}
-            <div kbInput>
-              <span class="badge badge-status rounded-pill"
-                    [ngClass]="[row.getIsCheckinBadge()]">
-                {{ row.getIsCheckin() }}
-              </span>
-            </div>
-          </kb-label>
-
-          <kb-label class="d-block mb-3">
-            {{ 'page.invitation-guest-book.total' | translate }}
-            <div kbInput>
-              {{ row.total_reservation || 'Belum Konfirmasi Kehadiran' }}
             </div>
           </kb-label>
 

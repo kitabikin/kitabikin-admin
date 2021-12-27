@@ -38,27 +38,16 @@
 
     <kb-label class="d-block mb-3"
               [required]="true"
-              [invalid]="getFormValidation(vm.formGroup?.controls?.['confirmation']).invalid"
-              [invalidText]="getFormValidation(vm.formGroup?.controls?.['confirmation']).text">
-      {{ 'page.invitation-guest-book.confirmation' | translate }}
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['type']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['type']).text">
+      {{ 'page.invitation-guest-book.type' | translate }}
       <ng-select kbInput
-                 [items]="[{value: 'notyet', label: 'Belum'}, {value: 'yes', label: 'Hadir'}, {value: 'no', label: 'Tidak Hadir'}]"
+                 [items]="[{value: 'biasa', label: 'Biasa'}, {value: 'vip', label: 'VIP'}]"
                  bindValue="value"
                  bindLabel="label"
-                 [placeholder]="'page.invitation-guest-book.confirmation' | translate"
-                 formControlName="confirmation">
+                 [placeholder]="'page.invitation-guest-book.type' | translate"
+                 formControlName="type">
       </ng-select>
-    </kb-label>
-
-    <kb-label class="d-block mb-3"
-              [invalid]="getFormValidation(vm.formGroup?.controls?.['total_reservation']).invalid"
-              [invalidText]="getFormValidation(vm.formGroup?.controls?.['total_reservation']).text">
-      {{ 'page.invitation-guest-book.total' | translate }}
-      <input kbInput
-             type="number"
-             class="form-control"
-             [placeholder]="'page.invitation-guest-book.total' | translate"
-             formControlName="total_reservation">
     </kb-label>
 
     <div class="text-green-700 mt-4 mb-1">

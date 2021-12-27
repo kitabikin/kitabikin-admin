@@ -28,6 +28,5 @@ writeFile(targetPath, environmentFileContent, (err) => {
   if (err) {
     console.log(err);
   }
-  console.log(`${process.env.ENVIRONMENT}=${process.env.LOCALES}`);
   console.log(`Wrote variables to ${targetPath}`);
 });

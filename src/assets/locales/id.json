@@ -95,10 +95,14 @@
       "address": "Alamat",
       "no-telp": "No. Telepon",
       "confirmation": "Konfirmasi Kehadiran",
+      "confirmation-date": "Tanggal Konfirmasi",
+      "check-in": "Check-In",
+      "check-in-date": "Tanggal Check-In",
       "send": "Kirim Undangan",
       "checkin": "Kehadiran",
       "qr-code": "QR Code",
-      "total": "Jumlah Reservasi"
+      "total": "Jumlah Reservasi",
+      "type": "Jenis Tamu"
     }
   },
   "_comment_action": "=======================================================================================",
@@ -118,6 +122,8 @@
   "excel": "Excel",
   "data": "Data",
   "guest-book": "Buku Tamu",
+  "confirmation": "Konfirmasi Kehadiran",
+  "check-in": "Check-In",
   "_comment_word": "=========================================================================================",
   "thumbnail": "Thumbnail",
   "email": "Email",

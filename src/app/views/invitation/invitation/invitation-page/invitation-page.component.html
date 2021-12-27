@@ -135,8 +135,8 @@
               {{ 'status' | translate }}
             </th>
             <th scope="col"
-                [style.minWidth.px]="260"
-                [style.width.px]="260">
+                [style.minWidth.px]="180"
+                [style.width.px]="180">
               {{ 'action' | translate }}
             </th>
           </tr>
@@ -172,20 +172,35 @@
                     {{ row.getIsActive() }}
                   </span>
                 </td>
-                <td>
-                  <a role="button"
-                     class="btn btn-green-700 me-2"
-                     [routerLink]="['/invitation/invitation/data', row.id_invitation]"
-                     [style.padding.px]="6">
-                    Data
-                  </a>
-
-                  <a role="button"
-                     class="btn btn-green-700 me-2"
-                     [routerLink]="['/invitation/invitation/guest-book', row.id_invitation]"
-                     [style.padding.px]="6">
-                    Buku Tamu
-                  </a>
+                <td class="d-flex overflow-hidden">
+                  <div ngbDropdown
+                       container="body">
+                    <button [style.padding.px]="6"
+                            class="btn btn-green-700 me-2"
+                            ngbDropdownToggle>Kelola</button>
+                    <div ngbDropdownMenu>
+                      <a role="button"
+                         [routerLink]="['/invitation/invitation/data', row.id_invitation]"
+                         ngbDropdownItem>
+                        Data
+                      </a>
+                      <a role="button"
+                         [routerLink]="['/invitation/invitation/guest-book', row.id_invitation]"
+                         ngbDropdownItem>
+                        Buku Tamu
+                      </a>
+                      <a role="button"
+                         [routerLink]="['/invitation/invitation/confirmation-attendance', row.id_invitation]"
+                         ngbDropdownItem>
+                        Konfirmasi Kehadiran
+                      </a>
+                      <a role="button"
+                         [routerLink]="['/invitation/invitation/check-in', row.id_invitation]"
+                         ngbDropdownItem>
+                        Check-In
+                      </a>
+                    </div>
+                  </div>
 
                   <a role="button"
                      class="btn btn-blue-gray-50 text-blue-gray-700 me-2"

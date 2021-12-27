@@ -107,7 +107,9 @@ export class InvitationGuestBookAddComponent implements OnInit, OnChanges, OnDes
       name: [null, [Validators.required, Validators.maxLength(240)]],
       address: [null, [Validators.required]],
       no_telp: [null, [Validators.required]],
-      confirmation: [null, [Validators.required]],
+      type: [null, [Validators.required]],
+      from: ['admin'],
+      confirmation: ['notyet'],
       total_reservation: [null],
       is_active: [true, [Validators.required]],
     });

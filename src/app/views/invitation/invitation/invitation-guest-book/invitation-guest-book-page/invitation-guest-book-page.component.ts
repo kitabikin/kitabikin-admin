@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { Observable, Subject } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { takeUntil, filter, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
@@ -19,6 +19,7 @@ import { Pagination, InvitationData, InvitationGuestBookData } from '@models';
 
 // SERVICE
 import { GlobalService } from '@services/private';
+import { WhatsappService, InvitationService } from '@services';
 
 // STORE
 import { selectInvitation } from '@store/invitation/invitation.selectors';
@@ -26,6 +27,7 @@ import { selectInvitation } from '@store/invitation/invitation.selectors';
 import {
   selectAllInvitationGuestBook,
   selectIsLoadingList as selectIsLoadingListInvitationGuestBook,
+  selectIsLoadingUpdate as selectIsLoadingUpdateInvitationGuestBook,
   selectIsLoadingDelete as selectIsLoadingDeleteInvitationGuestBook,
   selectError as selectErrorInvitationGuestBook,
   selectPagination as selectPaginationInvitationGuestBook,
@@ -66,7 +68,7 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
     { label: 'Undangan ', link: '/invitation/invitation' },
     { label: 'Buku Tamu ', link: '/invitation/invitation/guest-book/id' },
   ];
-  totalColumn = new Array(8);
+  totalColumn = new Array(7);
 
   // Variable
   idInvitation!: string;
@@ -84,16 +86,19 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
     currentPage: 1,
     search: '',
     confirmation: [],
+    type: [],
     status_is_send: [],
     status_is_checkin: [],
     status_is_active: [],
   };
 
   // Data
+  invitationData!: InvitationData | undefined;
   invitationData$!: Observable<InvitationData | undefined>;
 
   invitationGuestBookData$!: Observable<InvitationGuestBookData[]>;
   invitationGuestBookIsLoadingList$!: Observable<boolean>;
+  invitationGuestBookIsLoadingUpdate$!: Observable<boolean>;
   invitationGuestBookIsLoadingDelete$!: Observable<boolean>;
   invitationGuestBookIsError$!: Observable<boolean>;
   invitationGuestBookIsError = false;
@@ -101,10 +106,16 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
   invitationGuestBookPagination$!: Observable<Pagination>;
   invitationGuestBookPages: any;
 
+  sendLoading = false;
+
   confirmationData = [
     { value: 'notyet', label: 'Belum', checked: false },
     { value: 'yes', label: 'Hadir', checked: false },
     { value: 'no', label: 'Tidak Hadir', checked: false },
+  ];
+  typeData = [
+    { value: 'biasa', label: 'Biasa', checked: false },
+    { value: 'vip', label: 'VIP', checked: false },
   ];
   statusSendData = [
     { value: true, label: 'Sudah', checked: false },
@@ -128,6 +139,8 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
     private route: ActivatedRoute,
     private titleService: Title,
     private globalService: GlobalService,
+    private whatsappService: WhatsappService,
+    private invitationService: InvitationService,
     private translateService: TranslateService,
     private actions$: Actions,
     private store: Store<any>,
@@ -178,10 +191,22 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
   }
 
   getInvitation(): void {
-    this.invitationData$ = this.store.pipe(
-      select(selectInvitation(this.idInvitation)),
-      takeUntil(this.unsubscribeInvitation$)
-    );
+    const params = {
+      with: [
+        { user: true },
+        { event: true },
+        { event_package: true },
+        { theme_category: true },
+        { theme: true },
+        { theme: true },
+        { invitation_feature_data: true },
+      ],
+    };
+
+    this.invitationService.getSingle(this.idInvitation, params).subscribe((result) => {
+      this.invitationData$ = of(result.data);
+      this.cdRef.detectChanges();
+    });
   }
 
   getAllInvitationGuestBook(): void {
@@ -195,11 +220,20 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
       {
         is_delete: false,
       },
+      {
+        from: 'admin',
+      },
     ];
 
     if (this.filter.confirmation) {
       pWhere.push({
         confirmation: this.filter.confirmation,
+      });
+    }
+
+    if (this.filter.type) {
+      pWhere.push({
+        type: this.filter.type,
       });
     }
 
@@ -310,6 +344,12 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
     this.getAllInvitationGuestBook();
   }
 
+  filterType(event: any): void {
+    this.filter.type = event;
+    this.filter.currentPage = 1;
+    this.getAllInvitationGuestBook();
+  }
+
   filterStatusSend(event: any): void {
     this.filter.status_is_send = event;
     this.filter.currentPage = 1;
@@ -371,5 +411,175 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
       .subscribe((result) => {
         this.toastr.error(result.error.message, 'Invitation Guest Book');
       });
+  }
+
+  onUpdateSend(id: string | undefined, isSend: boolean = true): void {
+    const bodyInvitationGuestBook = {
+      id_invitation_guest_book: id,
+      is_send: isSend,
+    };
+
+    this.invitationGuestBookIsLoadingUpdate$ = this.store.pipe(
+      select(selectIsLoadingUpdateInvitationGuestBook)
+    );
+
+    this.store.dispatch(
+      fromInvitationGuestBookActions.updateInvitationGuestBook({
+        update: bodyInvitationGuestBook,
+      })
+    );
+
+    this.actions$
+      .pipe(
+        ofType(fromInvitationGuestBookActions.updateInvitationGuestBookSuccess),
+        takeUntil(this.unsubscribeInvitationGuestBook$)
+      )
+      .subscribe((result) => {
+        Swal.fire({
+          icon: 'success',
+          text: `Undangan berhasil terkirim kepada ${result.data.name}.`,
+          allowOutsideClick: false,
+          confirmButtonColor: '#069550',
+        }).then(() => {
+          this.filter.currentPage = 1;
+          this.getAllInvitationGuestBook();
+        });
+      });
+
+    this.actions$
+      .pipe(
+        ofType(fromInvitationGuestBookActions.updateInvitationGuestBookFailure),
+        takeUntil(this.unsubscribeInvitationGuestBook$)
+      )
+      .subscribe((result) => {
+        this.toastr.error(result.error.message, 'Invitation Guest Book');
+      });
+  }
+
+  onSend(invitation: any, guestBook: InvitationGuestBookData): void {
+    const url = environment.production
+      ? 'https://invitation.kitabikin.com/'
+      : 'https://invitation-dev.kitabikin.com/';
+    const link = `${url}${invitation.event.code}/${invitation.code}?to=${guestBook.name}`;
+
+    const feature = this.modifyData(invitation);
+    const message = this.getMessage(invitation, feature, link);
+
+    const bodyInvitationGuestBook = {
+      number: guestBook.no_telp,
+      message: message,
+    };
+
+    this.sendLoading = true;
+    this.whatsappService.sendInvitation(bodyInvitationGuestBook).subscribe((result) => {
+      this.sendLoading = false;
+      this.onUpdateSend(guestBook.id_invitation_guest_book);
+    });
+  }
+
+  modifyData(invitation: any): any {
+    let modify = invitation;
+
+    const feature = modify.feature.map(({ is_active, theme_feature, column }: any) => {
+      column = column.map(({ is_active, theme_feature_column, value }: any) => {
+        return { is_active, ...theme_feature_column, value };
+      });
+      return { is_active, ...theme_feature, column };
+    });
+
+    modify = { ...modify, feature };
+
+    return modify.feature.reduce((obj: any, item: any) => Object.assign(obj, { [item.code]: item }), {});
+  }
+
+  getMessage(invitation: any, feature: any, link: string): any {
+    let message = '';
+
+    if (invitation.event.code === 'wedding') {
+      switch (invitation.theme.code) {
+        case 'golden-gold':
+          console.log('golden-gold');
+          break;
+        case 'nashville':
+          message = this.getMessageThemeNashville(feature, link);
+          break;
+        case 'savannah':
+          console.log('savannah');
+          break;
+        default:
+          break;
+      }
+    }
+
+    return message;
+  }
+
+  getMessageThemeNashville(feature: any, link: string): any {
+    const code = 'nashville';
+
+    // Sampul
+    const codeSampul = `${code}-sampul`;
+    const sampul = feature[codeSampul].column.reduce(
+      (obj: any, item: any) => Object.assign(obj, { [item.code]: item }),
+      {}
+    );
+    const {
+      [`${codeSampul}-nicknameBridge`]: sampulNicknameBride,
+      [`${codeSampul}-nicknameGroom`]: sampulNicknameGroom,
+    } = sampul;
+
+    // Pembukaan
+    const codePembukaan = `${code}-pembukaan`;
+    const pembukaan = feature[codePembukaan].column.reduce(
+      (obj: any, item: any) => Object.assign(obj, { [item.code]: item }),
+      {}
+    );
+    const {
+      [`${codePembukaan}-brideFullname`]: pembukaanBrideFullname,
+      [`${codePembukaan}-groomFullname`]: pembukaanGroomFullname,
+    } = pembukaan;
+
+    // Detail Resepsi
+    const codeDetailResepsi = `${code}-detailResepsi`;
+    const detailResepsi = feature[codeDetailResepsi].column.reduce(
+      (obj: any, item: any) => Object.assign(obj, { [item.code]: item }),
+      {}
+    );
+    const {
+      [`${codeDetailResepsi}-date`]: detailResepsiDate,
+      [`${codeDetailResepsi}-time`]: detailResepsiTime,
+      [`${codeDetailResepsi}-location`]: detailResepsiLocation,
+      [`${codeDetailResepsi}-address`]: detailResepsiAddress,
+    } = detailResepsi;
+
+    let time = '';
+    if (JSON.parse(detailResepsiTime.value).length > 1) {
+      JSON.parse(detailResepsiTime.value).map((res: any, i: number) => {
+        if (i === 0) {
+          time += `Resepsi : ${res.time} (Sesi ${i + 1})\n`;
+        } else {
+          time += `                ${res.time} (Sesi ${i + 1})\n`;
+        }
+      });
+    } else {
+      time = `Resepsi  : ${JSON.parse(detailResepsiTime.value)[0].time}`;
+    }
+
+    let message = `Bismillahirrahmanirrahim,\n\n`;
+    message += `Turut mengundang teman-teman, sahabat, dan keluarga untuk hadir dalam acara pernikahan Kami:\n`;
+    message += `${pembukaanBrideFullname.value}\n     &     \n${pembukaanGroomFullname.value}\n\n`;
+    message += `Yang akan diselenggarakan pada:\n`;
+    message += `Hari        : ${moment(detailResepsiDate.value).locale('id').format('dddd, DD MMMM YYYY')}\n`;
+    message += time;
+    message += `Tempat  : ${detailResepsiLocation.value}\n`;
+    message += `${detailResepsiAddress.value}\n\n`;
+    message += `Kehadiran dan doa restu dari keluarga, sahabat, dan teman-teman akan semakin melengkapi hari kebahagiaan kami\n\n`;
+    message += `Mohon mengisi reservasi undangan online dibawah ini dan menunjukan QR Barcode di meja penerima tamu:\n\n`;
+    message += `${link}\n\n`;
+    message += `Kami yang berbahagia,\n`;
+    message += `${sampulNicknameBride.value} & ${sampulNicknameGroom.value}\n\n`;
+    message += `**WHATSAPP OTOMATIS TIDAK UNTUK DI BALAS**`;
+
+    return message;
   }
 }
