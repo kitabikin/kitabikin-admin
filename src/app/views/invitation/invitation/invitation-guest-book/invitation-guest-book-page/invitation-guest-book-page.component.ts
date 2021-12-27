@@ -562,7 +562,7 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
         }
       });
     } else {
-      time = `Resepsi  : ${JSON.parse(detailResepsiTime.value)[0].time}`;
+      time = `Resepsi  : ${JSON.parse(detailResepsiTime.value)[0].time}\n`;
     }
 
     let message = `Bismillahirrahmanirrahim,\n\n`;

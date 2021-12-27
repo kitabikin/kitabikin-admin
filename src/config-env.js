@@ -4,8 +4,7 @@ const { argv } = require('yargs');
 require('dotenv').config();
 
 const env = process.env.ENVIRONMENT;
-const environment = argv.environment;
-const isProduction = environment === 'production';
+const isProduction = env === 'production';
 
 let targetPath = '';
 if (env === 'development') {
