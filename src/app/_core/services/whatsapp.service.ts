@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment';
 })
 export class WhatsappService {
   // API URL
-  apiUrl = 'api-whatsapp';
+  apiUrl = 'api-whatsapp/v2/send-message';
 
   // Http Options
   httpOptions = {
