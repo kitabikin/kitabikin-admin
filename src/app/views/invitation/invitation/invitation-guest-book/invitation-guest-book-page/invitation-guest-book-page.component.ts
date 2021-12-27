@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { Observable, Subject } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { takeUntil, filter, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
@@ -19,7 +19,7 @@ import { Pagination, InvitationData, InvitationGuestBookData } from '@models';
 
 // SERVICE
 import { GlobalService } from '@services/private';
-import { WhatsappService } from '@services';
+import { WhatsappService, InvitationService } from '@services';
 
 // STORE
 import { selectInvitation } from '@store/invitation/invitation.selectors';
@@ -35,7 +35,7 @@ import {
 import { fromInvitationGuestBookActions } from '@store/invitation-guest-book/invitation-guest-book.actions';
 
 // PACKAGE
-import { isEmpty, isEqual, assign, isArray, map as lMap } from 'lodash';
+import { isEmpty, isEqual, assign, isArray } from 'lodash';
 import moment from 'moment';
 import { TranslateService } from '@ngx-translate/core';
 import { Store, select } from '@ngrx/store';
@@ -140,6 +140,7 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
     private titleService: Title,
     private globalService: GlobalService,
     private whatsappService: WhatsappService,
+    private invitationService: InvitationService,
     private translateService: TranslateService,
     private actions$: Actions,
     private store: Store<any>,
@@ -190,10 +191,22 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
   }
 
   getInvitation(): void {
-    this.invitationData$ = this.store.pipe(
-      select(selectInvitation(this.idInvitation)),
-      takeUntil(this.unsubscribeInvitation$)
-    );
+    const params = {
+      with: [
+        { user: true },
+        { event: true },
+        { event_package: true },
+        { theme_category: true },
+        { theme: true },
+        { theme: true },
+        { invitation_feature_data: true },
+      ],
+    };
+
+    this.invitationService.getSingle(this.idInvitation, params).subscribe((result) => {
+      this.invitationData$ = of(result.data);
+      this.cdRef.detectChanges();
+    });
   }
 
   getAllInvitationGuestBook(): void {
