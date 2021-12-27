@@ -43,6 +43,7 @@ export class StoreInvitationDetailGuard implements CanActivate {
               { event_package: true },
               { theme_category: true },
               { theme: true },
+              { invitation_feature_data: true },
             ],
           };
 

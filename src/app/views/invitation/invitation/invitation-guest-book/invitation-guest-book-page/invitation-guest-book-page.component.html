@@ -1,6 +1,8 @@
+<ngx-loading [show]="(invitationGuestBookIsLoadingUpdate$ | async) || false"></ngx-loading>
 <ngx-loading [show]="(invitationGuestBookIsLoadingDelete$ | async) || false"></ngx-loading>
+<ngx-loading [show]="sendLoading"></ngx-loading>
 
-<section *ngIf="invitationData$ | async as row"
+<section *ngIf="invitationData$ | async as data"
          class="invitation__guset__book__page">
   <div class="mb-4">
     <kb-breadcrumb [data]="breadcrumb"></kb-breadcrumb>
@@ -9,7 +11,7 @@
   <div class="d-flex mb-4">
     <div>
       <h5>{{ label }}</h5>
-      <div>{{ row.name }}</div>
+      <div>{{ data.name }}</div>
     </div>
     <div class="ms-auto">
       <div class="d-flex">
@@ -70,29 +72,16 @@
             </th>
             <th scope="col"
                 kb-table-head
-                [column]="'confirmation'"
+                [column]="'type'"
                 [filter]="filter"
                 [isSortable]="true"
                 (emitFilterSort)="filterSort($event)"
                 [isFilterable]="true"
-                [filterData]="confirmationData"
-                (emitFilterFilter)="filterConfirmation($event)"
+                [filterData]="typeData"
+                (emitFilterFilter)="filterType($event)"
                 [style.minWidth.px]="145"
                 [style.width.px]="145">
-              {{ 'page.invitation-guest-book.confirmation' | translate }}
-            </th>
-            <th scope="col"
-                kb-table-head
-                [column]="'is_checkin'"
-                [filter]="filter"
-                [isSortable]="true"
-                (emitFilterSort)="filterSort($event)"
-                [isFilterable]="true"
-                [filterData]="statusCheckinData"
-                (emitFilterFilter)="filterStatusCheckin($event)"
-                [style.minWidth.px]="145"
-                [style.width.px]="145">
-              {{ 'page.invitation-guest-book.checkin' | translate }}
+              {{ 'page.invitation-guest-book.type' | translate }}
             </th>
             <th scope="col"
                 kb-table-head
@@ -121,8 +110,8 @@
               {{ 'status' | translate }}
             </th>
             <th scope="col"
-                [style.minWidth.px]="240"
-                [style.width.px]="240">
+                [style.minWidth.px]="180"
+                [style.width.px]="180">
               {{ 'action' | translate }}
             </th>
           </tr>
@@ -147,18 +136,7 @@
                 <td>{{ row.name }}</td>
                 <td>{{ row.address }}</td>
                 <td>{{ row.no_telp }}</td>
-                <td>
-                  <span class="badge badge-status rounded-pill"
-                        [ngClass]="[row.getConfirmationBadge()]">
-                    {{ row.getConfirmation() }}
-                  </span>
-                </td>
-                <td>
-                  <span class="badge badge-status rounded-pill"
-                        [ngClass]="[row.getIsCheckinBadge()]">
-                    {{ row.getIsCheckin() }}
-                  </span>
-                </td>
+                <td>{{ row.getType() }}</td>
                 <td>
                   <span class="badge badge-status rounded-pill"
                         [ngClass]="[row.getIsSendBadge()]">
@@ -171,14 +149,25 @@
                     {{ row.getIsActive() }}
                   </span>
                 </td>
-                <td>
-                  <a *ngIf="row.no_telp !== null"
-                     role="button"
-                     class="btn btn-green-700 me-2"
-                     [routerLink]="['/invitation/invitation/guest-book' + idInvitation + '/send', row.id_invitation_guest_book]"
-                     [style.padding.px]="6">
-                    {{ 'page.invitation-guest-book.send' | translate }}
-                  </a>
+                <td class="d-flex overflow-hidden">
+                  <div ngbDropdown
+                       container="body">
+                    <button [style.padding.px]="6"
+                            class="btn btn-green-700 me-2"
+                            ngbDropdownToggle>Kelola</button>
+                    <div ngbDropdownMenu>
+                      <button (click)="onSend(data, row)"
+                              ngbDropdownItem>
+                        {{ 'page.invitation-guest-book.send' | translate }}
+                      </button>
+                      <a role="button"
+                         [href]="row.qr_code"
+                         [download]="row.name + '.png'"
+                         ngbDropdownItem>
+                        Download QR Code
+                      </a>
+                    </div>
+                  </div>
 
                   <a role="button"
                      class="btn btn-blue-gray-50 text-blue-gray-700 me-2"
@@ -187,8 +176,7 @@
                     <fa-icon [icon]="faSearchPlus"></fa-icon>
                   </a>
 
-                  <a *ngIf="row.no_telp !== null"
-                     role="button"
+                  <a role="button"
                      class="btn btn-blue-50 text-blue-700 me-2"
                      [routerLink]="['/invitation/invitation/guest-book/' + idInvitation + '/edit', row.id_invitation_guest_book]"
                      [style.padding.px]="6">
@@ -205,8 +193,7 @@
                         (confirm)="onDelete(row.id_invitation_guest_book)">
                   </swal>
 
-                  <button *ngIf="row.no_telp !== null"
-                          [swal]="deleteSwal"
+                  <button [swal]="deleteSwal"
                           type="button"
                           class="btn btn-red-50 text-red-700"
                           [style.padding.px]="6">

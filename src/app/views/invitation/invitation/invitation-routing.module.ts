@@ -53,6 +53,20 @@ const routes: Routes = [
             (m) => m.InvitationGuestBookModule
           ),
       },
+      {
+        path: 'confirmation-attendance/:id_invitation',
+        canActivate: [StoreInvitationDetailGuard],
+        loadChildren: () =>
+          import('./invitation-confirmation-attendance/invitation-confirmation-attendance.module').then(
+            (m) => m.InvitationConfirmationAttendanceModule
+          ),
+      },
+      {
+        path: 'check-in/:id_invitation',
+        canActivate: [StoreInvitationDetailGuard],
+        loadChildren: () =>
+          import('./invitation-check-in/invitation-check-in.module').then((m) => m.InvitationCheckInModule),
+      },
     ],
   },
 ];

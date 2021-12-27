@@ -1,6 +1,7 @@
 export * from './global.service';
 export * from './function.service';
 export * from './http.service';
+export * from './whatsapp.service';
 export * from './upload/upload.service';
 
 export * from './authentication/authentication.service';
