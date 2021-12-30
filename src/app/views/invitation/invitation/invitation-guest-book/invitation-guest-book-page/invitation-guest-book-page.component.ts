@@ -659,7 +659,7 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
     message += `${link}\n\n`;
     message += `Kami yang berbahagia,\n`;
     message += `${sampulNicknameBride.value} & ${sampulNicknameGroom.value}\n\n`;
-    message += `**WHATSAPP OTOMATIS TIDAK UNTUK DI BALAS**`;
+    message += `**HARAP DATANG SESUAI SESI YANG TERCANTUM DI JAM DI ATAS**`;
 
     return message;
   }
