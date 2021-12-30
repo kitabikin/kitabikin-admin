@@ -86,10 +86,16 @@ export class InvitationGuestBookData implements Deserializable {
   detailType(): any {
     let name = '';
 
-    if (this.type === 'biasa') {
-      name = 'Biasa';
-    } else {
-      name = 'VIP';
+    switch (this.type) {
+      case 'vip':
+        name = 'VIP';
+        break;
+      case 'keluarga':
+        name = 'Keluarga';
+        break;
+      default:
+        name = 'Biasa';
+        break;
     }
 
     return {

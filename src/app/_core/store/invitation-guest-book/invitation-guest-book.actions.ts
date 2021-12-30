@@ -17,6 +17,9 @@ export enum InvitationGuestBookActionTypes {
   DeleteInvitationGuestBook = '[INVITATION GUEST BOOK] Delete Invitation Guest Book',
   DeleteInvitationGuestBookSuccess = '[INVITATION GUEST BOOK] Delete Invitation Guest Book Success',
   DeleteInvitationGuestBookFailure = '[INVITATION GUEST BOOK] Delete Invitation Guest Book Failure',
+  ImportInvitationGuestBook = '[INVITATION GUEST BOOK] Import Invitation Guest Book',
+  ImportInvitationGuestBookSuccess = '[INVITATION GUEST BOOK] Import Invitation Guest Book Success',
+  ImportInvitationGuestBookFailure = '[INVITATION GUEST BOOK] Import Invitation Guest Book Failure',
   ClearInvitationGuestBook = '[INVITATION GUEST BOOK] Clear Invitation Guest Book',
 }
 
@@ -100,6 +103,22 @@ export const deleteInvitationGuestBookFailure = createAction(
   props<{ error: Error | any }>()
 );
 
+// Import
+export const importInvitationGuestBook = createAction(
+  InvitationGuestBookActionTypes.ImportInvitationGuestBook,
+  props<{ import: any }>()
+);
+
+export const importInvitationGuestBookSuccess = createAction(
+  InvitationGuestBookActionTypes.ImportInvitationGuestBookSuccess,
+  props<{ data: InvitationGuestBookData[] }>()
+);
+
+export const importInvitationGuestBookFailure = createAction(
+  InvitationGuestBookActionTypes.ImportInvitationGuestBookFailure,
+  props<{ error: Error | any }>()
+);
+
 // Clear
 export const clearInvitationGuestBook = createAction(InvitationGuestBookActionTypes.ClearInvitationGuestBook);
 
@@ -119,5 +138,8 @@ export const fromInvitationGuestBookActions = {
   deleteInvitationGuestBook,
   deleteInvitationGuestBookSuccess,
   deleteInvitationGuestBookFailure,
+  importInvitationGuestBook,
+  importInvitationGuestBookSuccess,
+  importInvitationGuestBookFailure,
   clearInvitationGuestBook,
 };

@@ -1,0 +1,20 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <ng-template #modalProgress
+               let-modal>
+    <div class="modal-header">
+      <h6 class="modal-title">
+        {{ vm.title }}
+      </h6>
+    </div>
+    <div class="modal-body">
+      <div class="d-flex mb-2">
+        {{ vm.label }}
+        <span class="ms-auto">{{ vm.progress }}%</span>
+      </div>
+      <ngb-progressbar type="green-700"
+                       [value]="vm.progress"
+                       [striped]="true"
+                       [animated]="true"></ngb-progressbar>
+    </div>
+  </ng-template>
+</ng-container>

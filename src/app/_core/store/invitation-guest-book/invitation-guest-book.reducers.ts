@@ -12,6 +12,7 @@ export interface State extends EntityState<InvitationGuestBookData> {
   isLoadingRead: boolean;
   isLoadingUpdate: boolean;
   isLoadingDelete: boolean;
+  isLoadingImport: boolean;
   metadata: any;
   pagination: any;
   error?: Error | any;
@@ -31,6 +32,7 @@ export const initialState: State = adapter.getInitialState({
   isLoadingRead: false,
   isLoadingUpdate: false,
   isLoadingDelete: false,
+  isLoadingImport: false,
   metadata: null,
   pagination: null,
   error: null,
@@ -170,6 +172,29 @@ const reducer = createReducer(
   on(fromInvitationGuestBookActions.deleteInvitationGuestBookFailure, (state, { error }) => {
     return {
       ...state,
+      error,
+    };
+  }),
+
+  // Import
+  on(fromInvitationGuestBookActions.importInvitationGuestBook, (state) => {
+    return {
+      ...state,
+      isLoadingImport: true,
+      error: null,
+    };
+  }),
+  on(fromInvitationGuestBookActions.importInvitationGuestBookSuccess, (state, { data }) => {
+    return {
+      ...state,
+      isLoadingImport: false,
+      error: { error: false },
+    };
+  }),
+  on(fromInvitationGuestBookActions.importInvitationGuestBookFailure, (state, { error }) => {
+    return {
+      ...state,
+      isLoadingImport: false,
       error,
     };
   }),

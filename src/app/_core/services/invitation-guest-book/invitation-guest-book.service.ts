@@ -57,4 +57,16 @@ export class InvitationGuestBookService {
       .put<InvitationGuestBook>(`${this.apiUrl}/${uniq}`, JSON.stringify(item), this.httpOptions)
       .pipe(map((response) => new InvitationGuestBook().deserialize(response)));
   }
+
+  importItem(item: any): Observable<InvitationGuestBook> {
+    return this.http
+      .post<InvitationGuestBook>(`${this.apiUrl}/upload`, item, {
+        reportProgress: true,
+        observe: 'events',
+        headers: {
+          'Cache-Control': 'no-cache',
+        },
+      })
+      .pipe(map((response) => new InvitationGuestBook().deserialize(response)));
+  }
 }

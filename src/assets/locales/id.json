@@ -121,6 +121,8 @@
   "csv": "CSV",
   "excel": "Excel",
   "data": "Data",
+  "import": "Impor",
+  "export": "Ekspor",
   "guest-book": "Buku Tamu",
   "confirmation": "Konfirmasi Kehadiran",
   "check-in": "Check-In",
