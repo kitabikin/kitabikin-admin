@@ -7,11 +7,13 @@ import {
   SimpleChanges,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
+  ViewChild,
 } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { Observable, of, Subject } from 'rxjs';
 import { takeUntil, filter, map } from 'rxjs/operators';
+import { HttpEventType } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 // MODEL
@@ -19,7 +21,7 @@ import { Pagination, InvitationData, InvitationGuestBookData } from '@models';
 
 // SERVICE
 import { GlobalService } from '@services/private';
-import { WhatsappService, InvitationService } from '@services';
+import { FunctionService, HttpService, WhatsappService, InvitationService } from '@services';
 
 // STORE
 import { selectInvitation } from '@store/invitation/invitation.selectors';
@@ -34,6 +36,11 @@ import {
 } from '@store/invitation-guest-book/invitation-guest-book.selectors';
 import { fromInvitationGuestBookActions } from '@store/invitation-guest-book/invitation-guest-book.actions';
 
+// COMPONENT
+import { ModalImportGuestBookComponent } from '@components/modal/import-guest-book/import-guest-book.component';
+import { ModalDownloadGuestBookQRCodeComponent } from '@components/modal/download-guest-book-qr-code/download-guest-book-qr-code.component';
+import { ModalProgressComponent } from '@components/modal/progress/progress.component';
+
 // PACKAGE
 import { isEmpty, isEqual, assign, isArray } from 'lodash';
 import moment from 'moment';
@@ -42,7 +49,8 @@ import { Store, select } from '@ngrx/store';
 import { Actions, ofType } from '@ngrx/effects';
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
-import { faSearchPlus, faPlus, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { saveAs } from 'file-saver';
+import { faSearchPlus, faPlus, faPen, faTrash, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'kb-invitation-guest-book-page',
@@ -55,9 +63,16 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
   faPlus = faPlus;
   faPen = faPen;
   faTrash = faTrash;
+  faEllipsisH = faEllipsisH;
 
   env: any = environment;
   moment: any = moment;
+
+  @ViewChild(ModalImportGuestBookComponent)
+  modalImportGuestBookComponent!: ModalImportGuestBookComponent;
+  @ViewChild(ModalDownloadGuestBookQRCodeComponent)
+  modalDownloadGuestBookQRCodeComponent!: ModalDownloadGuestBookQRCodeComponent;
+  @ViewChild(ModalProgressComponent) modalProgressComponent!: ModalProgressComponent;
 
   // Settings
   title!: string;
@@ -106,6 +121,10 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
   invitationGuestBookPagination$!: Observable<Pagination>;
   invitationGuestBookPages: any;
 
+  downloadQRCodeIsLoading = false;
+  downloadQRCodeName!: string;
+  downloadQRCodeProgress = 0;
+
   sendLoading = false;
 
   confirmationData = [
@@ -139,6 +158,8 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
     private route: ActivatedRoute,
     private titleService: Title,
     private globalService: GlobalService,
+    private functionService: FunctionService,
+    private httpService: HttpService,
     private whatsappService: WhatsappService,
     private invitationService: InvitationService,
     private translateService: TranslateService,
@@ -410,6 +431,68 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
       )
       .subscribe((result) => {
         this.toastr.error(result.error.message, 'Invitation Guest Book');
+      });
+  }
+
+  openModalImportGuestBookComponent(): void {
+    this.modalImportGuestBookComponent.openModal();
+  }
+
+  openModalDownloadGuestBookQRCode(): void {
+    this.modalDownloadGuestBookQRCodeComponent.openModal();
+  }
+
+  onDownloadQRCode(event: any): void {
+    this.downloadQRCodeProgress = 0;
+    this.modalDownloadGuestBookQRCodeComponent.closeModal();
+    this.modalProgressComponent.openModal();
+
+    const pWhere: any[] = [
+      {
+        id_invitation: this.idInvitation,
+      },
+      {
+        is_delete: false,
+      },
+    ];
+
+    if (event.noTelp) {
+      pWhere.push({
+        no_telp__null: !event.noTelp,
+      });
+    }
+
+    const params = {
+      download: 'pdf-qrcode',
+      size: event.size,
+      where: pWhere,
+    };
+
+    this.httpService
+      .getFile('api-core/v1/invitation-guest-book/download', params)
+      .subscribe(async (response) => {
+        if (response.type === HttpEventType.DownloadProgress) {
+          this.downloadQRCodeIsLoading = true;
+          this.downloadQRCodeProgress = Math.round((100 * response.loaded) / response.total);
+          this.cdRef.markForCheck();
+        } else if (response.type === HttpEventType.Response) {
+          await this.functionService.delay(1000);
+          this.modalProgressComponent.closeModal();
+          this.downloadQRCodeIsLoading = false;
+
+          const newBlob = new Blob([response.body], { type: 'application/pdf' });
+
+          await this.functionService.delay(1000);
+          saveAs(newBlob, `qr-code.pdf`);
+
+          Swal.fire({
+            icon: 'success',
+            title: 'Unduh',
+            text: 'Unduh QR Code berhasil.',
+            allowOutsideClick: false,
+            confirmButtonColor: '#069550',
+          });
+        }
       });
   }
 

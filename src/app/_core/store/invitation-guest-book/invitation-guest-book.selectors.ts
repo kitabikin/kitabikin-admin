@@ -48,6 +48,7 @@ export const selectIsLoadingCreate = createSelector(getState, (state) => state.i
 export const selectIsLoadingRead = createSelector(getState, (state) => state.isLoadingRead);
 export const selectIsLoadingUpdate = createSelector(getState, (state) => state.isLoadingUpdate);
 export const selectIsLoadingDelete = createSelector(getState, (state) => state.isLoadingDelete);
+export const selectIsLoadingImport = createSelector(getState, (state) => state.isLoadingImport);
 
 // select metadata
 export const selectMetadata = createSelector(getState, (state) => state.metadata);

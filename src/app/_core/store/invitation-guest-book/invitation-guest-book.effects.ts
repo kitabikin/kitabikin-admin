@@ -163,6 +163,33 @@ export class InvitationGuestBookEffects {
     )
   );
 
+  importInvitationGuestBook$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromInvitationGuestBookActions.importInvitationGuestBook),
+      switchMap((action) =>
+        this.invitationGuestBookService.importItem(action.import).pipe(
+          map((res: any) => {
+            return fromInvitationGuestBookActions.importInvitationGuestBookSuccess({
+              data: res.data || [],
+            });
+          }),
+          catchError((error) => {
+            return of(
+              fromInvitationGuestBookActions.importInvitationGuestBookFailure({
+                error: {
+                  name: this.name,
+                  error: !error.ok,
+                  message: error.message,
+                },
+              }),
+              undo(action)
+            );
+          })
+        )
+      )
+    )
+  );
+
   constructor(private actions$: Actions, private invitationGuestBookService: InvitationGuestBookService) {}
 
   loadAllSuccess(data: any, pagination: any): any {

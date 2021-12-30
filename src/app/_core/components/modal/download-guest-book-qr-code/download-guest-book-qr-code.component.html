@@ -1,0 +1,42 @@
+<ng-template #modalDownloadGuestBookQRCode
+             let-modal>
+  <div class="modal-header">
+    <h6 class="modal-title">
+      Unduh QR Code
+    </h6>
+    <button type="button"
+            class="btn-close"
+            aria-label="Close"
+            (click)="modal.dismiss('Cross click');">
+    </button>
+  </div>
+  <div class="modal-body">
+    <kb-label class="d-block mb-3">
+      Ukuran QR Code
+      <input kbInput
+             type="number"
+             class="form-control"
+             [placeholder]="'Ukuran QR Code'"
+             [(ngModel)]="size"
+             max="170">
+    </kb-label>
+
+    <kb-label class="d-block mb-3">
+      {{ 'page.invitation-guest-book.no-telp' | translate }}
+      <ng-select kbInput
+                 [items]="noTelpData"
+                 bindValue="value"
+                 bindLabel="label"
+                 [placeholder]="'page.invitation-guest-book.no-telp' | translate"
+                 [(ngModel)]="noTelp">
+      </ng-select>
+    </kb-label>
+  </div>
+  <div class="modal-footer">
+    <button type="submit"
+            class="btn btn-green-700"
+            (click)="onDownload()">
+      {{ 'download' | translate }}
+    </button>
+  </div>
+</ng-template>

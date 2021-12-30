@@ -1,0 +1,56 @@
+<ngx-loading [show]="(invitationGuestBookIsLoadingImport$ | async) || false"></ngx-loading>
+
+<ng-template #modalImportGuestBook
+             let-modal>
+  <div class="modal-header">
+    <h6 class="modal-title">
+      {{ 'import' | translate }} {{ 'guest-book' | translate }}
+    </h6>
+    <button type="button"
+            class="btn-close"
+            aria-label="Close"
+            (click)="modal.dismiss('Cross click');">
+    </button>
+  </div>
+  <form [formGroup]="myForm"
+        (ngSubmit)="onImport()"
+        (keydown.enter)="$event.stopPropagation()"
+        class="form">
+    <div class="modal-body">
+      <ngb-alert type="blue-800"
+                 [dismissible]="false">
+        <div>
+          <p>Silahkan gunakan template untuk mengimpor buku tamu.</p>
+          <div>
+            <a href="/assets/excel/buku_tamu.xlsx"
+               class="link-blue-900 text-decoration-none"
+               donwload="buku_tamu.xlxs">
+              <fa-icon [icon]="faFileDownload"
+                       class="me-2"></fa-icon> Unduh Template
+            </a>
+          </div>
+        </div>
+      </ngb-alert>
+
+      <kb-label class="d-block mb-3"
+                [required]="true"
+                [invalid]="getFormValidation(myForm?.controls?.['file']).invalid"
+                [invalidText]="getFormValidation(myForm?.controls?.['file']).text">
+        File
+        <input kbInput
+               type="file"
+               class="form-control"
+               [placeholder]="'File'"
+               accept=".xls, .xlsx"
+               (change)="onFileChange($event)">
+      </kb-label>
+    </div>
+    <div class="modal-footer">
+      <button type="submit"
+              class="btn btn-green-700"
+              [disabled]="!myForm.valid">
+        {{ 'import' | translate }}
+      </button>
+    </div>
+  </form>
+</ng-template>

@@ -2,6 +2,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+// PACKAGES
+import qs from 'qs';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -16,7 +19,7 @@ export class HttpService {
   constructor(private http: HttpClient) {}
 
   getFile(url: string, params: any): Observable<any> {
-    const merge = new URLSearchParams(params);
+    const merge = qs.stringify(params);
     return this.http.get(`${url}?${merge}`, {
       responseType: 'blob',
       reportProgress: true,

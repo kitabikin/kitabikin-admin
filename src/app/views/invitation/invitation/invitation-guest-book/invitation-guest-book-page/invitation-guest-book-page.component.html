@@ -31,12 +31,30 @@
         </div>
 
         <a role="button"
-           class="btn btn-green-700"
+           class="btn btn-green-700 me-3"
            [routerLink]="['/invitation/invitation/guest-book/' + idInvitation + '/add']">
           <fa-icon class="me-2"
                    [icon]="faPlus"></fa-icon>
           {{ 'add' | translate }} {{ 'guest-book' | translate }}
         </a>
+
+        <div ngbDropdown>
+          <button class="btn btn-green-700"
+                  ngbDropdownToggle>
+            <fa-icon [icon]="faEllipsisH"></fa-icon>
+          </button>
+          <div ngbDropdownMenu
+               class="dropdown-menu dropdown-menu-right">
+            <button (click)="openModalImportGuestBookComponent()"
+                    ngbDropdownItem>
+              {{ 'import' | translate }} {{ 'guest-book' | translate }}
+            </button>
+            <button (click)="openModalDownloadGuestBookQRCode()"
+                    ngbDropdownItem>
+              Unduh QR Code
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -233,3 +251,12 @@
                    (filterPagination)="filterPagination($event)"></kb-pagination>
   </div>
 </section>
+
+<kb-modal-import-guest-book [id]="idInvitation"
+                            (reload)="getAllInvitationGuestBook()"></kb-modal-import-guest-book>
+
+<kb-modal-download-guest-book-qr-code (dataOutput)="onDownloadQRCode($event)"></kb-modal-download-guest-book-qr-code>
+
+<kb-modal-progress title="{{ 'download' | translate }} QR Code"
+                   [label]="'download-progress' | translate"
+                   [progress]="downloadQRCodeProgress"></kb-modal-progress>
