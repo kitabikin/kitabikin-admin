@@ -42,12 +42,24 @@
               [invalidText]="getFormValidation(vm.formGroup?.controls?.['type']).text">
       {{ 'page.invitation-guest-book.type' | translate }}
       <ng-select kbInput
-                 [items]="[{value: 'biasa', label: 'Biasa'}, {value: 'vip', label: 'VIP'}]"
+                 [items]="[{value: 'biasa', label: 'Biasa'}, {value: 'keluarga', label: 'Keluarga'}, {value: 'vip', label: 'VIP'}]"
                  bindValue="value"
                  bindLabel="label"
                  [placeholder]="'page.invitation-guest-book.type' | translate"
                  formControlName="type">
       </ng-select>
+    </kb-label>
+
+    <kb-label class="d-block mb-3"
+              [required]="true"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['session']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['session']).text">
+      {{ 'page.invitation-guest-book.session' | translate }}
+      <input kbInput
+             type="number"
+             class="form-control"
+             [placeholder]="'page.invitation-guest-book.session' | translate"
+             formControlName="session">
     </kb-label>
 
     <div class="text-green-700 mt-4 mb-1">

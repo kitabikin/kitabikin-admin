@@ -116,6 +116,7 @@ export class InvitationGuestBookEditComponent implements OnInit, OnChanges, OnDe
       type: [null, [Validators.required]],
       from: ['admin'],
       confirmation: ['notyet'],
+      session: [1],
       is_active: [true, [Validators.required]],
     });
 
@@ -152,6 +153,7 @@ export class InvitationGuestBookEditComponent implements OnInit, OnChanges, OnDe
       address: data?.address,
       no_telp: data?.no_telp,
       type: data?.type,
+      session: data?.session,
       is_active: data?.is_active,
     });
   }

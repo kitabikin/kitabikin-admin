@@ -83,7 +83,7 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
     { label: 'Undangan ', link: '/invitation/invitation' },
     { label: 'Buku Tamu ', link: '/invitation/invitation/guest-book/id' },
   ];
-  totalColumn = new Array(7);
+  totalColumn = new Array(8);
 
   // Variable
   idInvitation!: string;
@@ -548,7 +548,7 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
     const link = `${url}${invitation.event.code}/${invitation.code}?to=${guestBook.name}`;
 
     const feature = this.modifyData(invitation);
-    const message = this.getMessage(invitation, feature, link);
+    const message = this.getMessage(invitation, guestBook, feature, link);
 
     const bodyInvitationGuestBook = {
       number: guestBook.no_telp,
@@ -577,7 +577,7 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
     return modify.feature.reduce((obj: any, item: any) => Object.assign(obj, { [item.code]: item }), {});
   }
 
-  getMessage(invitation: any, feature: any, link: string): any {
+  getMessage(invitation: any, guestBook: any, feature: any, link: string): any {
     let message = '';
 
     if (invitation.event.code === 'wedding') {
@@ -586,7 +586,7 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
           console.log('golden-gold');
           break;
         case 'nashville':
-          message = this.getMessageThemeNashville(feature, link);
+          message = this.getMessageThemeNashville(guestBook, feature, link);
           break;
         case 'savannah':
           console.log('savannah');
@@ -599,7 +599,7 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
     return message;
   }
 
-  getMessageThemeNashville(feature: any, link: string): any {
+  getMessageThemeNashville(guestBook: any, feature: any, link: string): any {
     const code = 'nashville';
 
     // Sampul
@@ -639,15 +639,11 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
 
     let time = '';
     if (JSON.parse(detailResepsiTime.value).length > 1) {
-      JSON.parse(detailResepsiTime.value).map((res: any, i: number) => {
-        if (i === 0) {
-          time += `Resepsi : ${res.time} (Sesi ${i + 1})\n`;
-        } else {
-          time += `                ${res.time} (Sesi ${i + 1})\n`;
-        }
-      });
+      const session = JSON.parse(detailResepsiTime.value)[guestBook.session - 1];
+      time = `Resepsi  : ${session.time}\n`;
     } else {
-      time = `Resepsi  : ${JSON.parse(detailResepsiTime.value)[0].time}\n`;
+      const session = JSON.parse(detailResepsiTime.value)[0];
+      time = `Resepsi  : ${session.time}\n`;
     }
 
     let message = `Bismillahirrahmanirrahim,\n\n`;

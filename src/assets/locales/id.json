@@ -102,7 +102,8 @@
       "checkin": "Kehadiran",
       "qr-code": "QR Code",
       "total": "Jumlah Reservasi",
-      "type": "Jenis Tamu"
+      "type": "Jenis Tamu",
+      "session": "Sesi"
     }
   },
   "_comment_action": "=======================================================================================",

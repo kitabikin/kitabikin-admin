@@ -38,6 +38,7 @@ export class InvitationGuestBookData implements Deserializable {
   qr_code_url!: string;
   confirmation!: string;
   total_reservation!: number;
+  session!: number;
   is_send!: boolean;
   is_checkin!: boolean;
   is_active!: boolean;

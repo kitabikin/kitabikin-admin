@@ -69,7 +69,9 @@
                 [column]="'name'"
                 [filter]="filter"
                 [isSortable]="true"
-                (emitFilterSort)="filterSort($event)">
+                (emitFilterSort)="filterSort($event)"
+                [style.minWidth.px]="180"
+                [style.width.px]="180">
               {{ 'page.invitation-guest-book.name' | translate }}
             </th>
             <th scope="col"
@@ -103,6 +105,14 @@
             </th>
             <th scope="col"
                 kb-table-head
+                [column]="'session'"
+                [filter]="filter"
+                [isSortable]="true"
+                (emitFilterSort)="filterSort($event)">
+              {{ 'page.invitation-guest-book.session' | translate }}
+            </th>
+            <th scope="col"
+                kb-table-head
                 [column]="'is_send'"
                 [filter]="filter"
                 [isSortable]="true"
@@ -128,8 +138,8 @@
               {{ 'status' | translate }}
             </th>
             <th scope="col"
-                [style.minWidth.px]="180"
-                [style.width.px]="180">
+                [style.minWidth.px]="160"
+                [style.width.px]="160">
               {{ 'action' | translate }}
             </th>
           </tr>
@@ -155,6 +165,7 @@
                 <td>{{ row.address }}</td>
                 <td>{{ row.no_telp }}</td>
                 <td>{{ row.getType() }}</td>
+                <td> {{ 'page.invitation-guest-book.session' | translate }} {{ row.session }}</td>
                 <td>
                   <span class="badge badge-status rounded-pill"
                         [ngClass]="[row.getIsSendBadge()]">
