@@ -134,6 +134,7 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
   ];
   typeData = [
     { value: 'biasa', label: 'Biasa', checked: false },
+    { value: 'keluarga', label: 'Keluarga', checked: false },
     { value: 'vip', label: 'VIP', checked: false },
   ];
   statusSendData = [
@@ -465,6 +466,7 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
     const params = {
       download: 'pdf-qrcode',
       size: event.size,
+      sort: 'name:asc',
       where: pWhere,
     };
 

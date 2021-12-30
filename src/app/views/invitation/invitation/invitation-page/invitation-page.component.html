@@ -172,66 +172,68 @@
                     {{ row.getIsActive() }}
                   </span>
                 </td>
-                <td class="d-flex overflow-hidden">
-                  <div ngbDropdown
-                       container="body">
-                    <button [style.padding.px]="6"
-                            class="btn btn-green-700 me-2"
-                            ngbDropdownToggle>Kelola</button>
-                    <div ngbDropdownMenu>
-                      <a role="button"
-                         [routerLink]="['/invitation/invitation/data', row.id_invitation]"
-                         ngbDropdownItem>
-                        Data
-                      </a>
-                      <a role="button"
-                         [routerLink]="['/invitation/invitation/guest-book', row.id_invitation]"
-                         ngbDropdownItem>
-                        Buku Tamu
-                      </a>
-                      <a role="button"
-                         [routerLink]="['/invitation/invitation/confirmation-attendance', row.id_invitation]"
-                         ngbDropdownItem>
-                        Konfirmasi Kehadiran
-                      </a>
-                      <a role="button"
-                         [routerLink]="['/invitation/invitation/check-in', row.id_invitation]"
-                         ngbDropdownItem>
-                        Check-In
-                      </a>
+                <td class="overflow-hidden">
+                  <div class="d-flex">
+                    <div ngbDropdown
+                         container="body">
+                      <button [style.padding.px]="6"
+                              class="btn btn-green-700 me-2"
+                              ngbDropdownToggle>Kelola</button>
+                      <div ngbDropdownMenu>
+                        <a role="button"
+                           [routerLink]="['/invitation/invitation/data', row.id_invitation]"
+                           ngbDropdownItem>
+                          Data
+                        </a>
+                        <a role="button"
+                           [routerLink]="['/invitation/invitation/guest-book', row.id_invitation]"
+                           ngbDropdownItem>
+                          Buku Tamu
+                        </a>
+                        <a role="button"
+                           [routerLink]="['/invitation/invitation/confirmation-attendance', row.id_invitation]"
+                           ngbDropdownItem>
+                          Konfirmasi Kehadiran
+                        </a>
+                        <a role="button"
+                           [routerLink]="['/invitation/invitation/check-in', row.id_invitation]"
+                           ngbDropdownItem>
+                          Check-In
+                        </a>
+                      </div>
                     </div>
+
+                    <a role="button"
+                       class="btn btn-blue-gray-50 text-blue-gray-700 me-2"
+                       [routerLink]="['/invitation/invitation/detail', row.id_invitation]"
+                       [style.padding.px]="6">
+                      <fa-icon [icon]="faSearchPlus"></fa-icon>
+                    </a>
+
+                    <a role="button"
+                       class="btn btn-blue-50 text-blue-700 me-2"
+                       [routerLink]="['/invitation/invitation/edit', row.id_invitation]"
+                       [style.padding.px]="6">
+                      <fa-icon [icon]="faPen"></fa-icon>
+                    </a>
+
+                    <swal #deleteSwal
+                          text="Apakah anda yakin akan menghapus data ini?"
+                          icon="question"
+                          [focusCancel]="true"
+                          [showCancelButton]="true"
+                          confirmButtonColor="#d32f2f"
+                          cancelButtonText="Batal"
+                          (confirm)="onDelete(row.id_invitation)">
+                    </swal>
+
+                    <button [swal]="deleteSwal"
+                            type="button"
+                            class="btn btn-red-50 text-red-700"
+                            [style.padding.px]="6">
+                      <fa-icon [icon]="faTrash"></fa-icon>
+                    </button>
                   </div>
-
-                  <a role="button"
-                     class="btn btn-blue-gray-50 text-blue-gray-700 me-2"
-                     [routerLink]="['/invitation/invitation/detail', row.id_invitation]"
-                     [style.padding.px]="6">
-                    <fa-icon [icon]="faSearchPlus"></fa-icon>
-                  </a>
-
-                  <a role="button"
-                     class="btn btn-blue-50 text-blue-700 me-2"
-                     [routerLink]="['/invitation/invitation/edit', row.id_invitation]"
-                     [style.padding.px]="6">
-                    <fa-icon [icon]="faPen"></fa-icon>
-                  </a>
-
-                  <swal #deleteSwal
-                        text="Apakah anda yakin akan menghapus data ini?"
-                        icon="question"
-                        [focusCancel]="true"
-                        [showCancelButton]="true"
-                        confirmButtonColor="#d32f2f"
-                        cancelButtonText="Batal"
-                        (confirm)="onDelete(row.id_invitation)">
-                  </swal>
-
-                  <button [swal]="deleteSwal"
-                          type="button"
-                          class="btn btn-red-50 text-red-700"
-                          [style.padding.px]="6">
-                    <fa-icon [icon]="faTrash"></fa-icon>
-                  </button>
                 </td>
               </tr>
             </ng-container>
