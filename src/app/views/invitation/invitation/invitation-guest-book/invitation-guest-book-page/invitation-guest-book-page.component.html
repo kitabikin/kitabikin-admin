@@ -167,56 +167,59 @@
                     {{ row.getIsActive() }}
                   </span>
                 </td>
-                <td class="d-flex overflow-hidden">
-                  <div ngbDropdown
-                       container="body">
-                    <button [style.padding.px]="6"
-                            class="btn btn-green-700 me-2"
-                            ngbDropdownToggle>Kelola</button>
-                    <div ngbDropdownMenu>
-                      <button (click)="onSend(data, row)"
-                              ngbDropdownItem>
-                        {{ 'page.invitation-guest-book.send' | translate }}
-                      </button>
-                      <a role="button"
-                         [href]="row.qr_code"
-                         [download]="row.name + '.png'"
-                         ngbDropdownItem>
-                        Download QR Code
-                      </a>
+                <td class="overflow-hidden">
+                  <div class="d-flex">
+                    <div ngbDropdown
+                         container="body">
+                      <button [style.padding.px]="6"
+                              class="btn btn-green-700 me-2"
+                              ngbDropdownToggle>Kelola</button>
+                      <div ngbDropdownMenu>
+                        <button *ngIf="row.no_telp"
+                                (click)="onSend(data, row)"
+                                ngbDropdownItem>
+                          {{ 'page.invitation-guest-book.send' | translate }}
+                        </button>
+                        <a role="button"
+                           [href]="row.qr_code"
+                           [download]="row.name + '.png'"
+                           ngbDropdownItem>
+                          Download QR Code
+                        </a>
+                      </div>
                     </div>
+
+                    <a role="button"
+                       class="btn btn-blue-gray-50 text-blue-gray-700 me-2"
+                       [routerLink]="['/invitation/invitation/guest-book/' + idInvitation + '/detail', row.id_invitation_guest_book]"
+                       [style.padding.px]="6">
+                      <fa-icon [icon]="faSearchPlus"></fa-icon>
+                    </a>
+
+                    <a role="button"
+                       class="btn btn-blue-50 text-blue-700 me-2"
+                       [routerLink]="['/invitation/invitation/guest-book/' + idInvitation + '/edit', row.id_invitation_guest_book]"
+                       [style.padding.px]="6">
+                      <fa-icon [icon]="faPen"></fa-icon>
+                    </a>
+
+                    <swal #deleteSwal
+                          text="Apakah anda yakin akan menghapus data ini?"
+                          icon="question"
+                          [focusCancel]="true"
+                          [showCancelButton]="true"
+                          confirmButtonColor="#d32f2f"
+                          cancelButtonText="Batal"
+                          (confirm)="onDelete(row.id_invitation_guest_book)">
+                    </swal>
+
+                    <button [swal]="deleteSwal"
+                            type="button"
+                            class="btn btn-red-50 text-red-700"
+                            [style.padding.px]="6">
+                      <fa-icon [icon]="faTrash"></fa-icon>
+                    </button>
                   </div>
-
-                  <a role="button"
-                     class="btn btn-blue-gray-50 text-blue-gray-700 me-2"
-                     [routerLink]="['/invitation/invitation/guest-book/' + idInvitation + '/detail', row.id_invitation_guest_book]"
-                     [style.padding.px]="6">
-                    <fa-icon [icon]="faSearchPlus"></fa-icon>
-                  </a>
-
-                  <a role="button"
-                     class="btn btn-blue-50 text-blue-700 me-2"
-                     [routerLink]="['/invitation/invitation/guest-book/' + idInvitation + '/edit', row.id_invitation_guest_book]"
-                     [style.padding.px]="6">
-                    <fa-icon [icon]="faPen"></fa-icon>
-                  </a>
-
-                  <swal #deleteSwal
-                        text="Apakah anda yakin akan menghapus data ini?"
-                        icon="question"
-                        [focusCancel]="true"
-                        [showCancelButton]="true"
-                        confirmButtonColor="#d32f2f"
-                        cancelButtonText="Batal"
-                        (confirm)="onDelete(row.id_invitation_guest_book)">
-                  </swal>
-
-                  <button [swal]="deleteSwal"
-                          type="button"
-                          class="btn btn-red-50 text-red-700"
-                          [style.padding.px]="6">
-                    <fa-icon [icon]="faTrash"></fa-icon>
-                  </button>
                 </td>
               </tr>
             </ng-container>
