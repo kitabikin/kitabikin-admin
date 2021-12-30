@@ -640,7 +640,7 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
     let time = '';
     if (JSON.parse(detailResepsiTime.value).length > 1) {
       const session = JSON.parse(detailResepsiTime.value)[guestBook.session - 1];
-      time = `Resepsi  : ${session.time}\n`;
+      time = `Resepsi  : ${session.time} (Sesi ${guestBook.session})\n`;
     } else {
       const session = JSON.parse(detailResepsiTime.value)[0];
       time = `Resepsi  : ${session.time}\n`;
