@@ -545,7 +545,7 @@ export class InvitationGuestBookPageComponent implements OnInit, OnChanges, OnDe
     const url = environment.production
       ? 'https://invitation.kitabikin.com/'
       : 'https://invitation-dev.kitabikin.com/';
-    const guest = encodeURI(guestBook.name);
+    const guest = encodeURIComponent(guestBook.name);
     const link = `${url}${invitation.event.code}/${invitation.code}?to=${guest}`;
 
     const feature = this.modifyData(invitation);
