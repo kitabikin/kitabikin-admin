@@ -199,6 +199,7 @@ export class InvitationCheckInPageComponent implements OnInit, OnChanges, OnDest
       limit: this.filter.perPage,
       start: pCurrent,
       where: pWhere,
+      with: [{ invitation: true }, { parrent: true }],
     };
 
     if (this.filter.sort) {

@@ -186,21 +186,16 @@ export class InvitationConfirmationAttendancePageComponent
         is_delete: false,
       },
       {
-        from: 'landing',
+        confirmation: ['yes', 'no'],
       },
     ];
-
-    if (this.filter.confirmation) {
-      pWhere.push({
-        confirmation: this.filter.confirmation,
-      });
-    }
 
     const params = {
       search: this.filter.search,
       limit: this.filter.perPage,
       start: pCurrent,
       where: pWhere,
+      with: [{ invitation: true }, { parrent: true }],
     };
 
     if (this.filter.sort) {
