@@ -48,6 +48,7 @@ export class InvitationGuestBookData implements Deserializable {
   modified_id!: string;
   modified_at!: Date;
   checkin_at!: Date;
+  parent!: any;
 
   deserialize(input: any): this {
     Object.assign(this, input);
