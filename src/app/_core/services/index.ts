@@ -17,3 +17,4 @@ export * from './invitation/invitation.service';
 export * from './invitation-feature/invitation-feature.service';
 export * from './invitation-feature-data/invitation-feature-data.service';
 export * from './invitation-guest-book/invitation-guest-book.service';
+export * from './testimonial/testimonial.service';
