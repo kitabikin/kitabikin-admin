@@ -11,3 +11,4 @@ export * from './store/theme-detail.guard';
 export * from './store/theme-feature-detail.guard';
 export * from './store/invitation-detail.guard';
 export * from './store/invitation-guest-book-detail.guard';
+export * from './store/testimonial-detail.guard';

@@ -12,6 +12,7 @@
   "theme-category": "Kategori Tema",
   "theme": "Tema",
   "theme-feature": "Fitur Tema",
+  "testimonial": "Testimoni",
   "logout": "Keluar",
   "seo": {
     "dashboard-page": {
@@ -104,6 +105,10 @@
       "total": "Jumlah Reservasi",
       "type": "Jenis Tamu",
       "session": "Sesi"
+    },
+    "testimonial": {
+      "name": "Nama",
+      "rate": "Rating"
     }
   },
   "_comment_action": "=======================================================================================",

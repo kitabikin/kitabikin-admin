@@ -44,6 +44,10 @@ const routes: Routes = [
         path: 'invitation',
         loadChildren: () => import('./invitation/invitation.module').then((m) => m.InvitationModule),
       },
+      {
+        path: 'testimonial',
+        loadChildren: () => import('./testimonial/testimonial.module').then((m) => m.TestimonialModule),
+      },
     ],
   },
 ];

@@ -54,6 +54,7 @@ import { FormThemeFeatureAddEditComponent } from '@components/form/theme-feature
 import { FormInvitationAddEditComponent } from '@components/form/invitation/add-edit/add-edit.component';
 import { FormInvitationDataComponent } from '@components/form/invitation/data/data.component';
 import { FormGuestBookAddEditComponent } from '@components/form/guest-book/add-edit/add-edit.component';
+import { FormTestimonialAddEditComponent } from '@components/form/testimonial/add-edit/add-edit.component';
 
 import { ModalImportGuestBookComponent } from '@components/modal/import-guest-book/import-guest-book.component';
 import { ModalDownloadGuestBookQRCodeComponent } from '@components/modal/download-guest-book-qr-code/download-guest-book-qr-code.component';
@@ -125,6 +126,7 @@ import { ModalProgressComponent } from '@components/modal/progress/progress.comp
     FormInvitationAddEditComponent,
     FormInvitationDataComponent,
     FormGuestBookAddEditComponent,
+    FormTestimonialAddEditComponent,
     ModalImportGuestBookComponent,
     ModalDownloadGuestBookQRCodeComponent,
     ModalProgressComponent,
@@ -179,6 +181,7 @@ import { ModalProgressComponent } from '@components/modal/progress/progress.comp
     FormInvitationAddEditComponent,
     FormInvitationDataComponent,
     FormGuestBookAddEditComponent,
+    FormTestimonialAddEditComponent,
     ModalImportGuestBookComponent,
     ModalDownloadGuestBookQRCodeComponent,
     ModalProgressComponent,

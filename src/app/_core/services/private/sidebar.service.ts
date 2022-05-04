@@ -40,6 +40,7 @@ export class SidebarService {
           { name: 'Kategori Tema', link: '/invitation/theme-category' },
           { name: 'Tema', link: '/invitation/theme' },
           { name: 'Undangan', link: '/invitation/invitation' },
+          { name: 'Testimoni', link: '/invitation/testimonial' },
         ],
       },
     ];

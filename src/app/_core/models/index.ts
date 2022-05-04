@@ -19,3 +19,4 @@ export * from './invitation/invitation.model';
 export * from './invitation-feature/invitation-feature.model';
 export * from './invitation-feature-data/invitation-feature-data.model';
 export * from './invitation-guest-book/invitation-guest-book.model';
+export * from './testimonial/testimonial.model';

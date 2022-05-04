@@ -1,0 +1,83 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <div [formGroup]="vm.formGroup">
+    <kb-label class="d-block mb-3"
+              [required]="true"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['id_user']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['id_user']).text">
+      {{ 'user' | translate }}
+      <ng-select kbInput
+                 [items]="(userData$ | async) || []"
+                 bindValue="id_user"
+                 bindLabel="profile.name"
+                 [placeholder]="'user' | translate"
+                 formControlName="id_user"
+                 (change)="onSelectedUser($event)"
+                 (clear)="onClearUser()">
+      </ng-select>
+    </kb-label>
+
+    <kb-label class="d-block mb-3"
+              [required]="true"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['name']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['name']).text">
+      {{ 'page.testimonial.name' | translate }}
+      <input kbInput
+             type="text"
+             class="form-control"
+             [placeholder]="'page.testimonial.name' | translate"
+             formControlName="name">
+    </kb-label>
+
+    <kb-label class="d-block mb-3"
+              [required]="true"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['rate']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['rate']).text">
+      {{ 'page.testimonial.rate' | translate }}
+      <input kbInput
+             type="number"
+             class="form-control"
+             [placeholder]="'page.testimonial.rate' | translate"
+             formControlName="rate">
+    </kb-label>
+
+    <kb-label class="d-block mb-3"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['testimonial']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['testimonial']).text">
+      {{ 'testimonial' | translate }}
+      <textarea kbInput
+                rows="3"
+                class="form-control"
+                [placeholder]="'testimonial' | translate"
+                formControlName="testimonial"></textarea>
+    </kb-label>
+
+    <div class="text-green-700 mt-4 mb-1">
+      {{ 'more-information' | translate }}
+    </div>
+    <hr class="my-2" />
+
+    <kb-label class="d-block mb-3"
+              [invalid]="getFormValidation(vm.formGroup?.controls?.['is_active']).invalid"
+              [invalidText]="getFormValidation(vm.formGroup?.controls?.['is_active']).text">
+      {{ 'status' | translate }}
+      <div kbInput
+           class="form-check form-switch">
+        <input class="form-check-input"
+               type="checkbox"
+               formControlName="is_active">
+      </div>
+    </kb-label>
+
+    <div class="d-grid gap-2 d-flex justify-content-end">
+      <a class="btn btn-outline-green-700"
+         [routerLink]="['/invitation/testimonial']">
+        {{ 'cancel' | translate }}
+      </a>
+      <button type="submit"
+              class="btn btn-green-700"
+              [disabled]="!vm.formGroup.valid">
+        {{ 'save' | translate }}
+      </button>
+    </div>
+  </div>
+</ng-container>
