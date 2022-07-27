@@ -1,0 +1,13 @@
+{
+  "rewrites": [{ "source": "/api-core/:match*", "destination": "https://api-core.kitabikin.com/:match*" }],
+  "headers": [
+    {
+      "source": "api-core/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Credentials", "value": "true" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET,OPTIONS,PATCH,DELETE,POST,PUT" }
+      ]
+    }
+  ]
+}
