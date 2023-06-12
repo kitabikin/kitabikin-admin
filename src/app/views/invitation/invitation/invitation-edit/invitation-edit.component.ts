@@ -120,6 +120,7 @@ export class InvitationEditComponent implements OnInit, OnChanges, OnDestroy, Af
       name: [null, [Validators.required, Validators.maxLength(240)]],
       invitation_at: [null, [Validators.required]],
       description: [null],
+      metadata: [null],
       is_active: [false, [Validators.required]],
     });
 
@@ -165,6 +166,7 @@ export class InvitationEditComponent implements OnInit, OnChanges, OnDestroy, Af
         day: moment(data?.invitation_at).date(),
       },
       description: data?.description,
+      metadata: data?.metadata,
       is_active: data?.is_active,
     });
 

@@ -111,6 +111,7 @@ export class InvitationAddComponent implements OnInit, OnChanges, OnDestroy, Aft
       name: [null, [Validators.required, Validators.maxLength(240)]],
       invitation_at: [null, [Validators.required]],
       description: [null],
+      metadata: [null],
       is_active: [false, [Validators.required]],
     });
   }

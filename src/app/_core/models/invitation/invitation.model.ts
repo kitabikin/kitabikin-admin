@@ -45,6 +45,7 @@ export class InvitationData implements Deserializable {
   name!: string;
   invitation_at!: Date;
   description!: string;
+  metadata!: string;
   is_active!: boolean;
   is_delete!: boolean;
   created_id!: string;
